@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      background: #0A0E1A;
+      font-family: Inter, system-ui, sans-serif;
+      color: #F5F5F2;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(70% 90% at 18% 0%, rgba(255,106,0,.20), transparent 60%);
+      pointer-events: none;
+    }
+    .wrap { display: flex; align-items: center; width: 100%; height: 100%; padding: 64px; gap: 56px; position: relative; }
+
+    .left { flex: 1; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: #FF8A33; background: rgba(255,106,0,.10); border: 1px solid rgba(255,106,0,.35);
+      border-radius: 999px; padding: 8px 18px; margin-bottom: 26px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #FF6A00; }
+
+    h1 {
+      font-family: "Bebas Neue", Impact, sans-serif;
+      font-weight: 400; line-height: .92; letter-spacing: .01em;
+      font-size: 86px; text-transform: uppercase; color: #F5F5F2;
+    }
+    h1 .accent { color: #FF6A00; }
+
+    .sub { margin-top: 22px; font-size: 26px; line-height: 1.35; color: #9AA3B2; max-width: 600px; }
+    .sub b { color: #F5F5F2; font-weight: 600; }
+
+    .price-row { margin-top: 34px; display: flex; align-items: center; gap: 18px; }
+    .price {
+      font-family: "Bebas Neue", Impact, sans-serif;
+      font-size: 30px; letter-spacing: .02em; color: #0A0E1A;
+      background: #FF6A00; border-radius: 12px; padding: 12px 22px 8px;
+    }
+    .meta { font-size: 19px; color: #9AA3B2; }
+    .meta b { color: #F5F5F2; font-weight: 600; }
+
+    .right { width: 360px; display: flex; justify-content: center; }
+    .cover-wrap { position: relative; }
+    .cover-wrap::before {
+      content: ""; position: absolute; inset: -24px;
+      background: radial-gradient(closest-side, rgba(255,106,0,.30), transparent 75%);
+      filter: blur(8px);
+    }
+    img.cover {
+      position: relative;
+      width: 360px; height: auto;
+      border-radius: 14px;
+      border: 1px solid #1E2740;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="left">
+      <span class="badge"><span class="dot"></span>Science-Backed · Natural · No Fluff</span>
+      <h1>Build a lean,<br/><span class="accent">aesthetic</span> physique.</h1>
+      <p class="sub">The exact science-backed system. <b>No dirty bulking. No starving.</b></p>
+      <div class="price-row">
+        <span class="price">Get it for $7</span>
+        <span class="meta">Instant PDF · <b>7-day money-back guarantee</b></span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="cover-wrap">
+        <img class="cover" src="assets/blueprint%20logo%20compressed.png" alt="The Aesthetic Physique Blueprint" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

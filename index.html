@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<!--
+=====================================================================
+  THE AESTHETIC PHYSIQUE BLUEPRINT: $7 SALES LANDING PAGE
+  Single static page. No build step. Deploy index.html + /assets.
+=====================================================================
+
+  >>> FILL-IN-THE-BLANKS BEFORE LAUNCH (search for each {{TOKEN}}) <<<
+
+  DONE: Checkout URL  -> https://pay.hotmart.com/B106265452I (wired into every CTA)
+  DONE: Guarantee     -> 7-day money-back guarantee (live in offer/guarantee/FAQ/CTA)
+  DONE: Testimonials  -> 4 real reviews live in the Social Proof section
+  DONE: Hero image    -> assets/hero.png (live)
+  DONE: Page count    -> 90-page guide (matches the actual PDF)
+  DONE: Buyer count   -> 314+ guys started
+  DONE: Footer        -> privacy.html, terms.html, aesthethic.engineer@gmail.com, disclaimer (live)
+  DONE: Before/After  -> two auto-playing slideshows (assets/before 1-3.jpeg, after 1-3.jpeg) (live)
+  DONE: Book mockup   -> assets/aesthetic blueprint mockup.png (live)
+  DONE: OG image      -> assets/og-image.png (1200x630, live). After deploy, change og:image
+                         to the ABSOLUTE URL (https://yourdomain.com/assets/og-image.png).
+
+  All assets are in. The page is launch-ready once hosted.
+
+  RULE: This page sells ONE product (the $7 guide). No other offers anywhere.
+=====================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>The Aesthetic Physique Blueprint: Build a Lean, Aesthetic Body (Science-Backed)</title>
+  <meta name="description" content="The exact science-backed system to build a lean, aesthetic physique: wide shoulders, V-taper, visible abs, naturally. No dirty bulking. No starving. $7." />
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Aesthetic Physique Blueprint" />
+  <meta property="og:description" content="The science-backed system to build a lean, aesthetic physique naturally, without wasted years. $7." />
+  <!-- For best results on Facebook/LinkedIn/WhatsApp, change this to the ABSOLUTE URL after deploy,
+       e.g. https://yourdomain.com/assets/og-image.png -->
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="assets/og-image.png" />
+
+  <!-- Fonts: 1 Google font (Bebas Neue for headlines). Body uses system/Inter stack. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#0A0E1A',   // near-black navy (page bg)
+            panel:  '#0D1220',   // slightly lighter navy (sections)
+            card:   '#121829',   // card surfaces
+            line:   '#1E2740',   // borders
+            cream:  '#F5F5F2',   // primary text
+            muted:  '#9AA3B2',   // secondary text
+            accent: '#FF6A00',   // orange. CTAs & emphasis ONLY
+            accent2:'#FF8A33',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
+            body: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html, body { background:#0A0E1A; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing: .01em; }
+
+    /* ---- Scroll-reveal system ---- */
+    .reveal {
+      opacity:0; transform: translateY(36px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal[data-anim="left"]  { transform: translateX(-48px); }
+    .reveal[data-anim="right"] { transform: translateX(48px); }
+    .reveal[data-anim="scale"] { transform: scale(.9); }
+    .reveal[data-anim="zoom"]  { transform: scale(1.06); }
+    .reveal[data-anim="blur"]  { filter: blur(10px); }
+    .reveal.in {
+      opacity:1; transform: none; filter:none;
+    }
+
+    /* ---- Card hover lift (applies to all .bg-card surfaces) ---- */
+    .bg-card {
+      transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease;
+    }
+    @media (hover:hover) {
+      .bg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.7); }
+    }
+
+    /* ---- Scroll progress bar ---- */
+    #progress {
+      position:fixed; top:0; left:0; height:3px; width:0%; z-index:60;
+      background: linear-gradient(90deg, #FF6A00, #FF8A33);
+      box-shadow: 0 0 12px rgba(255,106,0,.7);
+      transition: width .1s linear;
+    }
+
+    /* ---- Ambient floating glow ---- */
+    @keyframes floatGlow {
+      0%,100% { transform: translate(0,0) scale(1); opacity:.5; }
+      50%     { transform: translate(0,-24px) scale(1.08); opacity:.8; }
+    }
+    .float-glow { animation: floatGlow 9s ease-in-out infinite; }
+
+    /* ---- Slow pulse for CTA buttons ---- */
+    @keyframes ctaPulse {
+      0%,100% { box-shadow: 0 10px 30px -8px rgba(255,106,0,.55); }
+      50%     { box-shadow: 0 10px 42px -6px rgba(255,106,0,.85); }
+    }
+    .cta-glow { animation: ctaPulse 2.6s ease-in-out infinite; }
+
+    /* ---- Shimmering gradient accent text ---- */
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .shimmer {
+      background: linear-gradient(90deg, #FF6A00, #FFB37A, #FF6A00);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* ---- Marquee trust strip ---- */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display:flex; width:max-content; animation: marquee 28s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; filter:none !important; transition:none; }
+      .float-glow, .cta-glow, .shimmer, .marquee-track { animation:none !important; }
+      html { scroll-behavior:auto; }
+    }
+
+    /* Accessible focus */
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid #FF8A33; outline-offset: 3px; border-radius: 6px;
+    }
+
+    /* CTA glow */
+    .cta-glow { box-shadow: 0 10px 30px -8px rgba(255,106,0,.55); }
+
+    /* FAQ accordion */
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .2s ease; }
+
+    /* Subtle radial glow behind hero */
+    .hero-glow::before {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(255,106,0,.16), transparent 70%);
+      pointer-events:none;
+    }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-accent selection:text-ink">
+
+  <!-- Scroll progress bar -->
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- ============================================================= -->
+  <!-- 1. STICKY MOBILE CTA BAR (reveals after hero)                 -->
+  <!-- ============================================================= -->
+  <div id="stickyCta"
+       class="fixed bottom-0 inset-x-0 z-50 translate-y-full transition-transform duration-300
+              border-t border-line bg-ink/95 backdrop-blur px-4 py-3
+              flex items-center gap-3 sm:justify-center">
+    <div class="hidden sm:block leading-tight">
+      <p class="font-display text-2xl text-cream">THE AESTHETIC PHYSIQUE BLUEPRINT</p>
+      <p class="text-xs text-muted">Instant PDF · One-time $7</p>
+    </div>
+    <a href="https://pay.hotmart.com/B106265452I"
+       class="flex-1 sm:flex-none text-center bg-accent hover:bg-accent2 text-ink font-extrabold
+              rounded-xl px-5 py-3.5 text-base cta-glow transition-colors">
+      Get The Blueprint for $7
+    </a>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 2. HERO                                                       -->
+  <!-- ============================================================= -->
+  <header class="relative hero-glow overflow-hidden">
+    <!-- ambient floating glow -->
+    <div class="float-glow pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-8 pb-12 sm:pt-16 sm:pb-20
+                grid lg:grid-cols-2 gap-6 sm:gap-10 items-center">
+
+      <div class="order-1">
+        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase
+                  text-accent2 bg-accent/10 border border-accent/30 rounded-full px-3 py-1 mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          Science-backed · Natural · No fluff
+        </p>
+
+        <h1 class="font-display uppercase leading-[0.92] text-cream
+                   text-4xl sm:text-6xl lg:text-7xl">
+          Build a lean,
+          <span class="shimmer">aesthetic</span>
+          physique, <span class="block">without wasting years guessing.</span>
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-muted max-w-xl">
+          Wide shoulders. A real V-taper. Visible abs. The exact science-backed
+          system to get there <span class="text-cream font-semibold">naturally</span>.
+          No dirty bulking. No starving. No bro-science.
+        </p>
+
+        <p class="hidden sm:block mt-3 text-base text-cream/90 max-w-xl">
+          You train hard and still look the same? You're not lazy.
+          You were never shown how the body actually builds an aesthetic shape.
+        </p>
+
+        <div class="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <a href="https://pay.hotmart.com/B106265452I"
+             class="text-center bg-accent hover:bg-accent2 text-ink font-extrabold
+                    rounded-xl px-7 py-4 text-lg cta-glow transition-colors">
+            Get The Blueprint for $7
+          </a>
+          <span class="text-sm text-muted">
+            90-page PDF · <span class="text-cream">one-time payment</span>
+          </span>
+        </div>
+
+        <!-- Micro-trust line. Delete if you don't have a real buyer count. -->
+        <p class="mt-4 text-sm text-muted">
+          ⚡ Instant PDF download · <span class="text-cream font-semibold">314+</span> guys started
+        </p>
+      </div>
+
+      <div class="order-2">
+        <div class="relative mx-auto max-w-[15rem] sm:max-w-sm lg:max-w-none">
+          <div class="absolute -inset-3 bg-gradient-to-b from-accent/20 to-transparent rounded-3xl blur-xl"></div>
+          <img src="assets/hero.png" alt="Lean, aesthetic male physique with wide shoulders and a V-taper"
+               width="900" height="1100"
+               class="relative w-full max-h-[42vh] sm:max-h-none object-cover rounded-3xl border border-line bg-card" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ----- Scrolling trust strip (marquee) ----- -->
+  <div class="marquee overflow-hidden bg-panel border-y border-line py-3">
+    <div class="marquee-track items-center gap-10 text-sm font-semibold uppercase tracking-widest text-muted">
+      <!-- duplicated set for seamless loop -->
+      <span class="flex items-center gap-10 pr-10">
+        <span>⚡ Instant PDF Download</span><span class="text-accent">•</span>
+        <span>🔬 Science-Backed System</span><span class="text-accent">•</span>
+        <span>💪 Natural, No Drugs</span><span class="text-accent">•</span>
+        <span>🛡️ 7-Day Money-Back Guarantee</span><span class="text-accent">•</span>
+        <span>📱 Read On Any Device</span><span class="text-accent">•</span>
+      </span>
+      <span class="flex items-center gap-10 pr-10" aria-hidden="true">
+        <span>⚡ Instant PDF Download</span><span class="text-accent">•</span>
+        <span>🔬 Science-Backed System</span><span class="text-accent">•</span>
+        <span>💪 Natural, No Drugs</span><span class="text-accent">•</span>
+        <span>🛡️ 7-Day Money-Back Guarantee</span><span class="text-accent">•</span>
+        <span>📱 Read On Any Device</span><span class="text-accent">•</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 3. THE PROBLEM (agitation)                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream">
+        You're putting in the work.
+        <span class="text-accent">So why no change?</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Because the advice you were handed is broken. Here's the trap most guys
+        get stuck in for years:
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-accent mb-2">THE "JUST BULK" LIE</p>
+          <p class="text-muted">You ate everything in sight to "get big." You got softer, not bigger.
+            Now you're skinny-fat, small <em>and</em> covered.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-accent mb-2">MORE VOLUME, MORE JUNK</p>
+          <p class="text-muted">20 sets a session, every angle, every machine, and your shoulders and
+            back still look exactly the same as last year.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-accent mb-2">FORM WITHOUT FUNCTION</p>
+          <p class="text-muted">You half-rep through partials and "feel the pump", but never train the one
+            position that actually forces a muscle to grow.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-accent mb-2">YEARS, GONE</p>
+          <p class="text-muted">Endless conflicting tips. No system. So you stall, get discouraged,
+            and start to think you just have "bad genetics."</p>
+        </div>
+      </div>
+
+      <p class="reveal mt-10 text-xl text-cream font-semibold max-w-2xl">
+        You don't have bad genetics. You have a bad map.
+        <span class="text-accent">Here's the right one.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 4. THE STORY / CREDIBILITY                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-2 gap-10 items-center">
+
+      <div class="reveal order-2 lg:order-1" data-anim="left">
+        <p class="text-xs font-semibold tracking-widest uppercase text-accent2 mb-3">From the Aesthetic Engineer</p>
+        <h2 class="font-display uppercase text-4xl sm:text-5xl leading-none text-cream">
+          I wasted 4 years getting this wrong
+          <span class="text-accent">so you don't have to.</span>
+        </h2>
+
+        <div class="mt-6 space-y-4 text-muted text-lg">
+          <p>I started at <span class="text-cream font-semibold">51kg</span>. Skinny, invisible, frustrated.
+            So I did what the internet told me, I <span class="text-cream">dirty bulked</span>.</p>
+          <p>It wrecked me. I hit <span class="text-cream font-semibold">~30% body fat</span>, lost every bit of
+            definition, and got <span class="text-cream">gyno</span> as my hormones tanked. I'd somehow managed
+            to be skinny <em>and</em> fat at the same time.</p>
+          <p>Then I stopped guessing and started reading the actual science, how muscle is built, why
+            getting lean first changes everything, what training stimulus really matters.</p>
+          <p class="text-cream font-semibold">I fixed the fundamentals. The physique followed.
+            This guide is that exact system, minus the four wasted years.</p>
+        </div>
+      </div>
+
+      <figure class="reveal order-1 lg:order-2" data-anim="right">
+        <div class="grid grid-cols-2 gap-3">
+
+          <!-- BEFORE slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-line bg-card">
+              <span class="absolute z-20 top-2 left-2 text-[11px] font-bold uppercase tracking-wider bg-ink/85 border border-line rounded-full px-2.5 py-1">Before</span>
+              <img src="assets/before%201.jpeg" alt="Before transformation, photo 1" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="assets/before%202.jpeg" alt="Before transformation, photo 2" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="assets/before%203.jpeg" alt="Before transformation, photo 3" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Previous before photo"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next before photo"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Go to before photo 1" class="dot w-2 h-2 rounded-full bg-accent"></button>
+              <button type="button" aria-label="Go to before photo 2" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Go to before photo 3" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+          <!-- AFTER slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/40 bg-card">
+              <span class="absolute z-20 top-2 right-2 text-[11px] font-bold uppercase tracking-wider bg-accent text-ink rounded-full px-2.5 py-1">After</span>
+              <img src="assets/after%201.jpeg" alt="After transformation, photo 1" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="assets/after%202.jpeg" alt="After transformation, photo 2" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="assets/after%203.jpeg" alt="After transformation, photo 3" loading="lazy"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Previous after photo"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next after photo"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Go to after photo 1" class="dot w-2 h-2 rounded-full bg-accent"></button>
+              <button type="button" aria-label="Go to after photo 2" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Go to after photo 3" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+        </div>
+        <figcaption class="mt-3 text-sm text-muted text-center">Real transformation. Fundamentals fixed, not shortcuts.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 5. WHY THIS IS DIFFERENT (the mechanism)                      -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream">
+        The things <span class="text-accent">nobody told you.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Not opinions. Mechanisms. This is <em>why</em> most guys stay stuck, and exactly what the system fixes.
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <!-- card -->
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">GET LEAN <span class="text-accent">FIRST</span></p>
+          <p class="mt-2 text-muted">Carrying too much fat raises aromatase, your body converts testosterone
+            into estrogen, killing the hormonal environment you need to build. Lean first isn't vanity. It's the foundation.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">LESS VOLUME, <span class="text-accent">REAL FAILURE</span></p>
+          <p class="mt-2 text-muted">Growth (mTOR signaling) is driven by hard, close-to-failure sets, not 20 junk sets.
+            Fewer, harder sets build more and leave you recovered enough to do it again.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">THE <span class="text-accent">LENGTHENED</span> POSITION</p>
+          <p class="mt-2 text-muted">Muscles grow most when loaded in a deep stretch. Train the lengthened position and
+            you get more growth from the <em>same</em> effort. Most guys cut it short and leave gains on the table.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">SHOULDERS = <span class="text-accent">FREQUENCY</span></p>
+          <p class="mt-2 text-muted">Side delts are the #1 driver of the wide, capped, V-taper look, and they recover fast.
+            Hitting lateral raises with the right frequency is how you actually get <em>wide</em>.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">FEED THE <span class="text-accent">RIGHT TISSUE</span></p>
+          <p class="mt-2 text-muted">Timing nutrients around training improves nutrient partitioning (GLUT4), sending
+            more of what you eat into muscle instead of fat. Same calories, better result.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">LEAN BULK <span class="text-accent">MATH</span></p>
+          <p class="mt-2 text-muted">There's a ceiling to how fast you can build muscle (think FFMI). Eat past it and the
+            extra is just fat. The right small surplus builds muscle while staying aesthetic, no dirty-bulk rebound.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 6. WHAT'S INSIDE                                              -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-5 gap-10 items-start">
+
+      <div class="lg:col-span-2 reveal lg:sticky lg:top-10">
+        <div class="relative mx-auto max-w-xs">
+          <div class="absolute -inset-3 bg-gradient-to-b from-accent/25 to-transparent rounded-3xl blur-xl"></div>
+          <img src="assets/aesthetic%20blueprint%20mockup.png" alt="The Aesthetic Physique Blueprint, PDF guide cover"
+               width="600" height="800" loading="lazy"
+               class="relative w-full rounded-2xl border border-line bg-card" />
+        </div>
+        <p class="mt-5 text-center text-muted">90 pages. Zero fluff.<br/>
+          <span class="text-cream font-semibold">A complete system, not a tip list.</span></p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream">
+          What's <span class="text-accent">inside.</span>
+        </h2>
+        <p class="reveal mt-4 text-lg text-muted">8 chapters. Each one removes a reason you've been stuck.</p>
+
+        <ol class="mt-8 space-y-3" data-stagger>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">01</span>
+            <div><p class="font-semibold text-cream">Train for the mirror</p>
+              <p class="text-muted">Build the shape people actually notice (delts, back width, the V-taper), not just numbers.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">02</span>
+            <div><p class="font-semibold text-cream">Eat to build</p>
+              <p class="text-muted">Exactly what and when to eat to grow muscle, without burying your abs in fat.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">03</span>
+            <div><p class="font-semibold text-cream">Cut correctly</p>
+              <p class="text-muted">Strip fat and reveal definition while holding onto every hard-earned pound of muscle.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">04</span>
+            <div><p class="font-semibold text-cream">Lean bulk without the fat</p>
+              <p class="text-muted">The surplus math that builds muscle and keeps you aesthetic, the opposite of a dirty bulk.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">05</span>
+            <div><p class="font-semibold text-cream">Transition between phases</p>
+              <p class="text-muted">When to bulk, when to cut, and how to switch without losing your progress or your shape.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">06</span>
+            <div><p class="font-semibold text-cream">Pull the hormone levers</p>
+              <p class="text-muted">The natural habits that keep testosterone working <em>for</em> you instead of against you.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">07</span>
+            <div><p class="font-semibold text-cream">The full system</p>
+              <p class="text-muted">How every piece fits together into one repeatable plan you can run for years.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-accent leading-none w-9 shrink-0">08</span>
+            <div><p class="font-semibold text-cream">Your day-one plan</p>
+              <p class="text-muted">Close the guide and know exactly what to do in your next session, no more guessing.</p></div>
+          </li>
+        </ol>
+
+        <div class="mt-8">
+          <a href="https://pay.hotmart.com/B106265452I"
+             class="inline-block bg-accent hover:bg-accent2 text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow transition-colors">
+            Get The Blueprint for $7
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 7. WHO IT'S FOR / NOT FOR                                     -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream text-center">
+        Is this <span class="text-accent">for you?</span>
+      </h2>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        <div class="reveal bg-card border border-green-500/30 rounded-2xl p-6" data-anim="left">
+          <p class="font-display text-2xl text-cream mb-4">✅ THIS IS FOR YOU IF…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-green-400">▹</span> You're skinny-fat or stuck and sick of spinning your wheels.</li>
+            <li class="flex gap-3"><span class="text-green-400">▹</span> You'll actually train and eat with intent, you just need the right plan.</li>
+            <li class="flex gap-3"><span class="text-green-400">▹</span> You want the <em>why</em>, not just "trust me bro."</li>
+            <li class="flex gap-3"><span class="text-green-400">▹</span> You want to look aesthetic naturally, for the long run.</li>
+          </ul>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6" data-anim="right">
+          <p class="font-display text-2xl text-cream mb-4">🚫 THIS IS NOT FOR YOU IF…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-accent">▹</span> You want a magic pill or an overnight hack.</li>
+            <li class="flex gap-3"><span class="text-accent">▹</span> You won't change anything you're currently doing.</li>
+            <li class="flex gap-3"><span class="text-accent">▹</span> You'd rather keep collecting random tips than follow a system.</li>
+            <li class="flex gap-3"><span class="text-accent">▹</span> You're already lean, aesthetic, and dialed in.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 8. SOCIAL PROOF                                               -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream text-center">
+        Guys who <span class="text-accent">stopped guessing.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">
+        Real results from guys who ran the system instead of the guesswork.
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-5" data-stagger>
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 hover:border-accent/40 transition-colors">
+          <div class="text-accent text-lg mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="text-cream/90 leading-relaxed">
+            "Wasted 2 years on the generic 'just bulk bro' advice and ended up looking bloated. This blueprint completely
+            flipped the script. Going down to a crisp 10% body fat first to fix my insulin sensitivity was an absolute
+            cheat code. My waist is finally narrow and the V-taper is coming in heavy. 10/10 recommendation."
+          </blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display text-lg text-accent">J</span>
+            <span class="text-sm"><span class="text-cream font-semibold">Julian Rivera</span><br/><span class="text-muted">Verified buyer</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 hover:border-accent/40 transition-colors">
+          <div class="text-accent text-lg mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="text-cream/90 leading-relaxed">
+            "I used to spend 2 hours in the gym doing 25 trash volume sets and wondered why my physique looked flat.
+            Cut the junk volume out and ran the 2-set rule to true technical failure like the guide says. Absolute
+            game-changer. My gym sessions are under an hour now, recovery is flawless, and my delts are actually capped
+            for once."
+          </blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display text-lg text-accent">M</span>
+            <span class="text-sm"><span class="text-cream font-semibold">Marcus Torres</span><br/><span class="text-muted">Verified buyer</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 hover:border-accent/40 transition-colors">
+          <div class="text-accent text-lg mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="text-cream/90 leading-relaxed">
+            "If you like actual science and logic instead of generic fitness fluff, this is it. The breakdown of timing
+            carbs for double GLUT4 translocation and separating fats to respect the Randall Cycle is gold. Managed to
+            execute an entire intermediate bulk with zero fat spillover on my waist. My FFMI went from a soft 20.2 to a
+            lean 22.1."
+          </blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display text-lg text-accent">D</span>
+            <span class="text-sm"><span class="text-cream font-semibold">David Kovacs</span><br/><span class="text-muted">Verified buyer</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 hover:border-accent/40 transition-colors">
+          <div class="text-accent text-lg mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote class="text-cream/90 leading-relaxed">
+            "The reverse diet protocol is literal wizardry. I dirty bulked in the past, blew up my body fat, and was
+            terrified of gaining it all back after my cut. The transition framework in Chapter 5 saved my sanity.
+            Gradually scaling up carbohydrates refilled my muscle glycogen perfectly. I look lean, full, and vascular
+            without a single pound of fat rebound."
+          </blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center font-display text-lg text-accent">E</span>
+            <span class="text-sm"><span class="text-cream font-semibold">Esteban Mendez</span><br/><span class="text-muted">Verified buyer</span></span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="reveal mt-10 text-center">
+        <a href="https://pay.hotmart.com/B106265452I"
+           class="inline-block bg-accent hover:bg-accent2 text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow transition-colors">
+          Get The Blueprint for $7
+        </a>
+        <p class="mt-3 text-sm text-muted">Backed by a 7-day money-back guarantee</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 9. THE OFFER (value anchor)                                   -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20 text-center">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream">
+        What's it worth to <span class="text-accent">stop wasting years?</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted">
+        This one guide replaces what most guys burn money and time on:
+      </p>
+
+      <ul class="reveal mt-8 max-w-md mx-auto space-y-3 text-left">
+        <li class="flex items-center justify-between border-b border-line pb-3">
+          <span class="text-muted">Years of trial-and-error</span><span class="text-muted line-through">priceless (in a bad way)</span>
+        </li>
+        <li class="flex items-center justify-between border-b border-line pb-3">
+          <span class="text-muted">A "coach" feeding you generic plans</span><span class="text-muted line-through">$200+/mo</span>
+        </li>
+        <li class="flex items-center justify-between border-b border-line pb-3">
+          <span class="text-muted">A bloated online course</span><span class="text-muted line-through">$97+</span>
+        </li>
+        <li class="flex items-center justify-between pb-1">
+          <span class="text-muted">One more failed dirty bulk you have to undo</span><span class="text-muted line-through">months lost</span>
+        </li>
+      </ul>
+
+      <div class="reveal mt-10 inline-flex flex-col items-center bg-card border border-accent/40 rounded-3xl px-10 py-8 cta-glow" data-anim="scale">
+        <p class="text-muted uppercase tracking-widest text-sm">Today, one time</p>
+        <p class="font-display text-7xl text-accent leading-none mt-1">$7</p>
+        <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
+        <a href="https://pay.hotmart.com/B106265452I"
+           class="mt-6 inline-block bg-accent hover:bg-accent2 text-ink font-extrabold rounded-xl px-8 py-4 text-lg transition-colors">
+          Get The Blueprint for $7
+        </a>
+        <p class="mt-3 text-xs text-muted">🛡️ 7-day money-back guarantee</p>
+      </div>
+
+      <p class="reveal mt-6 text-muted">Less than a protein shake. The result lasts a lot longer.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 10. RISK REVERSAL / GUARANTEE                                 -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-3xl mx-auto px-5 py-12 sm:py-16">
+      <div class="reveal bg-card border border-line rounded-3xl p-8 text-center">
+        <div class="mx-auto w-28 h-28 rounded-full bg-accent/10 border-2 border-accent/50 flex flex-col items-center justify-center cta-glow">
+          <span class="font-display text-4xl text-accent leading-none">7</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-cream">Day Refund</span>
+        </div>
+        <h2 class="font-display uppercase text-3xl sm:text-4xl text-cream mt-5">7-Day money-back guarantee</h2>
+        <p class="mt-3 text-lg text-muted">
+          Try the entire Blueprint for <span class="text-cream font-semibold">7 full days</span>. Read it, apply it,
+          put the system to work. If it doesn't give you a clear, science-backed plan you can actually run, email us
+          and we'll refund every cent. <span class="text-cream font-semibold">No questions asked.</span>
+        </p>
+        <p class="mt-3 text-sm text-muted">All you risk is staying exactly where you are.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 11. FAQ (accordion)                                           -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20">
+      <h2 class="reveal font-display uppercase text-4xl sm:text-5xl leading-none text-cream text-center">
+        Questions, <span class="text-accent">answered.</span>
+      </h2>
+
+      <div class="mt-10 space-y-3" data-stagger>
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Will this actually work for me?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">If you're natural and willing to apply it, yes. This isn't a personality type or
+            a "genetics" thing, it's the underlying mechanics of how a body builds an aesthetic shape. Follow the system,
+            get the result.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            I'm a total beginner. Is this too advanced?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No, beginners benefit most because you skip the years of mistakes entirely.
+            It starts from the fundamentals and builds up, with a day-one plan so you know exactly what to do first.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            I've trained for years and stalled. Will I learn anything?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Almost certainly. Most long-term stalls come from missing a few specific
+            principles, lengthened-position training, the right volume, getting lean before you bulk. Fix those and
+            things move again.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Do I need a fancy gym or supplements?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No. A basic gym with dumbbells and a few machines is plenty. This is about
+            training and eating intelligently, not about a cabinet full of supplements.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Is this just repackaged bro-science?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">The opposite. Every recommendation traces back to a real mechanism, how
+            muscle protein synthesis is triggered, why body fat affects your hormones, how nutrient timing works, translated into plain language you can act on.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            How do I get it after I buy?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Instantly. After checkout you get immediate access to download the PDF, read it on your phone, tablet, or laptop. No waiting, no shipping.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            What if it's not for me?
+            <span class="faq-icon text-accent text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">You're covered by a 7-day money-back guarantee. Try the whole system risk-free, if it's
+            not a fit, email us within 7 days and we'll refund every cent, no questions asked.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 12. FINAL CTA                                                 -->
+  <!-- ============================================================= -->
+  <section class="relative hero-glow bg-ink overflow-hidden">
+    <div class="relative max-w-3xl mx-auto px-5 py-16 sm:py-24 text-center">
+      <h2 class="reveal font-display uppercase text-5xl sm:text-6xl leading-[0.95] text-cream">
+        Another year stuck, <span class="block text-accent">or the plan that ends it.</span>
+      </h2>
+      <p class="reveal mt-5 text-lg text-muted max-w-xl mx-auto">
+        You can keep guessing and watch another year pass with the same body in the mirror.
+        Or you can get the exact system for <span class="text-cream font-semibold">$7</span> and start building
+        the aesthetic, lean physique you actually want, the right way, naturally.
+      </p>
+
+      <a href="https://pay.hotmart.com/B106265452I"
+         class="reveal mt-9 inline-block bg-accent hover:bg-accent2 text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow transition-colors">
+        Get The Blueprint for $7
+      </a>
+      <p class="reveal mt-4 text-sm text-muted">Instant PDF download · One-time payment · 7-day money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 13. FOOTER                                                    -->
+  <!-- ============================================================= -->
+  <footer class="bg-ink border-t border-line">
+    <div class="max-w-5xl mx-auto px-5 py-10">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div>
+          <p class="font-display text-2xl text-cream">THE AESTHETIC PHYSIQUE BLUEPRINT</p>
+          <p class="text-sm text-muted mt-1">by the Aesthetic Engineer</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="privacy.html" class="text-muted hover:text-cream transition-colors">Privacy Policy</a>
+          <a href="terms.html" class="text-muted hover:text-cream transition-colors">Terms</a>
+          <a href="mailto:aesthethic.engineer@gmail.com" class="text-muted hover:text-cream transition-colors">Contact</a>
+        </nav>
+      </div>
+
+      <p class="mt-8 text-xs text-muted/80 leading-relaxed max-w-3xl">
+        Apply everything in this guide and you will get results. If you don't, read it again and apply it properly.
+        Your outcome depends on your own consistency and effort. This guide is educational and is not medical advice,
+        consult a physician before starting any training or nutrition program.
+      </p>
+      <p class="mt-4 text-xs text-muted/60">© <span id="year"></span> The Aesthetic Physique Blueprint. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================= -->
+  <!-- VANILLA JS: sticky CTA, FAQ icons (native), scroll reveals    -->
+  <!-- ============================================================= -->
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky CTA: show once hero is scrolled past
+    (function () {
+      var sticky = document.getElementById('stickyCta');
+      var hero = document.querySelector('header');
+      if (!sticky || !hero) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          // hero NOT in view -> show sticky bar
+          sticky.classList.toggle('translate-y-full', e.isIntersecting);
+        });
+      }, { rootMargin: '-60px 0px 0px 0px' });
+      io.observe(hero);
+    })();
+
+    // Scroll progress bar
+    (function () {
+      var bar = document.getElementById('progress');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // Scroll reveals (with auto-stagger for siblings inside [data-stagger])
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      // Auto-stagger: delay each reveal by its index within a [data-stagger] parent
+      document.querySelectorAll('[data-stagger]').forEach(function (parent) {
+        var kids = parent.querySelectorAll(':scope > .reveal');
+        kids.forEach(function (kid, i) { kid.style.transitionDelay = (i * 90) + 'ms'; });
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Before/After slideshows (independent prev/next + dots per side)
+    (function () {
+      document.querySelectorAll('[data-slideshow]').forEach(function (box) {
+        var slides = box.querySelectorAll('.slide');
+        var dots = box.querySelectorAll('.dot');
+        if (!slides.length) return;
+        var i = 0;
+        function show(n) {
+          i = (n + slides.length) % slides.length;
+          slides.forEach(function (s, idx) {
+            s.classList.toggle('opacity-100', idx === i);
+            s.classList.toggle('opacity-0', idx !== i);
+          });
+          dots.forEach(function (d, idx) {
+            d.classList.toggle('bg-accent', idx === i);
+            d.classList.toggle('bg-line', idx !== i);
+          });
+        }
+        var prev = box.querySelector('[data-prev]');
+        var next = box.querySelector('[data-next]');
+        if (prev) prev.addEventListener('click', function () { show(i - 1); });
+        if (next) next.addEventListener('click', function () { show(i + 1); });
+        dots.forEach(function (d, idx) { d.addEventListener('click', function () { show(idx); }); });
+
+        // Auto-play (pauses on hover; restarts shortly after manual interaction; respects reduced-motion)
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var timer = null;
+        function start() { if (!reduce && !timer) timer = setInterval(function () { show(i + 1); }, 4000); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        box.addEventListener('mouseenter', stop);
+        box.addEventListener('mouseleave', start);
+        box.addEventListener('click', function () { stop(); setTimeout(start, 8000); });
+        start();
+      });
+    })();
+
+    // Subtle hero parallax (image drifts as you scroll). Respects reduced-motion.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var img = document.querySelector('header img');
+      if (!img) return;
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            var y = Math.min(window.scrollY, 700);
+            img.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

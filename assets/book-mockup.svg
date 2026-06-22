@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <rect width="600" height="800" fill="#0D1220"/>
+  <rect x="120" y="90" width="360" height="620" fill="#121829" stroke="#FF6A00" stroke-width="3" rx="10"/>
+  <text x="300" y="360" font-family="Arial, sans-serif" font-size="40" fill="#F5F5F2" text-anchor="middle" font-weight="bold">THE</text>
+  <text x="300" y="410" font-family="Arial, sans-serif" font-size="40" fill="#FF6A00" text-anchor="middle" font-weight="bold">AESTHETIC</text>
+  <text x="300" y="455" font-family="Arial, sans-serif" font-size="34" fill="#F5F5F2" text-anchor="middle" font-weight="bold">PHYSIQUE</text>
+  <text x="300" y="500" font-family="Arial, sans-serif" font-size="34" fill="#F5F5F2" text-anchor="middle" font-weight="bold">BLUEPRINT</text>
+  <text x="300" y="760" font-family="Arial, sans-serif" font-size="16" fill="#9AA3B2" text-anchor="middle">{{BOOK_MOCKUP}} — assets/book-mockup.png · ~600×800</text>
+</svg>

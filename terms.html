@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Terms &amp; Conditions — The Aesthetic Physique Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink:'#0A0E1A', card:'#121829', line:'#1E2740', cream:'#F5F5F2', muted:'#9AA3B2', accent:'#FF6A00' },
+      fontFamily: { display:['"Bebas Neue"','Impact','sans-serif'], body:['Inter','system-ui','sans-serif'] }
+    } } };
+  </script>
+  <style> body { font-family: Inter, system-ui, sans-serif; } </style>
+</head>
+<body class="bg-ink text-cream font-body antialiased">
+  <main class="max-w-3xl mx-auto px-5 py-14">
+    <a href="index.html" class="text-accent hover:underline text-sm">← Back to the Blueprint</a>
+
+    <h1 class="font-display uppercase text-5xl mt-6 mb-2">Terms &amp; Conditions</h1>
+    <p class="text-muted text-sm mb-10">Last updated: <span id="date"></span></p>
+
+    <div class="space-y-6 text-muted leading-relaxed">
+      <p>By purchasing or using The Aesthetic Physique Blueprint ("the guide"), you agree to these terms.
+        Please read them before buying.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">The product</h2>
+      <p>The guide is a digital PDF delivered electronically after purchase. It is for your personal use only.
+        You may not copy, resell, redistribute, or share the file without written permission.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">Payment &amp; delivery</h2>
+      <p>Payment is processed securely by <span class="text-cream">Hotmart</span>. Access to the download is
+        granted immediately after a successful payment. If you do not receive access, contact us and we'll
+        make it right.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">Refunds</h2>
+      <p>The guide is backed by a <span class="text-cream">7-day money-back guarantee</span>. If you're not
+        satisfied, request a refund within 7 days of purchase and you'll receive a full refund. Refunds are
+        processed through Hotmart.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">Not medical advice</h2>
+      <p>The guide is educational and provides general information about training and nutrition. It is not
+        medical advice and is not a substitute for professional guidance. Consult a qualified physician
+        before beginning any training or nutrition program. You are responsible for your own health and
+        results, which depend on your individual effort and consistency.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, we are not liable for any injury, loss, or damages arising
+        from the use of the information in this guide. You use it at your own risk.</p>
+
+      <h2 class="font-display text-2xl text-cream pt-4">Contact</h2>
+      <p>Questions about these terms? Email
+        <a href="mailto:aesthethic.engineer@gmail.com" class="text-accent hover:underline">aesthethic.engineer@gmail.com</a>.</p>
+    </div>
+
+    <p class="mt-12 text-xs text-muted/60">© <span id="year"></span> The Aesthetic Physique Blueprint. All rights reserved.</p>
+  </main>
+  <script>
+    var now = new Date();
+    document.getElementById('date').textContent = now.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('year').textContent = now.getFullYear();
+  </script>
+</body>
+</html>

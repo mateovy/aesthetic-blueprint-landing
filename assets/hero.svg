@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
+  <rect width="900" height="1100" fill="#121829"/>
+  <rect x="1" y="1" width="898" height="1098" fill="none" stroke="#1E2740" stroke-width="2" rx="24"/>
+  <text x="450" y="520" font-family="Arial, sans-serif" font-size="34" fill="#FF6A00" text-anchor="middle" font-weight="bold">HERO IMAGE</text>
+  <text x="450" y="565" font-family="Arial, sans-serif" font-size="22" fill="#9AA3B2" text-anchor="middle">{{HERO_IMAGE}} — replace with assets/hero.jpg</text>
+  <text x="450" y="600" font-family="Arial, sans-serif" font-size="18" fill="#9AA3B2" text-anchor="middle">Aesthetic male physique · ~900×1100 · portrait</text>
+</svg>

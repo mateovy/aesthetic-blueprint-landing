@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750">
+  <rect width="1000" height="750" fill="#121829"/>
+  <rect x="1" y="1" width="998" height="748" fill="none" stroke="#1E2740" stroke-width="2" rx="24"/>
+  <line x1="500" y1="40" x2="500" y2="710" stroke="#1E2740" stroke-width="2"/>
+  <text x="250" y="370" font-family="Arial, sans-serif" font-size="30" fill="#9AA3B2" text-anchor="middle" font-weight="bold">BEFORE</text>
+  <text x="750" y="370" font-family="Arial, sans-serif" font-size="30" fill="#FF6A00" text-anchor="middle" font-weight="bold">AFTER</text>
+  <text x="500" y="690" font-family="Arial, sans-serif" font-size="18" fill="#9AA3B2" text-anchor="middle">{{TRANSFORMATION_IMAGE}} — replace with assets/transformation.jpg · ~1000×750</text>
+</svg>
