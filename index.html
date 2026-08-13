@@ -45,16 +45,56 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://aesthetic-engineer.com/assets/og-image.png" />
 
-  <!-- Fonts: Playfair Display (headlines, incl. italic) + Inter (body), via Google Fonts. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet" />
+  <!-- Fonts: self-hosted Playfair Display + Inter (latin subset, woff2). No third-party origins. -->
+  <!-- Preload only the two faces used above the fold; the rest load on demand via @font-face swap. -->
+  <link rel="preload" href="assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Compiled, purged Tailwind stylesheet (built from tailwind.config.js). See README.md to regenerate. -->
-  <link rel="stylesheet" href="assets/styles.css" />
+  <!-- Hero image: preload at high priority so it starts fetching before CSS/JS parse (LCP). -->
+  <link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high" />
+
+  <!-- Full compiled stylesheet, loaded WITHOUT blocking first paint. The above-the-fold CSS is
+       inlined in the <style> below, so first paint needs zero external CSS. The <noscript>
+       link applies the stylesheet normally for visitors with JavaScript disabled. -->
+  <link rel="preload" href="assets/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
+
+  <!-- If JS never runs, keep the scroll-reveal content visible instead of blank. -->
+  <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
 
   <style>
+    /* ============================================================= */
+    /* Self-hosted fonts (latin subset, woff2). font-display:swap so   */
+    /* text paints immediately in the fallback and swaps when ready.   */
+    /* ============================================================= */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400-italic.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600-italic.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('assets/fonts/playfair-700-italic.woff2') format('woff2')}
+
+    /* ============================================================= */
+    /* Critical above-the-fold CSS (compiled from the hero markup).    */
+    /* The full stylesheet loads async; this styles first paint with   */
+    /* zero external CSS requests. Regenerate: see README.md.          */
+    /* ============================================================= */
+    *,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.-inset-3{inset:-.75rem}.inset-x-0{left:0;right:0}.-right-24{right:-6rem}.-top-24{top:-6rem}.bottom-0{bottom:0}.top-0{top:0}.z-50{z-index:50}.z-\[70\]{z-index:70}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-5{margin-bottom:1.25rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-7{height:1.75rem}.h-96{height:24rem}.max-h-\[42vh\]{max-height:42vh}.w-1\.5{width:.375rem}.w-7{width:1.75rem}.w-96{width:24rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-6xl{max-width:72rem}.max-w-\[15rem\]{max-width:15rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-full{--tw-translate-y:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.gap-10{gap:2.5rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-6{gap:1.5rem}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px}.border-b,.border-y{border-bottom-width:1px}.border-t{border-top-width:1px}.border-line{--tw-border-opacity:1;border-color:rgb(30 39 64/var(--tw-border-opacity,1))}.bg-card{--tw-bg-opacity:1;background-color:rgb(18 24 41/var(--tw-bg-opacity,1))}.bg-cream{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.bg-cream\/5{background-color:hsla(60,13%,95%,.05)}.bg-ink{--tw-bg-opacity:1;background-color:rgb(10 14 26/var(--tw-bg-opacity,1))}.bg-ink\/95{background-color:rgba(10,14,26,.95)}.bg-line{--tw-bg-opacity:1;background-color:rgb(30 39 64/var(--tw-bg-opacity,1))}.bg-muted{--tw-bg-opacity:1;background-color:rgb(154 163 178/var(--tw-bg-opacity,1))}.bg-panel{--tw-bg-opacity:1;background-color:rgb(13 18 32/var(--tw-bg-opacity,1))}.bg-gradient-to-b{background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.from-cream\/10{--tw-gradient-from:hsla(60,13%,95%,.1) var(--tw-gradient-from-position);--tw-gradient-to:hsla(60,13%,95%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{-o-object-fit:cover;object-fit:cover}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-7{padding-left:1.75rem;padding-right:1.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-12{padding-bottom:3rem}.pr-10{padding-right:2.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.font-display{font-family:Playfair Display,Georgia,serif}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.05\]{line-height:1.05}.leading-none{line-height:1}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-widest{letter-spacing:.1em}.text-cream{--tw-text-opacity:1;color:rgb(245 245 242/var(--tw-text-opacity,1))}.text-cream\/90{color:hsla(60,13%,95%,.9)}.text-ink{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.text-muted{--tw-text-opacity:1;color:rgb(154 163 178/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-100{opacity:1}.blur-3xl{--tw-blur:blur(64px)}.blur-3xl,.blur-xl{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-xl{--tw-blur:blur(24px)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.selection\:bg-cream ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream ::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink ::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink ::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:bg-cream::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.hover\:bg-cream:hover{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.hover\:text-cream:hover{--tw-text-opacity:1;color:rgb(245 245 242/var(--tw-text-opacity,1))}.hover\:text-ink:hover{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:block{display:block}.sm\:max-h-none{max-height:none}.sm\:max-w-sm{max-width:24rem}.sm\:flex-none{flex:none}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:gap-10{gap:2.5rem}.sm\:pb-20{padding-bottom:5rem}.sm\:pt-16{padding-top:4rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width:1024px){.lg\:max-w-none{max-width:none}.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:text-7xl{font-size:4.5rem;line-height:1}}
+
+    /* ============================================================= */
+    /* Page-specific styles (override utilities; keep after them).     */
+    /* ============================================================= */
     html, body { background:#0A0E1A; }
+    /* Guard against horizontal scroll: the scroll-reveal system parks elements at
+       translateX(±48px) until they animate in, which otherwise stick out past the right
+       edge and cause a sideways scroll / zoom-out on mobile. Confirmed this is the only
+       source of horizontal overflow (settled reveals overflow 0px). overflow-x: clip hides
+       the transient overhang without creating a scroll container, so the reveal still slides
+       in from off-screen and the desktop sticky mockup is unaffected. `hidden` is a fallback
+       for browsers without `clip`. */
+    html, body { overflow-x: hidden; overflow-x: clip; }
     body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
     .font-display { letter-spacing: -0.015em; font-weight: 700; }
 
@@ -130,6 +170,29 @@
 </head>
 
 <body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+
+  <!-- ============================================================= -->
+  <!-- 0. IN-APP BROWSER NOTICE (TikTok/IG/FB/Snap webviews block the  -->
+  <!--    popup PayPal opens for checkout). Hidden unless JS detects   -->
+  <!--    an in-app user agent. Sits above the scroll progress bar.    -->
+  <!-- ============================================================= -->
+  <div id="inappNotice" role="region" aria-label="Open in browser tip"
+       class="hidden fixed top-0 inset-x-0 z-[70] bg-card border-b border-line">
+    <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-start gap-3 text-sm">
+      <p class="flex-1 min-w-0 text-cream/90 leading-snug">
+        For checkout to work, open this page in your browser. Tap the three dots above and choose
+        Open in browser.
+      </p>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" id="inappCopy"
+                class="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-cream hover:bg-cream hover:text-ink transition-colors">
+          Copy link
+        </button>
+        <button type="button" id="inappClose" aria-label="Dismiss this tip"
+                class="w-7 h-7 rounded-lg border border-line text-muted hover:text-cream flex items-center justify-center leading-none text-lg">×</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scroll progress bar -->
   <div id="progress" aria-hidden="true"></div>
@@ -785,7 +848,10 @@
       update();
     })();
 
-    // Scroll reveals (with auto-stagger for siblings inside [data-stagger])
+    // Scroll reveals. Failure mode is always "visible without animation", never "invisible":
+    //   - IntersectionObserver missing  -> reveal everything immediately
+    //   - observer stalls / throttled (common in webviews) -> safety net below reveals all
+    //   - JS never runs at all          -> the <noscript> style in <head> forces reveals visible
     (function () {
       var els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window) || !els.length) {
@@ -803,6 +869,16 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Reveal safety net: ~2.5s after load, reveal anything still hidden regardless of scroll
+    // position, so a slow, throttled or failed observer can never leave content invisible.
+    // Runs independently of the block above, so it fires even if that one threw.
+    (function () {
+      setTimeout(function () {
+        var hidden = document.querySelectorAll('.reveal:not(.in)');
+        for (var i = 0; i < hidden.length; i++) { hidden[i].classList.add('in'); }
+      }, 2500);
     })();
 
     // Before/After slideshows (independent prev/next + dots per side)
@@ -857,6 +933,68 @@
           ticking = true;
         }
       }, { passive: true });
+    })();
+
+    // In-app browser notice. TikTok/Instagram/Facebook/Snapchat webviews block the popup
+    // window PayPal opens at checkout, so buyers see a silent reload instead of a payment
+    // screen. We only hint; we never block. Nothing renders for normal browsers.
+    (function () {
+      var ua = navigator.userAgent || '';
+      if (!/(BytedanceWebview|musical_ly|Bytedance|Instagram|FBAN|FBAV|Snapchat)/i.test(ua)) return;
+
+      var bar = document.getElementById('inappNotice');
+      if (!bar) return;
+      var progress = document.getElementById('progress');
+
+      function applyOffset() {
+        var h = bar.offsetHeight;
+        document.body.style.paddingTop = h + 'px';
+        if (progress) progress.style.top = h + 'px';
+      }
+      function clearOffset() {
+        document.body.style.paddingTop = '';
+        if (progress) progress.style.top = '';
+      }
+
+      bar.classList.remove('hidden');
+      applyOffset();
+      window.addEventListener('resize', applyOffset, { passive: true });
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(applyOffset); }
+
+      var copyBtn = document.getElementById('inappCopy');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          var url = window.location.href;
+          function flash() {
+            copyBtn.textContent = 'Copied';
+            setTimeout(function () { copyBtn.textContent = 'Copy link'; }, 1600);
+          }
+          function fallback() {
+            try {
+              var t = document.createElement('textarea');
+              t.value = url; t.setAttribute('readonly', '');
+              t.style.position = 'absolute'; t.style.left = '-9999px';
+              document.body.appendChild(t); t.select();
+              document.execCommand('copy');
+              document.body.removeChild(t);
+              flash();
+            } catch (e) { /* clipboard unavailable in this webview */ }
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(flash, fallback);
+          } else {
+            fallback();
+          }
+        });
+      }
+
+      var closeBtn = document.getElementById('inappClose');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          bar.classList.add('hidden');
+          clearOffset();
+        });
+      }
     })();
   </script>
 </body>
