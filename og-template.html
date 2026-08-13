@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 1200px; height: 630px; overflow: hidden; }
@@ -18,7 +18,7 @@
     }
     .glow {
       position: absolute; inset: 0;
-      background: radial-gradient(70% 90% at 18% 0%, rgba(255,106,0,.20), transparent 60%);
+      background: radial-gradient(70% 90% at 18% 0%, rgba(245,245,242,.06), transparent 60%);
       pointer-events: none;
     }
     .wrap { display: flex; align-items: center; width: 100%; height: 100%; padding: 64px; gap: 56px; position: relative; }
@@ -27,26 +27,28 @@
     .badge {
       display: inline-flex; align-items: center; gap: 10px;
       font-size: 18px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
-      color: #FF8A33; background: rgba(255,106,0,.10); border: 1px solid rgba(255,106,0,.35);
+      color: #9AA3B2; background: rgba(245,245,242,.05); border: 1px solid #1E2740;
       border-radius: 999px; padding: 8px 18px; margin-bottom: 26px;
     }
-    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #FF6A00; }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #9AA3B2; }
 
+    /* Playfair is much wider than the old condensed display face, so this is sized to
+       fit the 1200x630 canvas. Eyeball it when you regenerate the PNG. */
     h1 {
-      font-family: "Bebas Neue", Impact, sans-serif;
-      font-weight: 400; line-height: .92; letter-spacing: .01em;
-      font-size: 86px; text-transform: uppercase; color: #F5F5F2;
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 800; line-height: 1.06; letter-spacing: -0.015em;
+      font-size: 60px; color: #F5F5F2;
     }
-    h1 .accent { color: #FF6A00; }
+    h1 .em { font-style: italic; font-weight: 700; color: #F5F5F2; }
 
     .sub { margin-top: 22px; font-size: 26px; line-height: 1.35; color: #9AA3B2; max-width: 600px; }
     .sub b { color: #F5F5F2; font-weight: 600; }
 
     .price-row { margin-top: 34px; display: flex; align-items: center; gap: 18px; }
     .price {
-      font-family: "Bebas Neue", Impact, sans-serif;
-      font-size: 30px; letter-spacing: .02em; color: #0A0E1A;
-      background: #FF6A00; border-radius: 12px; padding: 12px 22px 8px;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 24px; font-weight: 800; letter-spacing: .01em; color: #0A0E1A;
+      background: #F5F5F2; border-radius: 12px; padding: 12px 22px;
     }
     .meta { font-size: 19px; color: #9AA3B2; }
     .meta b { color: #F5F5F2; font-weight: 600; }
@@ -55,7 +57,7 @@
     .cover-wrap { position: relative; }
     .cover-wrap::before {
       content: ""; position: absolute; inset: -24px;
-      background: radial-gradient(closest-side, rgba(255,106,0,.30), transparent 75%);
+      background: radial-gradient(closest-side, rgba(245,245,242,.10), transparent 75%);
       filter: blur(8px);
     }
     img.cover {
@@ -72,7 +74,7 @@
   <div class="wrap">
     <div class="left">
       <span class="badge"><span class="dot"></span>Science-Backed · Natural · No Fluff</span>
-      <h1>Build a lean,<br/><span class="accent">aesthetic</span> physique.</h1>
+      <h1>Build a lean,<br/><span class="em">aesthetic</span> physique.</h1>
       <p class="sub">The exact science-backed system. <b>No dirty bulking. No starving.</b></p>
       <div class="price-row">
         <span class="price">Get it for $7</span>
