@@ -22,12 +22,12 @@ module.exports = {
       },
     },
   },
-  // Classes toggled at runtime by the vanilla JS (slideshow dots, sticky bar, reveals).
+  // Classes toggled at runtime by the vanilla JS (compare-slider dots, sticky bar).
   // The content scanner already sees them as string literals in index.html, but we pin
   // them so a future refactor of that JS can't silently drop them from the purge.
+  // The slider's own crossfade uses a plain .on class in the page's <style>, not utilities,
+  // so opacity-0/opacity-100 are no longer toggled and no longer need pinning.
   safelist: [
-    'opacity-0',
-    'opacity-100',
     'bg-cream',
     'bg-line',
     'translate-y-full',
