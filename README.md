@@ -13,9 +13,8 @@ every visit).
 - Design tokens (colors, fonts) live in `tailwind.config.js`.
 - The Tailwind entry file is `assets/tailwind.input.css` (just the three `@tailwind` directives).
 - Page-specific custom CSS (scroll reveals, self-drawing rules, marquee, progress bar, CTA
-  states, compare slider, in-app interstitial, hero glow) stays inline in the `<style>` block
-  of `index.html`. It is loaded after `styles.css`, so it overrides utilities the same way it
-  did under the CDN.
+  states, compare slider, hero glow) stays inline in the `<style>` block of `index.html`. It
+  is loaded after `styles.css`, so it overrides utilities the same way it did under the CDN.
 
 ## Motion
 
@@ -38,7 +37,7 @@ IntersectionObserver. Everything degrades to "visible, unanimated" rather than "
 
 Two things are JS rather than CSS because they cannot be expressed as transitions: the
 count-up, and the compare slider's one-time "drag me" hint (animating a custom property needs
-`@property`, which is not safe to rely on in older in-app webviews). Both are skipped
+`@property`, which is not safe to rely on in older mobile browsers). Both are skipped
 entirely under `prefers-reduced-motion`.
 
 ### Regenerate the stylesheet
@@ -73,27 +72,25 @@ filename. `og:image` and `twitter:image` in `index.html` point at the absolute U
 
 ## Before / after
 
-One drag-to-compare slider (`#compare`), not two slideshows. The after frame is the base
-layer; the before frame sits on top, clipped by `clip-path` to everything left of the handle.
-A single custom property `--pos` drives both the clip and the handle, so pointer drag,
-keyboard (arrows / Home / End / shift for bigger steps) and the intro hint all just move one
-number. Prev/next and the dots swap which of the three photo pairs is under the handle.
+Two side-by-side slideshows (`[data-slideshow]`), one for before and one for after, each with
+its own prev/next arrows, dots and auto-play. Auto-play pauses on hover, restarts a few
+seconds after a manual interaction, and is skipped entirely under `prefers-reduced-motion`.
+The slides crossfade via the `opacity-0`/`opacity-100` utilities, which is why those two are
+pinned in the config `safelist`.
 
-The images carry `draggable="false"` (plus `-webkit-user-drag: none`). Without it the browser
-starts a native image drag on mousedown, which fires `dragstart` → `pointercancel` and stalls
-the wipe about two pixels in.
+This section is deliberately left as-is. A drag-to-compare slider was tried and reverted.
 
-## In-app browsers
+## Checkout links
 
-TikTok/Instagram/Facebook/Snapchat webviews block the popup PayPal opens at checkout, so
-buyers there get a silent reload instead of a payment screen. The page detects those user
-agents and intercepts checkout clicks with an interstitial offering "Copy link" or "Continue
-anyway". It fires on intent only — nothing renders until someone actually taps a checkout
-link — and in a normal browser the detection returns immediately, no listener is bound, and
-every click passes through untouched.
+Six plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_content`
+(`sticky`, `hero`, `chapters`, `social-proof`, `pricing`, `final`) so you can see which
+section converts. Nothing intercepts the click — no JS runs on them at all.
 
-Checkout links are marked with `data-checkout`. **Any new checkout link needs that attribute**
-or in-app visitors will hit the broken PayPal popup with no warning.
+There used to be an in-app-browser warning here, on the theory that TikTok's webview broke
+the PayPal popup. That was tested and ruled out: checkout completes in Safari and in the
+in-app browser alike, and the one failing case failed in both, so it was account-specific,
+not a funnel problem. The detection, the interstitial and the click interception are all
+gone. Don't reintroduce them without evidence that reproduces outside a single account.
 
 ## Brand
 
