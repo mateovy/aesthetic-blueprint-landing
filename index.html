@@ -8,13 +8,9 @@
 
   >>> FILL-IN-THE-BLANKS BEFORE LAUNCH (search for each {{TOKEN}}) <<<
 
-  DONE: Checkout URL  -> https://hotm.io/fO1U4T (wired into every CTA)
-                         Short link; redirects to pay.hotmart.com/B106265452I?checkoutMode=10.
-                         checkoutMode=10 is what surfaces the order bump, and it lives inside
-                         the redirect, so never strip or rebuild this URL by hand.
-                         The shortener FORWARDS query params, so UTMs still work: append them
-                         starting with ? (e.g. ?utm_source=...). Using & instead of ? breaks
-                         the link entirely, it lands on the shortener error page.
+  DONE: Checkout URL  -> https://pay.hotmart.com/B106265452I?checkoutMode=10 (wired into every CTA)
+                         checkoutMode=10 is what surfaces the order bump. Any new CTA must
+                         keep it, and must join its UTMs with & since the base URL owns the ?.
   DONE: Guarantee     -> 7-day money-back guarantee (live in offer/guarantee/FAQ/CTA)
   TODO: Testimonials -> none yet. Only ever use real, confirmed buyers.
   DONE: Hero image    -> assets/hero.png (live)
@@ -271,7 +267,7 @@
       <p class="font-display text-3xl text-cream">The Aesthetic Physique Blueprint</p>
       <p class="text-xs text-muted">Instant PDF · One-time $7</p>
     </div>
-    <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
+    <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
        data-checkout
        class="flex-1 sm:flex-none text-center bg-cream text-ink font-extrabold
               rounded-xl px-5 py-3.5 text-base cta-glow">
@@ -319,7 +315,7 @@
         </p>
 
         <div class="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
+          <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
              data-checkout
              class="text-center bg-cream text-ink font-extrabold
                     rounded-xl px-7 py-4 text-lg cta-glow">
@@ -619,7 +615,7 @@
         </ol>
 
         <div class="mt-8">
-          <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
+          <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
              data-checkout
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint for $7
@@ -688,7 +684,7 @@
            Only real names, with permission. Never fabricate. -->
 
       <div class="reveal mt-10 text-center">
-        <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
+        <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
            data-checkout
            class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
           Get The Blueprint for $7
@@ -735,7 +731,7 @@
         <p class="text-muted uppercase tracking-widest text-sm">Today, one time</p>
         <p class="font-display text-7xl text-cream leading-none mt-1">$7</p>
         <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
-        <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
+        <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
            data-checkout
            class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
           Get The Blueprint for $7
@@ -861,7 +857,7 @@
         the aesthetic, lean physique you actually want, the right way, naturally.
       </p>
 
-      <a href="https://hotm.io/fO1U4T?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
+      <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
          data-checkout
          class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
         Get The Blueprint for $7
