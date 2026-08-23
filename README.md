@@ -31,7 +31,7 @@ IntersectionObserver. Everything degrades to "visible, unanimated" rather than "
 - Section heading italics fade and rise 50ms behind the roman text, so the eye lands on the
   emphasis word last.
 - `[data-count]` figures count up from zero over 900ms. The markup holds the final value, so
-  no-JS and reduced-motion visitors just read it. The `$7` is deliberately never animated.
+  no-JS and reduced-motion visitors just read it. The `$12` is deliberately never animated.
 - `.cta-glow` — resting lift, hover into pure white, and a press state. No pulse: the press
   is what makes it feel real on mobile, where there is no hover.
 
