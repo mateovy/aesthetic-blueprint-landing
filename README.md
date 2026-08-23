@@ -96,9 +96,10 @@ This section is deliberately left as-is. A drag-to-compare slider was tried and 
 
 ## Checkout links
 
-Six plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_content`
-(`sticky`, `hero`, `chapters`, `social-proof`, `pricing`, `final`) so you can see which
-section converts.
+Five plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_content`
+(`sticky`, `hero`, `chapters`, `pricing`, `final`) so you can see which section converts.
+There used to be a sixth, `social-proof`, in the "No testimonials yet" section; that
+section was removed, so expect that label to stop appearing in reports.
 
 On iPhone, tapping one of these inside the TikTok/IG/FB/Snap webview does not reach the
 checkout: the buyer is told to open the Hotmart link in a browser, and most stop there. So
