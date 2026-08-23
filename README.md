@@ -65,10 +65,24 @@ command (needs `sips`, built into macOS, and `cwebp` via `brew install webp`).
 
 ## Social share image
 
-`og-template.html` is the source used to render `assets/og-image.png` (1200x630). If you
-change the template, regenerate the PNG (screenshot the template at 1200x630) and keep the
-filename. `og:image` and `twitter:image` in `index.html` point at the absolute URL
-`https://aesthetic-engineer.com/assets/og-image.png` so link previews resolve for scrapers.
+`og-template.html` is the source layout for `assets/og-image.jpeg` (1200x630, ~132KB).
+`og:image` and `twitter:image` in `index.html` point at the absolute URL
+`https://aesthetic-engineer.com/assets/og-image.jpeg` so link previews resolve for scrapers,
+and `og:image:width`/`height` must keep matching the file.
+
+Keep the referenced file small. Facebook and Twitter tolerate multi-megabyte images, but
+WhatsApp routinely refuses to render a preview for them, and that is the channel where this
+link gets pasted most. The full-resolution export stays at `assets/originals/og-image.jpeg`;
+re-derive the referenced copy from it:
+
+```
+cp assets/originals/og-image.jpeg assets/og-image.jpeg
+sips -z 630 1200 assets/og-image.jpeg
+sips -s format jpeg -s formatOptions 90 assets/og-image.jpeg
+```
+
+After changing the price or any copy, the image has to be re-exported by hand: it is a
+picture, so nothing in the HTML can update it.
 
 ## Before / after
 
@@ -84,13 +98,14 @@ This section is deliberately left as-is. A drag-to-compare slider was tried and 
 
 Six plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_content`
 (`sticky`, `hero`, `chapters`, `social-proof`, `pricing`, `final`) so you can see which
-section converts. Nothing intercepts the click — no JS runs on them at all.
+section converts.
 
-There used to be an in-app-browser warning here, on the theory that TikTok's webview broke
-the PayPal popup. That was tested and ruled out: checkout completes in Safari and in the
-in-app browser alike, and the one failing case failed in both, so it was account-specific,
-not a funnel problem. The detection, the interstitial and the click interception are all
-gone. Don't reintroduce them without evidence that reproduces outside a single account.
+On iPhone, tapping one of these inside the TikTok/IG/FB/Snap webview does not reach the
+checkout: the buyer is told to open the Hotmart link in a browser, and most stop there. So
+those taps are intercepted by the interstitial in section 14, which offers "Copy link" and
+"Continue anyway". It is scoped to iOS webviews only, because Android goes straight through
+and warning those visitors would cost conversions for nothing. Everywhere else no listener
+is bound at all and the links behave as plain anchors.
 
 ## Brand
 

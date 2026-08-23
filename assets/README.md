@@ -8,6 +8,7 @@ The page references small WebP derivatives, not the original photos:
 |---|---|---|
 | `hero.webp` | `hero.png` | 536px CSS (max, wide desktop) × 2 for retina → 1080px wide |
 | `aesthetic-blueprint-mockup.webp` | `aesthetic blueprint mockup.png` | 320px CSS (flat across breakpoints) × 2 → 640px wide |
+| `og-image.jpeg` | `originals/og-image.jpeg` | fixed 1200×630, the Open Graph card size |
 | `before-1.webp` / `before-2.webp` / `before-3.webp` | `originals/before 1.jpeg` / `before 2.jpeg` / `before 3.jpeg` | 356px CSS (max, tablet width) × 2 → 720px wide |
 | `after-1.webp` / `after-2.webp` / `after-3.webp` | `originals/after 1.JPG` / `after 2.PNG` / `after 3.jpg` | same as above → 720px wide |
 
