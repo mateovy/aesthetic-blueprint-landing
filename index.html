@@ -8,9 +8,12 @@
 
   >>> FILL-IN-THE-BLANKS BEFORE LAUNCH (search for each {{TOKEN}}) <<<
 
-  DONE: Checkout URL  -> https://pay.hotmart.com/B106265452I?checkoutMode=10 (wired into every CTA)
-                         checkoutMode=10 is what surfaces the order bump. Any new CTA must
-                         keep it, and must join its UTMs with & since the base URL owns the ?.
+  DONE: Checkout URL  -> every CTA points at /go/blueprint/, NOT at Hotmart directly.
+                         That bridge page exists so the click is countable in Web Analytics,
+                         and it forwards its whole query string, which is how utm_content
+                         survives. The real destination and checkoutMode=10 (the order bump)
+                         live in go/blueprint/index.html. A new CTA just needs
+                         href="/go/blueprint/?utm_source=...&utm_content=<section>".
   DONE: Guarantee     -> 7-day money-back guarantee (live in offer/guarantee/FAQ/CTA)
   TODO: Testimonials -> none yet, and the section that explained their absence has been
                          removed. If real ones arrive, add a section back. Only ever use
@@ -33,6 +36,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Icons. Declared explicitly so browsers stop probing /favicon.ico and
+       /apple-touch-icon*.png, which were 404ing on every fresh visit. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- SEO -->
   <title>The Aesthetic Physique Blueprint: Build a Lean, Aesthetic Body (Science-Backed)</title>
@@ -273,7 +282,7 @@
       <p class="font-display text-3xl text-cream">The Aesthetic Physique Blueprint</p>
       <p class="text-xs text-muted">Instant PDF · One-time $12</p>
     </div>
-    <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
+    <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
        data-checkout
        class="flex-1 sm:flex-none text-center bg-cream text-ink font-extrabold
               rounded-xl px-5 py-3.5 text-base cta-glow">
@@ -321,7 +330,7 @@
         </p>
 
         <div class="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
+          <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
              data-checkout
              class="text-center bg-cream text-ink font-extrabold
                     rounded-xl px-7 py-4 text-lg cta-glow">
@@ -652,7 +661,7 @@
         </div>
 
         <div class="mt-8">
-          <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
+          <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
              data-checkout
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint for $12
@@ -740,7 +749,7 @@
         <p class="text-muted uppercase tracking-widest text-sm">Today, one time</p>
         <p class="font-display text-7xl text-cream leading-none mt-1">$12</p>
         <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
-        <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
            data-checkout
            class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
           Get The Blueprint for $12
@@ -866,7 +875,7 @@
         the aesthetic, lean physique you actually want, the right way, naturally.
       </p>
 
-      <a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
+      <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
          data-checkout
          class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
         Get The Blueprint for $12
@@ -1196,5 +1205,8 @@
     // is the standard nudge, and it is what makes the CTA press state land on iPhone.
     document.addEventListener('touchstart', function () {}, { passive: true });
   </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
 </body>
 </html>

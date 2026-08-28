@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Aesthetic Engineer">
+  <!-- Monochrome mark, existing palette only: ink #0A0E1A ground, cream #F5F5F2 strokes.
+       An "A" for Aesthetic whose crossbar is the short rule that opens every section of
+       the page and every carousel post. Square caps, like those rules. -->
+  <rect width="64" height="64" rx="13" fill="#0A0E1A"/>
+  <g stroke="#F5F5F2" stroke-width="6" stroke-linecap="butt" fill="none">
+    <path d="M17 48 L32 17"/>
+    <path d="M47 48 L32 17"/>
+    <path d="M23.5 37 L40.5 37"/>
+  </g>
+</svg>

@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Icons. Declared explicitly so browsers stop probing /favicon.ico and
+       /apple-touch-icon*.png, which were 404ing on every fresh visit. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="robots" content="noindex" />
   <title>Terms &amp; Conditions — The Aesthetic Physique Blueprint</title>
   <!-- Self-hosted fonts (latin subset, woff2). No third-party origins. -->
@@ -61,5 +67,8 @@
     document.getElementById('date').textContent = now.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
     document.getElementById('year').textContent = now.getFullYear();
   </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
 </body>
 </html>
