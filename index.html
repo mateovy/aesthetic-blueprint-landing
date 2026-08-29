@@ -66,7 +66,7 @@
 
   <!-- The checkout bridge sits on the conversion path, so fetch it now, at idle priority,
        rather than making the buyer wait for a round trip after they have already tapped.
-       Also warm the beacon origin, which the bridge needs the instant it loads. -->
+       The third line warms the origin that Cloudflare's injected beacon loads from. -->
   <link rel="prefetch" href="/go/blueprint/" as="document" />
   <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
   <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
@@ -1061,8 +1061,5 @@
     // is the standard nudge, and it is what makes the CTA press state land on iPhone.
     document.addEventListener('touchstart', function () {}, { passive: true });
   </script>
-
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
 </body>
 </html>

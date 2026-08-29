@@ -5,15 +5,14 @@
   Exists only so a checkout click is countable: Cloudflare Web Analytics cannot see clicks
   on an outbound link, but it does see a pageview here.
 
-  It sits on the conversion path, so every millisecond is the buyer's. Three things keep it
-  cheap: the landing page prefetches this document so the click costs no network, the
-  connection to Hotmart is opened before the redirect fires, and the beacon is requested
-  from the head rather than deferred to the end of the body.
+  The beacon is NOT written here. Cloudflare Pages injects it into every HTML response at
+  the edge, and a hand-written one only fights with it, so this page carries no analytics
+  tag of its own. It just waits 600ms before redirecting to give that injected beacon time
+  to report, since a page that leaves instantly is a page that never gets counted.
 
-  The redirect waits for the beacon to LOAD, not to finish reporting: Cloudflare's beacon
-  uses navigator.sendBeacon, whose request survives the navigation. An earlier version just
-  waited a flat 300ms, which on Slow 4G fired before the script had even arrived, so the
-  visit was never counted and the buyer still paid the delay.
+  It sits on the conversion path, so the rest is kept cheap: the landing page prefetches
+  this document, so the tap costs no round trip, and the connection to Hotmart is already
+  open by the time the redirect fires.
 
   Every incoming query string is forwarded, which is how per-section attribution survives.
   There is only one of these because the site has one checkout destination; the Add-On Pack
@@ -31,12 +30,6 @@
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-  <!-- Cloudflare Web Analytics. In the head and async, not deferred at the end of the body:
-       this document is measured and then immediately abandoned, so the script has to start
-       downloading in the first bytes of the parse or it never runs at all. -->
-  <script async id="cf-beacon" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
-
   <!-- Palette inlined rather than pulling styles.css: this is a redirect, and the whole
        point is that it paints the site's ink instantly and never flashes white. -->
   <style>
@@ -78,25 +71,15 @@
         window.location.replace(target);
       }
 
-      // Leave the moment the beacon script has executed. Cloudflare's beacon calls
-      // navigator.sendBeacon inside its own load handler, and that request survives the
-      // navigation, so there is nothing to wait around for once the script has run.
+      // Hold before leaving, so Cloudflare's automatically injected beacon has time to
+      // send the page view. This document exists only to be counted, so redirecting too
+      // early defeats the whole point of it.
       //
-      // CAP is a hard ceiling for the cases where the script never runs: blocked by an
-      // extension, or still in flight on bad mobile data. Kept deliberately short. A buyer
-      // on a slow connection is the last person who should be held up by an analytics
-      // script, so past this point the click goes through uncounted.
-      //
-      // In practice the script is already in the browser cache from the landing page (it is
-      // served with max-age=86400), so this resolves in a few milliseconds and the visit is
-      // recorded on every connection speed measured.
-      var CAP = 400;
-      var s = document.getElementById('cf-beacon');
-      if (s) {
-        s.addEventListener('load', go);
-        s.addEventListener('error', go);           // blocked: do not wait at all
-      }
-      setTimeout(go, CAP);
+      // A fixed wait rather than hooking the script's load event: the beacon is injected at
+      // the edge, not written here, so there is no tag of ours to listen to. 600ms sits in
+      // the middle of the 500-800ms window and is the entire cost of the hop on a decent
+      // connection.
+      setTimeout(go, 600);
     })();
   </script>
 </body>
