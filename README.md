@@ -101,12 +101,13 @@ Five plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_co
 There used to be a sixth, `social-proof`, in the "No testimonials yet" section; that
 section was removed, so expect that label to stop appearing in reports.
 
-On iPhone, tapping one of these inside the TikTok/IG/FB/Snap webview does not reach the
-checkout: the buyer is told to open the Hotmart link in a browser, and most stop there. So
-those taps are intercepted by the interstitial in section 14, which offers "Copy link" and
-"Continue anyway". It is scoped to iOS webviews only, because Android goes straight through
-and warning those visitors would cost conversions for nothing. Everywhere else no listener
-is bound at all and the links behave as plain anchors.
+Nothing intercepts these clicks: they are plain anchors and no JS touches them.
+
+There was an interstitial here that caught taps inside iOS webviews and offered "Copy link",
+because on iPhone the TikTok/IG/FB/Snap browser refuses to open Hotmart's checkout and tells
+the buyer to open it in a real browser. It was removed on request. **That failure mode still
+exists on iPhone**, it just goes unhandled now, so watch iOS conversion. The full
+implementation is in git history if it needs to come back.
 
 ## Brand
 

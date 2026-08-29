@@ -78,13 +78,23 @@
         window.location.replace(target);
       }
 
-      // Leave once the beacon has executed. GRACE gives sendBeacon a moment to hand the
-      // request to the browser; CAP means a blocked or slow beacon can never strand anyone.
-      var GRACE = 60, CAP = 1500;
+      // Leave the moment the beacon script has executed. Cloudflare's beacon calls
+      // navigator.sendBeacon inside its own load handler, and that request survives the
+      // navigation, so there is nothing to wait around for once the script has run.
+      //
+      // CAP is a hard ceiling for the cases where the script never runs: blocked by an
+      // extension, or still in flight on bad mobile data. Kept deliberately short. A buyer
+      // on a slow connection is the last person who should be held up by an analytics
+      // script, so past this point the click goes through uncounted.
+      //
+      // In practice the script is already in the browser cache from the landing page (it is
+      // served with max-age=86400), so this resolves in a few milliseconds and the visit is
+      // recorded on every connection speed measured.
+      var CAP = 400;
       var s = document.getElementById('cf-beacon');
       if (s) {
-        s.addEventListener('load',  function () { setTimeout(go, GRACE); });
-        s.addEventListener('error', go);           // blocked by an extension: do not wait
+        s.addEventListener('load', go);
+        s.addEventListener('error', go);           // blocked: do not wait at all
       }
       setTimeout(go, CAP);
     })();

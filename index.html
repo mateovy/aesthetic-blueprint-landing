@@ -199,7 +199,6 @@
       .reveal h2 .italic, h2.reveal .italic { opacity:1 !important; transform:none !important; transition:none; }
       .rule { transform:none !important; transition:none; }
       .float-glow, .marquee-track { animation:none !important; }
-      #inappModal.open .inapp-panel { animation:none; }
       /* CTA keeps its press feedback, minus the travel */
       a.cta-glow:hover, button.cta-glow:hover,
       a.cta-glow:active, button.cta-glow:active { transform:none; }
@@ -249,27 +248,6 @@
       background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%);
       pointer-events:none;
     }
-
-    /* ---- In-app browser interstitial ----
-       Only ever built for iOS webviews (TikTok/IG/FB/Snap), and only after a checkout tap.
-       Layout lives here rather than in utilities so it never depends on the async
-       stylesheet having landed by the time someone taps. */
-    #inappModal {
-      position:fixed; inset:0; z-index:80; padding:1.25rem;
-      display:none; align-items:center; justify-content:center;
-    }
-    #inappModal.open { display:flex; }
-    .inapp-backdrop {
-      position:absolute; inset:0; background:rgba(10,14,26,.82);
-      -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
-    }
-    .inapp-panel { position:relative; width:100%; max-width:23rem; }
-    /* the panel takes focus so screen readers announce the dialog, but it is a container,
-       not a control: the browser's default (blue) ring would break the monochrome rule */
-    .inapp-panel:focus, .inapp-panel:focus-visible { outline:none; }
-    #inappModal.open .inapp-panel { animation: inappIn .2s cubic-bezier(.16,1,.3,1); }
-    @keyframes inappIn { from { opacity:0; transform: translateY(8px) scale(.98); } }
-    .inapp-close { position:absolute; top:.75rem; right:.75rem; }
   </style>
 </head>
 
@@ -290,7 +268,6 @@
       <p class="text-xs text-muted">Instant PDF · One-time $12</p>
     </div>
     <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
-       data-checkout
        class="flex-1 sm:flex-none text-center bg-cream text-ink font-extrabold
               rounded-xl px-5 py-3.5 text-base cta-glow">
       Get The Blueprint for $12
@@ -338,7 +315,6 @@
 
         <div class="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
-             data-checkout
              class="text-center bg-cream text-ink font-extrabold
                     rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint for $12
@@ -674,7 +650,6 @@
 
         <div class="mt-8">
           <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
-             data-checkout
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint for $12
           </a>
@@ -762,7 +737,6 @@
         <p class="font-display text-7xl text-cream leading-none mt-1">$12</p>
         <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
         <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
-           data-checkout
            class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
           Get The Blueprint for $12
         </a>
@@ -888,7 +862,6 @@
       </p>
 
       <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
-         data-checkout
          class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
         Get The Blueprint for $12
       </a>
@@ -920,36 +893,6 @@
       <p class="mt-4 text-xs text-muted/60">© <span id="year"></span> The Aesthetic Physique Blueprint. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- ============================================================= -->
-  <!-- 14. IN-APP BROWSER INTERSTITIAL                               -->
-  <!--   On iPhone, the TikTok/IG/FB/Snap webview refuses to open    -->
-  <!--   Hotmart's checkout and tells the buyer to open it in a      -->
-  <!--   browser, which most of them never do. We catch the tap      -->
-  <!--   first and hand them a one-tap way across. Fires on intent   -->
-  <!--   only, never on load, and never outside an iOS webview.      -->
-  <!-- ============================================================= -->
-  <div id="inappModal" role="dialog" aria-modal="true" aria-labelledby="inappTitle" aria-describedby="inappBody">
-    <div class="inapp-backdrop" data-inapp-dismiss></div>
-    <div class="inapp-panel bg-card border border-line rounded-2xl p-6" tabindex="-1">
-      <button type="button" id="inappClose" data-inapp-dismiss aria-label="Close"
-              class="inapp-close w-8 h-8 rounded-lg border border-line text-muted hover:text-cream flex items-center justify-center leading-none text-lg">&times;</button>
-
-      <h2 id="inappTitle" class="font-display text-2xl text-cream pr-8">Finish in Safari</h2>
-      <p id="inappBody" class="mt-3 text-muted leading-snug">
-        The browser inside this app won't open the checkout. Copy the link, paste it in
-        Safari, and your purchase goes through normally.
-      </p>
-
-      <button type="button" id="inappCopy"
-              class="mt-6 w-full bg-cream text-ink font-extrabold rounded-xl px-5 py-3.5 text-base cta-glow">
-        Copy link
-      </button>
-      <a id="inappContinue" href="#" class="mt-4 block text-center text-sm text-muted hover:text-cream transition-colors">
-        Continue anyway
-      </a>
-    </div>
-  </div>
 
   <!-- ============================================================= -->
   <!-- VANILLA JS: sticky CTA, FAQ icons (native), scroll reveals    -->
@@ -1112,105 +1055,6 @@
         });
       }, { threshold: 0.6 });
       els.forEach(function (el) { io.observe(el); });
-    })();
-
-    // In-app browser interstitial.
-    //
-    // On iPhone, tapping a checkout link inside the TikTok/IG/FB/Snap webview does not open
-    // the checkout: the buyer gets told to open the Hotmart link in a browser, and most of
-    // them stop there. We cannot force our way out of a WKWebView, so we catch the tap and
-    // hand them the shortest path across: copy the link, open Safari, paste.
-    //
-    // Deliberately narrow. It is scoped to iOS webviews because that is where the failure was
-    // observed; Android in-app browsers go straight through, and showing this to them would
-    // cost conversions for nothing. Widen IS_INAPP/IS_IOS below if Android starts failing too.
-    //
-    // It never blocks: "Continue anyway" always follows the original link. In Safari, Chrome,
-    // or on Android this whole function returns immediately, binds no listener, and every
-    // checkout tap behaves exactly as if this code did not exist.
-    (function () {
-      var ua = navigator.userAgent || '';
-      var IS_IOS = /iPhone|iPad|iPod/i.test(ua);
-      var IS_INAPP = /(BytedanceWebview|musical_ly|Bytedance|Instagram|FBAN|FBAV|FB_IAB|Snapchat)/i.test(ua);
-      if (!IS_IOS || !IS_INAPP) return;
-
-      var modal = document.getElementById('inappModal');
-      if (!modal) return;
-      var panel = modal.querySelector('.inapp-panel');
-      var copyBtn = document.getElementById('inappCopy');
-      var contBtn = document.getElementById('inappContinue');
-      var lastFocus = null;
-      var copyTimer = null;
-
-      function open(url) {
-        if (contBtn) { contBtn.href = url; }
-        lastFocus = document.activeElement;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        // focus the dialog, not a control: screen readers announce the title and body, and
-        // the primary button doesn't open wearing a focus ring
-        if (panel) { panel.focus(); }
-      }
-      function close() {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-        if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
-        lastFocus = null;
-      }
-
-      // Intercept any checkout link, whatever section it lives in.
-      document.addEventListener('click', function (e) {
-        var link = e.target.closest && e.target.closest('a[data-checkout]');
-        if (!link) return;
-        e.preventDefault();
-        open(link.href);
-      });
-
-      // Dismiss: backdrop, the X, or Escape.
-      modal.addEventListener('click', function (e) {
-        if (e.target.closest && e.target.closest('[data-inapp-dismiss]')) { close(); }
-      });
-      document.addEventListener('keydown', function (e) {
-        if (!modal.classList.contains('open')) return;
-        if (e.key === 'Escape' || e.key === 'Esc') { close(); return; }
-        // keep tabbing inside the dialog while it is up
-        if (e.key !== 'Tab') return;
-        var f = modal.querySelectorAll('button, a[href]');
-        if (!f.length) return;
-        var first = f[0], last = f[f.length - 1], here = document.activeElement;
-        if (e.shiftKey && (here === first || here === panel)) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && here === last) { e.preventDefault(); first.focus(); }
-      });
-
-      // "Continue anyway" is a real link to the checkout URL; let it navigate.
-      if (contBtn) { contBtn.addEventListener('click', close); }
-
-      if (copyBtn) {
-        copyBtn.addEventListener('click', function () {
-          var url = window.location.href;
-          function flash() {
-            copyBtn.textContent = 'Copied';
-            clearTimeout(copyTimer);
-            copyTimer = setTimeout(function () { copyBtn.textContent = 'Copy link'; }, 2000);
-          }
-          function fallback() {
-            try {
-              var t = document.createElement('textarea');
-              t.value = url; t.setAttribute('readonly', '');
-              t.style.position = 'absolute'; t.style.left = '-9999px';
-              document.body.appendChild(t); t.select();
-              document.execCommand('copy');
-              document.body.removeChild(t);
-              flash();
-            } catch (e) { /* clipboard unavailable in this webview */ }
-          }
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).then(flash, fallback);
-          } else {
-            fallback();
-          }
-        });
-      }
     })();
 
     // iOS only fires :active on elements it considers tappable. One empty passive listener
