@@ -569,8 +569,13 @@
       <div class="lg:col-span-2 reveal lg:sticky lg:top-10">
         <div class="relative mx-auto max-w-xs">
           <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl"></div>
+          <!-- Deliberately NOT loading="lazy". Lazy only starts the download once the image
+               is nearly on screen, so on a slow connection the card faded in and sat empty
+               for over two seconds before the cover appeared. Measured at 2.4s on Slow 4G.
+               Chrome gives below-the-fold images low priority anyway, so fetching it with
+               the document costs the hero nothing. -->
           <img src="assets/aesthetic-blueprint-mockup.webp" alt="The Aesthetic Physique Blueprint, PDF guide cover"
-               width="640" height="858" loading="lazy"
+               width="640" height="858" decoding="async"
                class="relative w-full rounded-2xl border border-line bg-card" />
         </div>
         <p class="mt-5 text-center text-muted">90 pages. Zero fluff.<br/>
