@@ -2,16 +2,22 @@
 <html lang="en">
 <!--
   Bridge page: /go/blueprint/
-  Exists only so a checkout click is countable. Cloudflare Web Analytics cannot see clicks
-  on an outbound link, but it does see a pageview here, so this stands between the button
-  and Hotmart purely to be measured.
+  Exists only so a checkout click is countable: Cloudflare Web Analytics cannot see clicks
+  on an outbound link, but it does see a pageview here.
 
-  Every incoming query string is forwarded, which is how per-section attribution survives:
-  the buttons link here with their own utm_content and it is passed straight through.
+  It sits on the conversion path, so every millisecond is the buyer's. Three things keep it
+  cheap: the landing page prefetches this document so the click costs no network, the
+  connection to Hotmart is opened before the redirect fires, and the beacon is requested
+  from the head rather than deferred to the end of the body.
 
-  There is only one of these because the site has one checkout destination. The Add-On Pack
-  is not a separate URL, it is the order bump that checkoutMode=10 surfaces inside this same
-  product, so a /go/bundle/ would point at the exact same place.
+  The redirect waits for the beacon to LOAD, not to finish reporting: Cloudflare's beacon
+  uses navigator.sendBeacon, whose request survives the navigation. An earlier version just
+  waited a flat 300ms, which on Slow 4G fired before the script had even arrived, so the
+  visit was never counted and the buyer still paid the delay.
+
+  Every incoming query string is forwarded, which is how per-section attribution survives.
+  There is only one of these because the site has one checkout destination; the Add-On Pack
+  is the order bump inside this same product, not a separate URL.
 -->
 <head>
   <meta charset="UTF-8" />
@@ -19,16 +25,20 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Redirecting to checkout</title>
 
+  <!-- Open both connections before anything needs them. -->
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- Warm up the TLS handshake to Hotmart while the 300ms timer runs, so the hop costs
-       the buyer as little as possible. -->
-  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <!-- Cloudflare Web Analytics. In the head and async, not deferred at the end of the body:
+       this document is measured and then immediately abandoned, so the script has to start
+       downloading in the first bytes of the parse or it never runs at all. -->
+  <script async id="cf-beacon" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
 
-  <!-- Palette inlined rather than pulling styles.css: this page is a redirect, and the
-       whole point is that it paints the site's ink instantly and never flashes white. -->
+  <!-- Palette inlined rather than pulling styles.css: this is a redirect, and the whole
+       point is that it paints the site's ink instantly and never flashes white. -->
   <style>
     html, body {
       margin: 0; height: 100%;
@@ -44,7 +54,7 @@
 
 <body>
   <div class="wrap">
-    <p>Redirecting…</p>
+    <p>Redirecting&#8230;</p>
   </div>
 
   <noscript>
@@ -60,13 +70,24 @@
       var incoming = window.location.search.replace(/^\?/, '');
       var target = BASE + (incoming ? '&' + incoming : '');
 
-      // ~300ms so the beacon has time to fire before the document goes away. replace()
-      // rather than href so the back button returns to the landing page, not to this hop.
-      setTimeout(function () { window.location.replace(target); }, 300);
+      var went = false;
+      function go() {
+        if (went) return;
+        went = true;
+        // replace() so the back button returns to the landing page, not to this hop.
+        window.location.replace(target);
+      }
+
+      // Leave once the beacon has executed. GRACE gives sendBeacon a moment to hand the
+      // request to the browser; CAP means a blocked or slow beacon can never strand anyone.
+      var GRACE = 60, CAP = 1500;
+      var s = document.getElementById('cf-beacon');
+      if (s) {
+        s.addEventListener('load',  function () { setTimeout(go, GRACE); });
+        s.addEventListener('error', go);           // blocked by an extension: do not wait
+      }
+      setTimeout(go, CAP);
     })();
   </script>
-
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REEMPLAZAR_TOKEN"}'></script>
 </body>
 </html>

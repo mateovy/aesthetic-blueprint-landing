@@ -43,7 +43,10 @@
 /
   Cache-Control: public, max-age=300, must-revalidate
 
-# The bridge pages must never be cached long: they only exist to redirect and to be counted.
+# The bridge pages. Short cache rather than must-revalidate, so the landing page's
+# <link rel="prefetch"> is actually reusable when the buyer taps: revalidating would put
+# the round trip right back onto the conversion path. Ten minutes, so an edit here still
+# reaches people quickly.
 /go/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=600
   X-Robots-Tag: noindex

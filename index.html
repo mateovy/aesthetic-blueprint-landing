@@ -64,6 +64,13 @@
   <link rel="preload" href="assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
 
+  <!-- The checkout bridge sits on the conversion path, so fetch it now, at idle priority,
+       rather than making the buyer wait for a round trip after they have already tapped.
+       Also warm the beacon origin, which the bridge needs the instant it loads. -->
+  <link rel="prefetch" href="/go/blueprint/" as="document" />
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
   <!-- Hero image: preload at high priority so it starts fetching before CSS/JS parse (LCP). -->
   <link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high" />
 
