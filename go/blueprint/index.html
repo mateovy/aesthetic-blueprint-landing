@@ -2,21 +2,21 @@
 <html lang="en">
 <!--
   Bridge page: /go/blueprint/
-  Exists only so a checkout click is countable: Cloudflare Web Analytics cannot see clicks
-  on an outbound link, but it does see a pageview here.
 
-  The beacon is NOT written here. Cloudflare Pages injects it into every HTML response at
-  the edge, and a hand-written one only fights with it, so this page carries no analytics
-  tag of its own. It just waits 600ms before redirecting to give that injected beacon time
-  to report, since a page that leaves instantly is a page that never gets counted.
+  Two jobs. For almost everyone it is a counted hop: Cloudflare Pages injects the Web
+  Analytics beacon into this HTML at the edge, so the pageview is what makes a checkout
+  click measurable, and 600ms later the buyer is on Hotmart.
 
-  It sits on the conversion path, so the rest is kept cheap: the landing page prefetches
-  this document, so the tap costs no round trip, and the connection to Hotmart is already
-  open by the time the redirect fires.
+  For one specific case it stops instead. Inside an iOS in-app browser (TikTok, Instagram,
+  Facebook) Hotmart's checkout refuses to open and the buyer is left staring at a dead end,
+  so those visitors get the instructions screen rather than a redirect into a wall.
 
-  Every incoming query string is forwarded, which is how per-section attribution survives.
-  There is only one of these because the site has one checkout destination; the Add-On Pack
-  is the order bump inside this same product, not a separate URL.
+  The detection fails OPEN, deliberately and in every direction: anything unrecognised, any
+  thrown error, any doubt at all, and the redirect happens as normal. A false negative costs
+  one confusing checkout. A false positive blocks a sale from someone who could have paid.
+
+  Everything else is unchanged: the query string is forwarded whole, which is how
+  utm_content survives, and there is one bridge because there is one checkout destination.
 -->
 <head>
   <meta charset="UTF-8" />
@@ -24,35 +24,89 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Redirecting to checkout</title>
 
-  <!-- Open both connections before anything needs them. -->
   <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
   <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <!-- Palette inlined rather than pulling styles.css: this is a redirect, and the whole
-       point is that it paints the site's ink instantly and never flashes white. -->
+
   <style>
+    /* The brand faces are declared but only referenced inside .blocked, which is display:none
+       until detection says otherwise. So the redirect path, which is nearly everyone, still
+       downloads no fonts at all; they are fetched only when the instructions actually show. */
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/inter-800.woff2') format('woff2')}
+
+    :root { --ink:#0A0E1A; --cream:#F5F5F2; --muted:#9AA3B2; --line:#1E2740; --card:#121829; }
+    * { box-sizing: border-box; }
     html, body {
-      margin: 0; height: 100%;
-      background: #0A0E1A; color: #9AA3B2;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin: 0; min-height: 100%;
+      background: var(--ink); color: var(--muted);
       -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
     }
-    .wrap { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-    p { margin: 0; font-size: .875rem; letter-spacing: .01em; }
-    a { color: #F5F5F2; }
+
+    /* Redirect path: system font, nothing to download, never flashes white. */
+    .redir {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: .875rem;
+    }
+
+    /* Instructions path. */
+    .blocked { display: none; font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .blocked.on { display: block; }
+    .blocked .inner { max-width: 26rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+    .rule { display: block; width: 3rem; height: 2px; background: var(--cream); margin-bottom: 1.5rem; }
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+      color: var(--cream); font-size: 2rem; line-height: 1.1; letter-spacing: -0.015em;
+      margin: 0 0 1rem;
+    }
+    h1 em { font-style: italic; }
+    .step { font-size: 1rem; line-height: 1.55; margin: 0 0 2rem; }
+    .step b { color: var(--cream); font-weight: 600; }
+
+    .copy {
+      display: block; width: 100%; border: 0; cursor: pointer;
+      background: var(--cream); color: var(--ink);
+      font-family: inherit; font-weight: 800; font-size: 1rem;
+      padding: 1.05rem 1.25rem; border-radius: .75rem;
+      box-shadow: 0 6px 20px -8px rgba(0,0,0,.75);
+      transition: transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease;
+    }
+    .copy:active { transform: translateY(1px); box-shadow: 0 2px 8px -4px rgba(0,0,0,.8); }
+
+    .direct {
+      display: block; margin-top: 1.25rem; padding: .85rem 0;
+      color: var(--muted); font-size: .8rem; line-height: 1.5;
+      word-break: break-all; text-align: center;
+    }
+    .direct span { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) { .copy { transition: none; } }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <p>Redirecting&#8230;</p>
+  <div class="redir" id="redir"><p>Redirecting&#8230;</p></div>
+
+  <div class="blocked" id="blocked">
+    <div class="inner">
+      <span class="rule" aria-hidden="true"></span>
+      <h1 id="headline">This browser can't take <em>secure payments</em>.</h1>
+      <p class="step">Tap <b>&#8943;</b> at the top right, then <b>Open in browser</b>.</p>
+      <button type="button" class="copy" id="copy">Copy link</button>
+      <a class="direct" id="direct" href="#">Or open this link yourself:<br /><span id="directUrl"></span></a>
+    </div>
   </div>
 
   <noscript>
-    <div class="wrap">
-      <p><a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&amp;src=tiktok">Continue to checkout</a></p>
+    <div class="redir">
+      <p><a href="https://pay.hotmart.com/B106265452I?checkoutMode=10&amp;src=tiktok" style="color:#F5F5F2">Continue to checkout</a></p>
     </div>
   </noscript>
 
@@ -71,15 +125,66 @@
         window.location.replace(target);
       }
 
-      // Hold before leaving, so Cloudflare's automatically injected beacon has time to
-      // send the page view. This document exists only to be counted, so redirecting too
-      // early defeats the whole point of it.
-      //
-      // A fixed wait rather than hooking the script's load event: the beacon is injected at
-      // the edge, not written here, so there is no tag of ours to listen to. 600ms sits in
-      // the middle of the 500-800ms window and is the entire cost of the hop on a decent
-      // connection.
-      setTimeout(go, 600);
+      // Fail open. Anything this function does not positively recognise as an iOS in-app
+      // browser, including anything that throws, redirects like everybody else.
+      function blockedApp() {
+        try {
+          var ua = navigator.userAgent || '';
+          if (!/iPhone|iPad|iPod/i.test(ua)) return null;
+          if (/BytedanceWebview|musical_ly|TikTok/i.test(ua)) return 'TikTok';
+          if (/Instagram/i.test(ua)) return 'Instagram';
+          if (/FBAN|FBAV/i.test(ua)) return 'Facebook';
+          return null;
+        } catch (e) { return null; }
+      }
+
+      var app = blockedApp();
+      if (!app) {
+        // Hold before leaving, so Cloudflare's injected beacon has time to send the page
+        // view. This document exists to be counted; redirecting instantly defeats it.
+        setTimeout(go, 600);
+        return;
+      }
+
+      // From here on nobody is redirected: this webview would only show them a dead end.
+      try {
+        document.getElementById('headline').innerHTML =
+          app + "'s browser can't take <em>secure payments</em>.";
+        document.getElementById('redir').style.display = 'none';
+        document.getElementById('blocked').className = 'blocked on';
+        document.title = 'Open in your browser to check out';
+
+        var direct = document.getElementById('direct');
+        direct.href = target;
+        document.getElementById('directUrl').textContent = target.split('?')[0];
+
+        var btn = document.getElementById('copy'), t = null;
+        btn.addEventListener('click', function () {
+          function done() {
+            btn.textContent = 'Copied';
+            clearTimeout(t);
+            t = setTimeout(function () { btn.textContent = 'Copy link'; }, 2000);
+          }
+          function fallback() {
+            try {
+              var f = document.createElement('textarea');
+              f.value = target; f.setAttribute('readonly', '');
+              f.style.position = 'absolute'; f.style.left = '-9999px';
+              document.body.appendChild(f); f.select(); f.setSelectionRange(0, 99999);
+              document.execCommand('copy');
+              document.body.removeChild(f);
+              done();
+            } catch (e) { btn.textContent = 'Press and hold the link below'; }
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(target).then(done, fallback);
+          } else {
+            fallback();
+          }
+        });
+      } catch (e) {
+        go();   // the screen failed to build: send them through rather than strand them
+      }
     })();
   </script>
 </body>
