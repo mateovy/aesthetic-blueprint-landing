@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  TEMPORARY diagnostic page. Delete this whole folder, and the "." link in the footer of
+  index.html, once the iOS webview question is settled.
+
+  Four plain anchors to four different forms of the checkout URL, so the TikTok webview on
+  iPhone can be pointed at each one in turn and the failure isolated to a single variable.
+
+  Deliberately dumb: no JavaScript, no bridge, no redirect, no analytics, no target="_blank".
+  Whatever happens after a tap is the webview reacting to that exact URL and nothing else.
+
+    A  full: checkoutMode=10 + src=tiktok
+    B  no checkoutMode, src only
+    C  bare product URL, no query string at all
+    D  the hotm.io short link, which 302s to A
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Checkout link test</title>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Palette inlined rather than pulling styles.css, so this page stays independent of the
+       site's build and can be deleted without leaving anything behind. -->
+  <style>
+    :root { --ink:#0A0E1A; --cream:#F5F5F2; --muted:#9AA3B2; --line:#1E2740; --card:#121829; }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; background: var(--ink); color: var(--muted);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 30rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 { color: var(--cream); font-size: 1.05rem; font-weight: 600; margin: 0 0 .4rem; letter-spacing: .01em; }
+    .sub { font-size: .8rem; line-height: 1.5; margin: 0 0 2.25rem; }
+
+    /* Big, far apart, and each one its own tap target: this gets used with a thumb, on a
+       phone, by someone reading a letter off the screen and reporting what happened. */
+    .btn {
+      display: flex; align-items: center; gap: 1.1rem;
+      margin-bottom: 1.5rem; padding: 1.4rem 1.25rem;
+      background: var(--cream); color: var(--ink);
+      border-radius: .9rem; text-decoration: none;
+      box-shadow: 0 6px 20px -8px rgba(0,0,0,.75);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: translateY(1px); }
+    .letter { font-size: 2.5rem; font-weight: 800; line-height: 1; width: 2.2rem; flex-shrink: 0; text-align: center; }
+    .meta { min-width: 0; }
+    .meta > span { display: block; }
+    .what { font-weight: 700; font-size: .95rem; }
+    .url { font-size: .7rem; opacity: .62; word-break: break-all; margin-top: .25rem; line-height: 1.35; }
+
+    .note { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: .75rem; line-height: 1.6; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Checkout link test</h1>
+    <p class="sub">Tap each one and note what happens. Direct links, no redirect and no scripts.</p>
+
+    <a class="btn" href="https://pay.hotmart.com/B106265452I?checkoutMode=10&amp;src=tiktok">
+      <span class="letter">A</span>
+      <span class="meta">
+        <span class="what">Full URL, with order bump</span>
+        <span class="url">pay.hotmart.com/B106265452I?checkoutMode=10&amp;src=tiktok</span>
+      </span>
+    </a>
+
+    <a class="btn" href="https://pay.hotmart.com/B106265452I?src=tiktok">
+      <span class="letter">B</span>
+      <span class="meta">
+        <span class="what">No checkoutMode</span>
+        <span class="url">pay.hotmart.com/B106265452I?src=tiktok</span>
+      </span>
+    </a>
+
+    <a class="btn" href="https://pay.hotmart.com/B106265452I">
+      <span class="letter">C</span>
+      <span class="meta">
+        <span class="what">Bare URL, no parameters</span>
+        <span class="url">pay.hotmart.com/B106265452I</span>
+      </span>
+    </a>
+
+    <a class="btn" href="https://hotm.io/fO1U4T">
+      <span class="letter">D</span>
+      <span class="meta">
+        <span class="what">Short link</span>
+        <span class="url">hotm.io/fO1U4T</span>
+      </span>
+    </a>
+
+    <p class="note">Temporary page, not indexed. Delete /test/ and the footer link when done.</p>
+  </div>
+</body>
+</html>
