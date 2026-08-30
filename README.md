@@ -96,10 +96,10 @@ This section is deliberately left as-is. A drag-to-compare slider was tried and 
 
 ## Checkout links
 
-Five plain `<a>` elements pointing at the Hotmart URL, each with its own `utm_content`
-(`sticky`, `hero`, `chapters`, `pricing`, `final`) so you can see which section converts.
-There used to be a sixth, `social-proof`, in the "No testimonials yet" section; that
-section was removed, so expect that label to stop appearing in reports.
+Six plain `<a>` elements pointing at `/go/blueprint/`, each with its own `utm_content`
+(`sticky`, `hero`, `chapters`, `social-proof`, `pricing`, `final`) so you can see which
+section converts. The bridge forwards the whole query string, so those labels reach
+Hotmart intact.
 
 Nothing intercepts these clicks: they are plain anchors and no JS touches them.
 

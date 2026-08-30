@@ -15,9 +15,9 @@
                          live in go/blueprint/index.html. A new CTA just needs
                          href="/go/blueprint/?utm_source=...&utm_content=<section>".
   DONE: Guarantee     -> 7-day money-back guarantee (live in offer/guarantee/FAQ/CTA)
-  TODO: Testimonials -> none yet, and the section that explained their absence has been
-                         removed. If real ones arrive, add a section back. Only ever use
-                         real, confirmed buyers, with permission. Never fabricate.
+  TODO: Testimonials -> none yet. Section 8 says so out loud instead of faking them; drop
+                         real ones in there when they arrive. Only ever use real, confirmed
+                         buyers, with permission. Never fabricate.
   DONE: Hero image    -> assets/hero.png (live)
   DONE: Page count    -> 90-page guide (matches the actual PDF)
   TODO: Buyer count -> none. Only ever show a real, verifiable number.
@@ -692,11 +692,44 @@
   </section>
 
   <!-- ============================================================= -->
+  <!-- 8. SOCIAL PROOF                                               -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        No testimonials yet. <span class="italic">Here's why that's fine.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">
+        Straight answer instead of a wall of five stars.
+      </p>
+
+      <div class="reveal mt-10 max-w-3xl mx-auto bg-card border border-line rounded-2xl p-8 sm:p-10 space-y-5 text-lg text-muted leading-relaxed">
+        <p>This launched recently. I could fill this space with five star reviews from people who
+          don't exist, and plenty of pages at this price do exactly that. I'd rather tell you the
+          truth and let the guarantee carry the risk instead of you.</p>
+        <p>Read the whole thing. Run it. If it isn't the clearest, most mechanism driven plan
+          anyone has handed you, email me inside 7 days and I'll refund every cent. That's worth
+          more than a review you have no way to verify.</p>
+      </div>
+
+      <!-- REAL TESTIMONIALS GO HERE once confirmed buyers send them.
+           Only real names, with permission. Never fabricate. -->
+
+      <div class="reveal mt-10 text-center">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
+           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+          Get The Blueprint for $12
+        </a>
+        <p class="mt-3 text-sm text-muted">Backed by a 7-day money-back guarantee</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
   <!-- 9. THE OFFER (value anchor)                                   -->
   <!-- ============================================================= -->
-  <!-- border-b only: section 7 sits directly above and already draws the line between
-       them, so border-y here would stack two 1px borders into a 2px seam. -->
-  <section class="bg-panel border-b border-line">
+  <section class="bg-panel border-y border-line">
     <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20 text-center">
       <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
       <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
