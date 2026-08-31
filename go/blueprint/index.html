@@ -140,9 +140,36 @@
 
       var app = blockedApp();
       if (!app) {
-        // Hold before leaving, so Cloudflare's injected beacon has time to send the page
-        // view. This document exists to be counted; redirecting instantly defeats it.
-        setTimeout(go, 600);
+        // Wait for Cloudflare's injected beacon rather than guessing at a number. A flat
+        // 600ms was too short on mobile, so the page view was being lost on exactly the
+        // visitors this page exists to count.
+        //
+        // Two paths, because of where the tag comes from. It is injected at the edge at the
+        // END of <body>, after this script, so querying for it right now returns null. It
+        // also arrives as a classic script, which blocks DOMContentLoaded, so by the time
+        // that event fires the beacon has already executed and its load event is long gone.
+        var CAP = 1800, GRACE = 300;
+        function afterBeacon() { setTimeout(go, GRACE); }
+        function hook(s) {
+          s.addEventListener('load', afterBeacon);
+          s.addEventListener('error', afterBeacon);   // blocked by an extension: do not hang
+        }
+        function find() { return document.querySelector('script[src*="cloudflareinsights"]'); }
+
+        var early = find();
+        if (early) {
+          hook(early);                     // only if injection ever moves above this script
+        } else {
+          document.addEventListener('DOMContentLoaded', function () {
+            var s = find();
+            if (!s) { go(); return; }      // no beacon on the page: nothing to wait for
+            if (s.async) { hook(s); }      // still in flight, its load event is yet to come
+            else { afterBeacon(); }        // classic or deferred: parsing past it means it ran
+          });
+        }
+
+        // Hard ceiling, whatever happens above. Nobody waits longer than this.
+        setTimeout(go, CAP);
         return;
       }
 
