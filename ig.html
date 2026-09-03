@@ -1,0 +1,1184 @@
+<!--
+  GENERATED FILE. Do not edit this one, edit index.html and regenerate.
+
+  Everything below this comment is a byte-for-byte copy of index.html. Cloudflare Pages
+  serves it at /ig, and Web Analytics reports location.pathname, so that campaign gets
+  its own row in the Path tab. The URL has to stay /ig for that to work: any redirect
+  collapses it back to "/" and the split is lost.
+
+  A copy rather than a _redirects rewrite because Pages turns a 200 rewrite pointed at
+  /index.html into a 307 to "/", which is exactly the outcome this needs to avoid.
+
+  At the repo root rather than in /ig/, so the relative asset paths inside still resolve
+  against /assets/ and not /ig/assets/.
+
+  index.html carries <link rel="canonical"> pointing at the root, so all three paths tell
+  search engines the same thing.
+
+  Regenerate both copies after ANY edit to index.html:
+    for f in ig fb; do { sed -n '1,/^-->$/p' "$f.html"; cat index.html; } > "$f.tmp" \
+      && mv "$f.tmp" "$f.html"; done
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<!--
+=====================================================================
+  THE AESTHETIC PHYSIQUE BLUEPRINT: $12 SALES LANDING PAGE
+  Single static page. No build step. Deploy index.html + /assets.
+=====================================================================
+
+  >>> FILL-IN-THE-BLANKS BEFORE LAUNCH (search for each {{TOKEN}}) <<<
+
+  DONE: Checkout URL  -> every CTA points at /go/blueprint/, NOT at Hotmart directly.
+                         That bridge page exists so the click is countable in Web Analytics,
+                         and it forwards its whole query string, which is how utm_content
+                         survives. The real destination and checkoutMode=10 (the order bump)
+                         live in go/blueprint/index.html. A new CTA just needs
+                         href="/go/blueprint/?utm_source=...&utm_content=<section>".
+  DONE: Guarantee     -> 7-day money-back guarantee (live in offer/guarantee/FAQ/CTA)
+  TODO: Testimonials -> none yet. Section 8 says so out loud instead of faking them; drop
+                         real ones in there when they arrive. Only ever use real, confirmed
+                         buyers, with permission. Never fabricate.
+  DONE: Hero image    -> assets/hero.png (live)
+  DONE: Page count    -> 90-page guide (matches the actual PDF)
+  TODO: Buyer count -> none. Only ever show a real, verifiable number.
+  DONE: Footer        -> privacy.html, terms.html, aesthethic.engineer@gmail.com, disclaimer (live)
+  DONE: Before/After  -> two auto-playing slideshows (assets/before-1..3.webp, after-1..3.webp)
+  DONE: Book mockup   -> assets/aesthetic blueprint mockup.png (live)
+  DONE: OG image      -> assets/og-image.jpeg (1200x630, 132KB), monochrome and showing $12.
+                         og:image/twitter:image use the absolute aesthetic-engineer.com URL.
+                         The full-res export lives in assets/originals/og-image.jpeg.
+
+  All assets are in. The page is launch-ready once hosted.
+
+  RULE: This page sells ONE product (the $12 guide). No other offers anywhere.
+=====================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Icons. Declared explicitly so browsers stop probing /favicon.ico and
+       /apple-touch-icon*.png, which were 404ing on every fresh visit. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- SEO -->
+  <title>The Aesthetic Physique Blueprint: Build a Lean, Aesthetic Body (Science-Backed)</title>
+  <meta name="description" content="The exact science-backed system to build a lean, aesthetic physique: wide shoulders, V-taper, visible abs, naturally. No dirty bulking. No starving. $12." />
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <!-- The same page is served at /ig and /fb for campaign tracking, so every path points
+       search engines back at the root and none of them reads as duplicate content. -->
+  <link rel="canonical" href="https://aesthetic-engineer.com/" />
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Aesthetic Physique Blueprint" />
+  <meta property="og:description" content="The science-backed system to build a lean, aesthetic physique naturally, without wasted years. $12." />
+  <meta property="og:image" content="https://aesthetic-engineer.com/assets/og-image.jpeg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://aesthetic-engineer.com/assets/og-image.jpeg" />
+
+  <!-- Fonts: self-hosted Playfair Display + Inter (latin subset, woff2). No third-party origins. -->
+  <!-- Preload only the two faces used above the fold; the rest load on demand via @font-face swap. -->
+  <link rel="preload" href="assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- The checkout bridge sits on the conversion path, so fetch it now, at idle priority,
+       rather than making the buyer wait for a round trip after they have already tapped.
+       The third line warms the origin that Cloudflare's injected beacon loads from. -->
+  <link rel="prefetch" href="/go/blueprint/" as="document" />
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
+  <!-- Hero image: preload at high priority so it starts fetching before CSS/JS parse (LCP). -->
+  <link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high" />
+
+  <!-- Full compiled stylesheet, loaded WITHOUT blocking first paint. The above-the-fold CSS is
+       inlined in the <style> below, so first paint needs zero external CSS. The <noscript>
+       link applies the stylesheet normally for visitors with JavaScript disabled. -->
+  <link rel="preload" href="assets/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="assets/styles.css" /></noscript>
+
+  <!-- If JS never runs, keep every animated-in element visible instead of blank. -->
+  <noscript><style>.reveal,.reveal h2 .italic,h2.reveal .italic{opacity:1!important;transform:none!important;filter:none!important}.rule{transform:none!important}</style></noscript>
+
+  <style>
+    /* ============================================================= */
+    /* Self-hosted fonts (latin subset, woff2). font-display:swap so   */
+    /* text paints immediately in the fallback and swaps when ready.   */
+    /* ============================================================= */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400-italic.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600-italic.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('assets/fonts/playfair-700-italic.woff2') format('woff2')}
+
+    /* ============================================================= */
+    /* Critical above-the-fold CSS (compiled from the hero markup).    */
+    /* The full stylesheet loads async; this styles first paint with   */
+    /* zero external CSS requests. Regenerate: see README.md.          */
+    /* ============================================================= */
+    *,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-inset-3{inset:-.75rem}.inset-x-0{left:0;right:0}.-right-24{right:-6rem}.-top-24{top:-6rem}.bottom-0{bottom:0}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-5{margin-bottom:1.25rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-96{height:24rem}.max-h-\[42vh\]{max-height:42vh}.w-1\.5{width:.375rem}.w-96{width:24rem}.w-full{width:100%}.max-w-6xl{max-width:72rem}.max-w-\[15rem\]{max-width:15rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.translate-y-full{--tw-translate-y:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.flex-col{flex-direction:column}.items-center{align-items:center}.items-stretch{align-items:stretch}.gap-10{gap:2.5rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-6{gap:1.5rem}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px;border-bottom-width:1px}.border-t{border-top-width:1px}.border-line{--tw-border-opacity:1;border-color:rgb(30 39 64/var(--tw-border-opacity,1))}.bg-card{--tw-bg-opacity:1;background-color:rgb(18 24 41/var(--tw-bg-opacity,1))}.bg-cream{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.bg-cream\/5{background-color:hsla(60,13%,95%,.05)}.bg-ink{--tw-bg-opacity:1;background-color:rgb(10 14 26/var(--tw-bg-opacity,1))}.bg-ink\/95{background-color:rgba(10,14,26,.95)}.bg-line{--tw-bg-opacity:1;background-color:rgb(30 39 64/var(--tw-bg-opacity,1))}.bg-muted{--tw-bg-opacity:1;background-color:rgb(154 163 178/var(--tw-bg-opacity,1))}.bg-panel{--tw-bg-opacity:1;background-color:rgb(13 18 32/var(--tw-bg-opacity,1))}.bg-gradient-to-b{background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.from-cream\/10{--tw-gradient-from:hsla(60,13%,95%,.1) var(--tw-gradient-from-position);--tw-gradient-to:hsla(60,13%,95%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{-o-object-fit:cover;object-fit:cover}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-7{padding-left:1.75rem;padding-right:1.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-12{padding-bottom:3rem}.pr-10{padding-right:2.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.font-display{font-family:Playfair Display,Georgia,serif}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.05\]{line-height:1.05}.leading-tight{line-height:1.25}.tracking-widest{letter-spacing:.1em}.text-cream{--tw-text-opacity:1;color:rgb(245 245 242/var(--tw-text-opacity,1))}.text-cream\/90{color:hsla(60,13%,95%,.9)}.text-ink{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.text-muted{--tw-text-opacity:1;color:rgb(154 163 178/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.blur-3xl{--tw-blur:blur(64px)}.blur-3xl,.blur-xl{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-xl{--tw-blur:blur(24px)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.selection\:bg-cream ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream ::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink ::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink ::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:bg-cream::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:block{display:block}.sm\:max-h-none{max-height:none}.sm\:max-w-sm{max-width:24rem}.sm\:flex-none{flex:none}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:gap-10{gap:2.5rem}.sm\:pb-20{padding-bottom:5rem}.sm\:pt-16{padding-top:4rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width:1024px){.lg\:max-w-none{max-width:none}.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:text-7xl{font-size:4.5rem;line-height:1}}
+
+    /* ============================================================= */
+    /* Page-specific styles (override utilities; keep after them).     */
+    /* ============================================================= */
+    html, body { background:#0A0E1A; }
+    /* Guard against horizontal scroll: the scroll-reveal system parks elements at
+       translateX(±48px) until they animate in, which otherwise stick out past the right
+       edge and cause a sideways scroll / zoom-out on mobile. Confirmed this is the only
+       source of horizontal overflow (settled reveals overflow 0px). overflow-x: clip hides
+       the transient overhang without creating a scroll container, so the reveal still slides
+       in from off-screen and the desktop sticky mockup is unaffected. `hidden` is a fallback
+       for browsers without `clip`. */
+    html, body { overflow-x: hidden; overflow-x: clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing: -0.015em; font-weight: 700; }
+
+    /* ---- Scroll-reveal system ---- */
+    .reveal {
+      opacity:0; transform: translateY(36px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal[data-anim="left"]  { transform: translateX(-48px); }
+    .reveal[data-anim="right"] { transform: translateX(48px); }
+    .reveal[data-anim="scale"] { transform: scale(.9); }
+    .reveal[data-anim="zoom"]  { transform: scale(1.06); }
+    .reveal[data-anim="blur"]  { filter: blur(10px); }
+    /* Hero: a slow settle from 1.04 rather than a plain fade. Longer than the rest so it
+       reads as the page arriving, not as an element popping in. */
+    .reveal[data-anim="hero"]  { transform: scale(1.04); transition-duration: .9s; }
+    .reveal.in {
+      opacity:1; transform: none; filter:none;
+    }
+
+    /* ---- Section headings: the italic phrase lands last ----
+       The roman text arrives with the heading; the Playfair italic follows 50ms behind, so
+       the eye finishes on the emphasis word. Scoped to headings inside a .reveal, so an
+       italic that is never observed can never be left invisible. */
+    .reveal h2 .italic, h2.reveal .italic {
+      opacity:0; transform: translateY(.28em);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1) 50ms,
+                  transform .7s cubic-bezier(.16,1,.3,1) 50ms;
+    }
+    /* transforms need a block-level box; italics already carrying .block have one */
+    .reveal h2 .italic:not(.block), h2.reveal .italic:not(.block) { display:inline-block; }
+    .reveal.in h2 .italic, h2.reveal.in .italic { opacity:1; transform:none; }
+
+    /* ---- Rules that draw themselves ----
+       Every carousel post opens with a short rule; the page reuses it. Any horizontal
+       divider or accent line grows from its left edge when its section enters view. */
+    .rule {
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+      will-change: transform;
+    }
+    .rule.in { transform: scaleX(1); }
+    .rule-accent  { display:block; width:3rem; height:2px; background:#F5F5F2; margin-bottom:1.25rem; }
+    .rule-divider { display:block; height:1px; background:#1E2740; }
+    /* value-anchor rows draw in sequence, top to bottom */
+    .value-list li:nth-child(2) .rule { transition-delay: .08s; }
+    .value-list li:nth-child(3) .rule { transition-delay: .16s; }
+    /* the counting price anchors: fixed-width digits so the row doesn't jitter */
+    .count { font-variant-numeric: tabular-nums; }
+
+    /* ---- Card hover lift (applies to all .bg-card surfaces) ---- */
+    .bg-card {
+      transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease;
+    }
+    @media (hover:hover) {
+      .bg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.7); }
+    }
+
+    /* ---- Scroll progress bar ---- */
+    #progress {
+      position:fixed; top:0; left:0; height:3px; width:0%; z-index:60;
+      background: #F5F5F2;
+      transition: width .1s linear;
+    }
+
+    /* ---- Ambient floating glow ---- */
+    @keyframes floatGlow {
+      0%,100% { transform: translate(0,0) scale(1); opacity:.5; }
+      50%     { transform: translate(0,-24px) scale(1.08); opacity:.8; }
+    }
+    .float-glow { animation: floatGlow 9s ease-in-out infinite; }
+
+    /* ---- Marquee trust strip ---- */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display:flex; width:max-content; animation: marquee 28s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; filter:none !important; transition:none; }
+      .reveal h2 .italic, h2.reveal .italic { opacity:1 !important; transform:none !important; transition:none; }
+      .rule { transform:none !important; transition:none; }
+      .float-glow, .marquee-track { animation:none !important; }
+      /* CTA keeps its press feedback, minus the travel */
+      a.cta-glow:hover, button.cta-glow:hover,
+      a.cta-glow:active, button.cta-glow:active { transform:none; }
+      /* !important because .scroll-smooth sits on <html> itself and a class beats a bare
+         element selector, so without it smooth scrolling survived reduced-motion. */
+      html { scroll-behavior:auto !important; }
+    }
+
+    /* Accessible focus */
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid #F5F5F2; outline-offset: 3px; border-radius: 6px;
+    }
+
+    /* ---- CTA affordance ----
+       Resting lift, a hover that rises into pure white, and a press that pushes back down.
+       No pulse and no glow loop: a button that never stops moving reads cheap, a button
+       that answers the moment you touch it reads expensive. The press state is the one that
+       carries mobile, where there is no hover at all. */
+    .cta-glow { box-shadow: 0 6px 20px -8px rgba(0,0,0,.75); }
+    a.cta-glow, button.cta-glow {
+      transition: transform .18s cubic-bezier(.16,1,.3,1),
+                  box-shadow .18s ease,
+                  background-color .18s ease;
+    }
+    /* hover-capable pointers only, so a tap can't leave the lift stuck on a phone */
+    @media (hover:hover) {
+      a.cta-glow:hover, button.cta-glow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px -10px rgba(0,0,0,.85);
+        background-color: #FFFFFF;
+      }
+    }
+    a.cta-glow:active, button.cta-glow:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px -4px rgba(0,0,0,.8);
+    }
+
+    /* FAQ accordion */
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .2s ease; }
+
+    /* Subtle radial glow behind hero */
+    .hero-glow::before {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%);
+      pointer-events:none;
+    }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+
+  <!-- Scroll progress bar -->
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- ============================================================= -->
+  <!-- 1. STICKY MOBILE CTA BAR (reveals after hero)                 -->
+  <!-- ============================================================= -->
+  <div id="stickyCta"
+       class="fixed bottom-0 inset-x-0 z-50 translate-y-full transition-transform duration-300
+              border-t border-line bg-ink/95 backdrop-blur px-4 py-3
+              flex items-center gap-3 sm:justify-center">
+    <div class="hidden sm:block leading-tight">
+      <p class="font-display text-3xl text-cream">The Aesthetic Physique Blueprint</p>
+      <p class="text-xs text-muted">Instant PDF · One-time $12</p>
+    </div>
+    <div class="flex-1 sm:flex-none">
+      <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
+         class="block text-center bg-cream text-ink font-extrabold
+                rounded-xl px-5 py-3 text-base cta-glow">
+        Get The Blueprint
+      </a>
+      <p class="mt-1.5 text-center text-[11px] text-muted">$12 · one-time · instant PDF</p>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 2. HERO                                                       -->
+  <!-- ============================================================= -->
+  <header class="relative hero-glow overflow-hidden">
+    <!-- ambient floating glow -->
+    <div class="float-glow pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cream/5 blur-3xl" aria-hidden="true"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-8 pb-12 sm:pt-16 sm:pb-20
+                grid lg:grid-cols-2 gap-6 sm:gap-10 items-center">
+
+      <div class="order-1">
+        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase
+                  text-muted bg-cream/5 border border-line rounded-full px-3 py-1 mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-muted"></span>
+          Science-backed · Natural · No fluff
+        </p>
+
+        <h1 class="font-display leading-[1.05] text-cream
+                   text-4xl sm:text-6xl lg:text-7xl">
+          Build a lean,
+          <span class="italic">Aesthetic</span>
+          physique, <span class="block">without wasting years guessing.</span>
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-muted max-w-xl">
+          Wide shoulders. A real V-taper. Visible abs. The exact science-backed
+          system to get there <span class="text-cream font-semibold">naturally</span>.
+          No dirty bulking. No starving. No bro-science.
+        </p>
+
+        <p class="mt-3 text-sm sm:text-base text-muted max-w-xl">
+          The same mechanisms from the posts, GLUT4 timing, the leucine threshold, why leanness is
+          a hormone strategy, assembled into one system you can actually run.
+        </p>
+
+        <p class="hidden sm:block mt-3 text-base text-cream/90 max-w-xl">
+          You train hard and still look the same? You're not lazy.
+          You were never shown how the body actually builds an aesthetic shape.
+        </p>
+
+        <div class="mt-5">
+          <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
+             class="block sm:inline-block text-center bg-cream text-ink font-extrabold
+                    rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-sm text-muted">$12 · one-time · instant PDF</p>
+        </div>
+
+        <p class="mt-4 text-sm text-muted">
+          ⚡ Instant PDF download
+        </p>
+      </div>
+
+      <div class="order-2">
+        <!-- .hero-media carries the scroll parallax; the image itself carries the intro
+             settle, so the two transforms never overwrite each other. -->
+        <div class="hero-media relative mx-auto max-w-[15rem] sm:max-w-sm lg:max-w-none">
+          <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl"></div>
+          <img src="assets/hero.webp" alt="Lean, aesthetic male physique with wide shoulders and a V-taper"
+               width="1080" height="1446" fetchpriority="high" data-anim="hero"
+               class="reveal relative w-full max-h-[42vh] sm:max-h-none object-cover rounded-3xl border border-line bg-card" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ----- Scrolling trust strip (marquee) ----- -->
+  <div class="marquee overflow-hidden bg-panel border-y border-line py-3">
+    <div class="marquee-track items-center gap-10 text-sm font-semibold uppercase tracking-widest text-muted">
+      <!-- duplicated set for seamless loop -->
+      <span class="flex items-center gap-10 pr-10">
+        <span>⚡ Instant PDF Download</span><span class="text-muted">•</span>
+        <span>🔬 Science-Backed System</span><span class="text-muted">•</span>
+        <span>💪 Natural, No Drugs</span><span class="text-muted">•</span>
+        <span>🛡️ 7-Day Money-Back Guarantee</span><span class="text-muted">•</span>
+        <span>📱 Read On Any Device</span><span class="text-muted">•</span>
+      </span>
+      <span class="flex items-center gap-10 pr-10" aria-hidden="true">
+        <span>⚡ Instant PDF Download</span><span class="text-muted">•</span>
+        <span>🔬 Science-Backed System</span><span class="text-muted">•</span>
+        <span>💪 Natural, No Drugs</span><span class="text-muted">•</span>
+        <span>🛡️ 7-Day Money-Back Guarantee</span><span class="text-muted">•</span>
+        <span>📱 Read On Any Device</span><span class="text-muted">•</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 2b. WHAT YOU GET (compact, so the decision is reachable in the -->
+  <!--     first three mobile screens instead of the ninth)          -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-3xl mx-auto px-5 py-10 sm:py-14">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-3xl sm:text-4xl leading-[1.05] text-cream">
+        What you <span class="italic">get.</span>
+      </h2>
+
+      <ul class="reveal mt-5 space-y-2.5 text-muted">
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The 90-page Blueprint. 8 chapters, no fluff.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Train for shape: delts, back width, the V-taper.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Eat to build, and cut without losing muscle.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Lean bulk math, and the hormone levers that matter.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Metabolic Calorie Calculator, a Google Sheet.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Physique Change Tracker, a Google Sheet.</li>
+      </ul>
+
+      <div class="reveal mt-7">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=included"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 3. THE PROBLEM (agitation)                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        You're putting in the work. So why no change?
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Because the advice you were handed is broken. Here's the trap most guys
+        get stuck in for years:
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">The "just bulk" lie</p>
+          <p class="text-muted">You ate everything in sight to "get big." You got softer, not bigger.
+            Now you're skinny-fat, small <em>and</em> covered. Usually promoted by enhanced people</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">More volume, more junk</p>
+          <p class="text-muted">20 sets a session, every angle, every machine, and your shoulders and
+            back still look exactly the same as last year.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Form without function</p>
+          <p class="text-muted">You half-rep through partials and "feel the pump", but never train the one
+            position that actually forces a muscle to grow.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Years, gone</p>
+          <p class="text-muted">Endless conflicting tips. No system. So you stall, get discouraged,
+            and start to think you just have "bad genetics."</p>
+        </div>
+      </div>
+
+      <p class="reveal mt-10 text-xl text-cream font-semibold max-w-2xl">
+        You don't have bad genetics. You have a bad map.
+        <span class="italic">Here's the right one.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 4. THE STORY / CREDIBILITY                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-2 gap-10 items-center">
+
+      <div class="reveal order-2 lg:order-1" data-anim="left">
+        <span class="rule rule-accent" aria-hidden="true"></span>
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3">My story</p>
+        <h2 class="font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+          I wasted 4 years getting this wrong
+          <span class="italic">so you don't have to.</span>
+        </h2>
+
+        <div class="mt-6 space-y-4 text-muted text-lg">
+          <p>I started at <span class="text-cream font-semibold">51kg</span>. Skinny, invisible, looking awkward.
+            So I did what I saw online, I <span class="text-cream">dirty bulked</span>.</p>
+          <p>It wrecked me. I hit <span class="text-cream font-semibold">~30% body fat as you can see in the left photos</span>, lost every bit of
+            definition, and got <span class="text-cream">gyno</span>. I wasn't even looking muscular, just fat.</p>
+          <p>When I hit a plateau looking terrible, I stopped guessing and started reading the actual science, how muscle is built, why
+            getting lean first changes everything and how training stimulus really matters.</p>
+          <p class="text-cream font-semibold">I fixed the fundamentals. Did a solid transformation that i'm proud of as i'm still on the journey to look better.
+            This guide is that exact system, minus the four years I wasted.</p>
+        </div>
+      </div>
+
+      <figure class="reveal order-1 lg:order-2" data-anim="right">
+        <div class="grid grid-cols-2 gap-3">
+
+          <!-- BEFORE slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-line bg-card">
+              <span class="absolute z-20 top-2 left-2 text-[11px] font-bold uppercase tracking-wider bg-ink/85 border border-line rounded-full px-2.5 py-1">Before</span>
+              <img src="assets/before-1.webp" alt="Before transformation, photo 1" loading="lazy"
+                   width="720" height="1135"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="assets/before-2.webp" alt="Before transformation, photo 2" loading="lazy"
+                   width="720" height="1264"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="assets/before-3.webp" alt="Before transformation, photo 3" loading="lazy"
+                   width="720" height="1269"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Previous before photo"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next before photo"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Go to before photo 1" class="dot w-2 h-2 rounded-full bg-cream"></button>
+              <button type="button" aria-label="Go to before photo 2" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Go to before photo 3" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+          <!-- AFTER slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-cream/40 bg-card">
+              <span class="absolute z-20 top-2 right-2 text-[11px] font-bold uppercase tracking-wider bg-cream text-ink rounded-full px-2.5 py-1">After</span>
+              <img src="assets/after-1.webp" alt="After transformation, photo 1" loading="lazy"
+                   width="720" height="960"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="assets/after-2.webp" alt="After transformation, photo 2" loading="lazy"
+                   width="720" height="1253"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="assets/after-3.webp" alt="After transformation, photo 3" loading="lazy"
+                   width="720" height="1189"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Previous after photo"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next after photo"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Go to after photo 1" class="dot w-2 h-2 rounded-full bg-cream"></button>
+              <button type="button" aria-label="Go to after photo 2" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Go to after photo 3" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+        </div>
+        <figcaption class="mt-3 text-sm text-muted text-center">Real transformation. Fundamentals fixed, not shortcuts.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 5. WHY THIS IS DIFFERENT (the mechanism)                      -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        The things <span class="italic">nobody told you.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        I give and explain the exact Mechanisms. This is <em>why</em> most guys stay stuck, and exactly what the system fixes.
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <!-- card -->
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Get lean <span class="italic">first</span></p>
+          <p class="mt-2 text-muted">Carrying too much fat raises aromatase, your body converts testosterone
+            into estrogen, making it more difficult to build muscle and easier to store fat. Definitely lean is law.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Less volume, <span class="italic">real failure</span></p>
+          <p class="mt-2 text-muted">Growth (mTOR signaling) is driven by hard, close-to-failure sets, not 20 junk sets.
+            Fewer, harder sets build more and leave you recovered enough to do it again.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">The <span class="italic">lengthened</span> position</p>
+          <p class="mt-2 text-muted">Muscles grow most when loaded in a deep stretch. Train the lengthened position and
+            you get more growth from the <em>same</em> effort. Most guys cut it short and leave gains on the table.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Shoulders = <span class="italic">frequency</span></p>
+          <p class="mt-2 text-muted">Side delts are the #1 aesthetic muscle and they recover fast.
+            Hitting lateral raises with the right frequency is how you actually get <em>wide</em>.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Feed the <span class="italic">right tissue</span></p>
+          <p class="mt-2 text-muted">Timing nutrients around training improves nutrient partitioning (GLUT4), sending
+            more of what you eat into muscle instead of fat. Same calories, better result.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Lean bulk <span class="italic">math</span></p>
+          <p class="mt-2 text-muted">There's a ceiling to how fast you can build muscle (think FFMI). Eat past it and the
+            extra is just fat. The right small surplus builds muscle while staying aesthetic, no dirty-bulk rebound.</p>
+        </div>
+      </div>
+
+      <div class="reveal mt-10 text-center">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=mechanism"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 6. WHAT'S INSIDE                                              -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-5 gap-10 items-start">
+
+      <div class="lg:col-span-2 reveal lg:sticky lg:top-10">
+        <div class="relative mx-auto max-w-xs">
+          <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl"></div>
+          <!-- Deliberately NOT loading="lazy". Lazy only starts the download once the image
+               is nearly on screen, so on a slow connection the card faded in and sat empty
+               for over two seconds before the cover appeared. Measured at 2.4s on Slow 4G.
+               Chrome gives below-the-fold images low priority anyway, so fetching it with
+               the document costs the hero nothing. -->
+          <img src="assets/aesthetic-blueprint-mockup.webp" alt="The Aesthetic Physique Blueprint, PDF guide cover"
+               width="640" height="858" decoding="async"
+               class="relative w-full rounded-2xl border border-line bg-card" />
+        </div>
+        <p class="mt-5 text-center text-muted">90 pages. Zero fluff.<br/>
+          <span class="text-cream font-semibold">A complete system, not a tip list.</span></p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <span class="rule rule-accent" aria-hidden="true"></span>
+        <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+          What's <span class="italic">inside.</span>
+        </h2>
+        <p class="reveal mt-4 text-lg text-muted">8 chapters. Each one removes a reason you've been stuck.</p>
+
+        <ol class="mt-8 space-y-3" data-stagger>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">01</span>
+            <div><p class="font-semibold text-cream">Train for the mirror</p>
+              <p class="text-muted">Train the exact muscles that create the v-taper physique for the female gaze</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">02</span>
+            <div><p class="font-semibold text-cream">Eat to build</p>
+              <p class="text-muted">Exactly what and when to eat to grow muscle, without burying your abs in fat.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">03</span>
+            <div><p class="font-semibold text-cream">Cut correctly</p>
+              <p class="text-muted">Strip fat and reveal definition while holding onto every hard-earned pound of muscle.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">04</span>
+            <div><p class="font-semibold text-cream">Lean bulk without the fat</p>
+              <p class="text-muted">The surplus math that builds muscle and keeps you aesthetic, the opposite of a dirty bulk.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">05</span>
+            <div><p class="font-semibold text-cream">Transition between phases</p>
+              <p class="text-muted">When to bulk, when to cut, and how to switch without losing your progress or your shape.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">06</span>
+            <div><p class="font-semibold text-cream">Pull the hormone levers</p>
+              <p class="text-muted">The natural habits that increases your testosterone</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">07</span>
+            <div><p class="font-semibold text-cream">The full system</p>
+              <p class="text-muted">How every piece fits together into one repeatable plan you can run forever.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">08</span>
+            <div><p class="font-semibold text-cream">Your day-one plan</p>
+              <p class="text-muted">Get the guide and know exactly what to do in your next session, no more guessing.</p></div>
+          </li>
+        </ol>
+
+        <!-- The two included tools. Same card as a chapter so they read as part of the
+             package, but a brighter border and a + instead of a number so nobody reads
+             them as chapters 09 and 10. -->
+        <div class="mt-10">
+          <p class="reveal text-xs font-semibold tracking-widest uppercase text-muted mb-3">Plus two tools, included</p>
+
+          <ul class="space-y-3" data-stagger>
+            <li class="reveal flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
+              <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">+</span>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="font-semibold text-cream">The Metabolic Calorie Calculator</p>
+                  <span class="text-[10px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2 py-0.5">Google Sheet</span>
+                </div>
+                <p class="mt-1 text-muted">Enter your stats and it returns your maintenance, cut and bulk targets in
+                  seconds. You stop guessing at the one number everything else depends on.</p>
+              </div>
+            </li>
+            <li class="reveal flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
+              <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">+</span>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="font-semibold text-cream">The Physique Change Tracker</p>
+                  <span class="text-[10px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2 py-0.5">Google Sheet</span>
+                </div>
+                <p class="mt-1 text-muted">Log your measurements and it turns them into a body fat estimate you can
+                  follow week by week. More reliable than a body fat scale and more honest than the mirror on a
+                  bad day.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8">
+          <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 7. WHO IT'S FOR / NOT FOR                                     -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        Is this <span class="italic">for you?</span>
+      </h2>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6" data-anim="left">
+          <p class="font-display text-2xl text-cream mb-4">✅ This is for you if…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-cream">▹</span> You're looking terrible and girls don't even look at you</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> You'll actually train and eat with intent, you just need the right plan.</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> You want the <em>why</em>, not just "trust me bro."</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> You want that v-taper sexy physique</li>
+          </ul>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6" data-anim="right">
+          <p class="font-display text-2xl text-cream mb-4">🚫 This is not for you if…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-muted">▹</span> You want a magic pill or an overnight hack.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> You won't change anything you're currently doing.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> You'd rather keep collecting random tips than follow a system.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> You're already lean, aesthetic, and dialed in (don't think so if you're in this page).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 8. SOCIAL PROOF                                               -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        No testimonials yet. <span class="italic">Here's why that's fine.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">
+        Straight answer instead of a wall of five stars.
+      </p>
+
+      <div class="reveal mt-10 max-w-3xl mx-auto bg-card border border-line rounded-2xl p-8 sm:p-10 space-y-5 text-lg text-muted leading-relaxed">
+        <p>This launched recently. I could fill this space with five star reviews from people who
+          don't exist, and plenty of pages at this price do exactly that. I'd rather tell you the
+          truth and let the guarantee carry the risk instead of you.</p>
+        <p>Read the whole thing. Run it. If it isn't the clearest, most mechanism driven plan
+          anyone has handed you, email me inside 7 days and I'll refund every cent. That's worth
+          more than a review you have no way to verify.</p>
+      </div>
+
+      <!-- REAL TESTIMONIALS GO HERE once confirmed buyers send them.
+           Only real names, with permission. Never fabricate. -->
+
+      <div class="reveal mt-10 text-center">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
+           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+          Get The Blueprint
+        </a>
+        <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+        <p class="mt-2 text-sm text-muted">Backed by a 7-day money-back guarantee</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 9. THE OFFER (value anchor)                                   -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20 text-center">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        What's it worth to <span class="italic">stop wasting years?</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted">
+        This one guide replaces what most guys burn money and time on:
+      </p>
+
+      <!-- The dividers draw themselves in sequence and the two comparison figures count up
+           from zero. The $12 below lands flat and instant: the contrast is the whole point. -->
+      <ul class="value-list reveal mt-8 max-w-md mx-auto space-y-3 text-left">
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">Years of trial-and-error</span><span class="text-muted line-through">priceless (in a bad way)</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">A "coach" feeding you generic ai plans</span><span class="text-muted line-through">$<span class="count" data-count="200">200</span>+/mo</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">A bloated online course</span><span class="text-muted line-through">$<span class="count" data-count="97">97</span>+</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="flex items-center justify-between pb-1">
+          <span class="text-muted">One more failed dirty bulk you have to undo</span><span class="text-muted line-through">months lost</span>
+        </li>
+      </ul>
+
+      <!-- Value reinforcement, deliberately quiet: it lands between the comparison list and
+           the price so the tools are already counted before the figure appears. -->
+      <p class="reveal mt-8 text-sm text-muted max-w-md mx-auto">
+        Includes the Metabolic Calorie Calculator and the Physique Change Tracker.
+      </p>
+
+      <div class="reveal mt-6 inline-flex flex-col items-center bg-card border border-cream/30 rounded-3xl px-10 py-8 cta-glow" data-anim="scale">
+        <p class="text-muted uppercase tracking-widest text-sm">Today, one time</p>
+        <p class="font-display text-7xl text-cream leading-none mt-1">$12</p>
+        <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
+           class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
+          Get The Blueprint
+        </a>
+        <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+        <p class="mt-2 text-xs text-muted">🛡️ 7-day money-back guarantee</p>
+      </div>
+
+      <p class="reveal mt-6 text-muted">Less than one takeaway meal. This one lasts a lot longer.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 10. RISK REVERSAL / GUARANTEE                                 -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-3xl mx-auto px-5 py-12 sm:py-16">
+      <div class="reveal bg-card border border-line rounded-3xl p-8 text-center">
+        <div class="mx-auto w-28 h-28 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center cta-glow">
+          <span class="font-display text-4xl text-cream leading-none">7</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-cream">Day Refund</span>
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl text-cream mt-5">7-Day money-back guarantee</h2>
+        <p class="mt-3 text-lg text-muted">
+          Try the entire Blueprint for <span class="text-cream font-semibold">7 full days</span>. Read it, apply it,
+          put the system to work. If it doesn't give you a clear, science-backed plan you can actually run, email us
+          and we'll refund every cent. <span class="text-cream font-semibold">No questions asked.</span>
+        </p>
+        <p class="mt-3 text-sm text-muted">All you risk is staying exactly where you are.</p>
+      </div>
+
+      <div class="reveal mt-8 text-center">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=guarantee"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 11. FAQ (accordion)                                           -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        Questions, <span class="italic">answered.</span>
+      </h2>
+
+      <div class="mt-10 space-y-3" data-stagger>
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Will this actually work for me?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">If you're natural and willing to apply it, yes. This isn't a personality type or
+            a "genetics" thing, it's the underlying mechanics of how a body builds an aesthetic shape. Follow the system,
+            get the result.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            I'm a total beginner. Is this too advanced?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No, beginners benefit most because you skip the years of mistakes entirely.
+            It starts from the fundamentals and builds up, with a day-one plan so you know exactly what to do first.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            I've trained for years and stalled. Will I learn anything?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Almost certainly. Most long-term stalls come from missing a few specific
+            principles, lengthened-position training, the right volume, getting lean before you bulk. Fix those and
+            things move again.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Do I need a fancy gym or supplements?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No. A basic gym with dumbbells and a few machines is plenty. This is about
+            training and eating intelligently, not about a cabinet full of supplements.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Is this just repackaged bro-science?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">The opposite. Every recommendation traces back to a real mechanism, how
+            muscle protein synthesis is triggered, why body fat affects your hormones, how nutrient timing works, translated into plain language you can act on.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            How do I get it after I buy?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Instantly. After checkout you get immediate access to download the PDF, read it on your phone, tablet, or laptop. No waiting, no shipping.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            What if it's not for me?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">You're covered by a 7-day money-back guarantee. Try the whole system risk-free, if it's
+            not a fit, email us within 7 days and we'll refund every cent, no questions asked.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 12. FINAL CTA                                                 -->
+  <!-- ============================================================= -->
+  <section class="relative hero-glow bg-ink overflow-hidden">
+    <div class="relative max-w-3xl mx-auto px-5 py-16 sm:py-24 text-center">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-5xl sm:text-6xl leading-[1.05] text-cream">
+        Another year stuck, <span class="block italic">or the plan that ends it.</span>
+      </h2>
+      <p class="reveal mt-5 text-lg text-muted max-w-xl mx-auto">
+        You can keep guessing and watch another year pass with the same body in the mirror.
+        Or you can get the exact system for <span class="text-cream font-semibold">$12</span> and start building
+        the aesthetic, lean physique you actually want, the right way, naturally.
+      </p>
+
+      <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
+         class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
+        Get The Blueprint
+      </a>
+      <p class="reveal mt-3 text-sm text-muted">$12 · one-time · instant PDF</p>
+      <p class="reveal mt-2 text-sm text-muted">7-day money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 13. FOOTER                                                    -->
+  <!-- ============================================================= -->
+  <footer class="bg-ink border-t border-line">
+    <div class="max-w-5xl mx-auto px-5 py-10">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div>
+          <p class="font-display text-3xl text-cream">The Aesthetic Physique Blueprint</p>
+          <p class="text-sm text-muted mt-1">by the Aesthetic Engineer</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="privacy.html" class="text-muted hover:text-cream transition-colors">Privacy Policy</a>
+          <a href="terms.html" class="text-muted hover:text-cream transition-colors">Terms</a>
+          <a href="mailto:aesthethic.engineer@gmail.com" class="text-muted hover:text-cream transition-colors">Contact</a>
+        </nav>
+      </div>
+
+      <p class="mt-8 text-xs text-muted/80 leading-relaxed max-w-3xl">
+        Results depend on your own consistency and effort. This guide is educational, it is not
+        medical advice. Consult a physician before starting any training or nutrition program.
+      </p>
+      <p class="mt-4 text-xs text-muted/60">© <span id="year"></span> The Aesthetic Physique Blueprint. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================= -->
+  <!-- VANILLA JS: sticky CTA, FAQ icons (native), scroll reveals    -->
+  <!-- ============================================================= -->
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky CTA: show as soon as the hero's own button is gone.
+    //
+    // It used to watch the whole <header>, so the bar only arrived once the entire hero
+    // had left the screen. That is later than it needs to be: the moment worth covering is
+    // when the visitor scrolls past the first button, not when the last pixel of the image
+    // goes. Watching the button itself brings it forward by roughly half a screen.
+    //
+    // Falls back to the header if the button is ever renamed or removed, so the bar can
+    // never end up permanently hidden.
+    (function () {
+      var sticky = document.getElementById('stickyCta');
+      if (!sticky) return;
+      var watch = document.querySelector('header a[href*="/go/blueprint/"]') ||
+                  document.querySelector('header');
+      if (!watch) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          // target still in view -> keep the bar parked
+          sticky.classList.toggle('translate-y-full', e.isIntersecting);
+        });
+      }, { rootMargin: '0px 0px 0px 0px' });
+      io.observe(watch);
+    })();
+
+    // Scroll progress bar
+    (function () {
+      var bar = document.getElementById('progress');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // Scroll reveals. Failure mode is always "visible without animation", never "invisible":
+    //   - IntersectionObserver missing  -> reveal everything immediately
+    //   - observer stalls / throttled (common in webviews) -> safety net below reveals all
+    //   - JS never runs at all          -> the <noscript> style in <head> forces reveals visible
+    (function () {
+      // .rule rides the same observer: dividers and accent lines draw themselves from the
+      // left as their section arrives, on exactly the same trigger as the content.
+      var els = document.querySelectorAll('.reveal, .rule');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      // Auto-stagger: delay each reveal by its index within a [data-stagger] parent
+      document.querySelectorAll('[data-stagger]').forEach(function (parent) {
+        var kids = parent.querySelectorAll(':scope > .reveal');
+        kids.forEach(function (kid, i) { kid.style.transitionDelay = (i * 90) + 'ms'; });
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Reveal safety net: ~2.5s after load, reveal anything still hidden regardless of scroll
+    // position, so a slow, throttled or failed observer can never leave content invisible.
+    // Runs independently of the block above, so it fires even if that one threw.
+    (function () {
+      setTimeout(function () {
+        var hidden = document.querySelectorAll('.reveal:not(.in), .rule:not(.in)');
+        for (var i = 0; i < hidden.length; i++) { hidden[i].classList.add('in'); }
+      }, 2500);
+    })();
+
+    // Before/After slideshows (independent prev/next + dots per side)
+    (function () {
+      document.querySelectorAll('[data-slideshow]').forEach(function (box) {
+        var slides = box.querySelectorAll('.slide');
+        var dots = box.querySelectorAll('.dot');
+        if (!slides.length) return;
+        var i = 0;
+        function show(n) {
+          i = (n + slides.length) % slides.length;
+          slides.forEach(function (s, idx) {
+            s.classList.toggle('opacity-100', idx === i);
+            s.classList.toggle('opacity-0', idx !== i);
+          });
+          dots.forEach(function (d, idx) {
+            d.classList.toggle('bg-cream', idx === i);
+            d.classList.toggle('bg-line', idx !== i);
+          });
+        }
+        var prev = box.querySelector('[data-prev]');
+        var next = box.querySelector('[data-next]');
+        if (prev) prev.addEventListener('click', function () { show(i - 1); });
+        if (next) next.addEventListener('click', function () { show(i + 1); });
+        dots.forEach(function (d, idx) { d.addEventListener('click', function () { show(idx); }); });
+
+        // Auto-play (pauses on hover; restarts shortly after manual interaction; respects reduced-motion)
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var timer = null;
+        function start() { if (!reduce && !timer) timer = setInterval(function () { show(i + 1); }, 4000); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        box.addEventListener('mouseenter', stop);
+        box.addEventListener('mouseleave', start);
+        box.addEventListener('click', function () { stop(); setTimeout(start, 8000); });
+        start();
+      });
+    })();
+
+    // Subtle hero parallax. Drives the .hero-media wrapper, not the image, so it can't
+    // stomp on the image's own intro transform (scale 1.04 -> 1). Respects reduced-motion.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var media = document.querySelector('.hero-media');
+      if (!media) return;
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            var y = Math.min(window.scrollY, 700);
+            media.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // Price anchors count up from zero when the value section arrives. The markup already
+    // holds the final figure, so no-JS and reduced-motion visitors just read it flat.
+    (function () {
+      var els = document.querySelectorAll('[data-count]');
+      if (!els.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      els.forEach(function (el) { el.textContent = '0'; });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          io.unobserve(e.target);
+          var el = e.target;
+          var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+          var t0 = null, dur = 900, done = false;
+          function land() { done = true; el.textContent = target; }
+          function step(t) {
+            if (done) return;
+            if (t0 === null) t0 = t;
+            var k = Math.min((t - t0) / dur, 1);
+            var eased = 1 - Math.pow(1 - k, 3);
+            el.textContent = Math.round(target * eased);
+            if (k < 1) { requestAnimationFrame(step); } else { land(); }
+          }
+          requestAnimationFrame(step);
+          // Same safety net as the reveals: if frames stop being delivered (throttled tab,
+          // slow webview) the figure must still land on its real value, never one short.
+          setTimeout(function () { if (!done) land(); }, dur + 250);
+        });
+      }, { threshold: 0.6 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // iOS only fires :active on elements it considers tappable. One empty passive listener
+    // is the standard nudge, and it is what makes the CTA press state land on iPhone.
+    document.addEventListener('touchstart', function () {}, { passive: true });
+  </script>
+</body>
+</html>
