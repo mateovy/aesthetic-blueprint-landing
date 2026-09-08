@@ -31,7 +31,7 @@ IntersectionObserver. Everything degrades to "visible, unanimated" rather than "
 - Section heading italics fade and rise 50ms behind the roman text, so the eye lands on the
   emphasis word last.
 - `[data-count]` figures count up from zero over 900ms. The markup holds the final value, so
-  no-JS and reduced-motion visitors just read it. The `$12` is deliberately never animated.
+  no-JS and reduced-motion visitors just read it. The `$27` is deliberately never animated.
 - `.cta-glow` — resting lift, hover into pure white, and a press state. No pulse: the press
   is what makes it feel real on mobile, where there is no hover.
 
@@ -96,10 +96,21 @@ This section is deliberately left as-is. A drag-to-compare slider was tried and 
 
 ## Checkout links
 
-Six plain `<a>` elements pointing at `/go/blueprint/`, each with its own `utm_content`
-(`sticky`, `hero`, `chapters`, `social-proof`, `pricing`, `final`) so you can see which
-section converts. The bridge forwards the whole query string, so those labels reach
-Hotmart intact.
+Nine plain `<a>` elements pointing at `/go/blueprint/`, each with its own `utm_content`
+(`sticky`, `hero`, `stack`, `mechanism`, `chapters`, `social-proof`, `pricing`, `guarantee`,
+`final`) so you can see which section converts. The bridge forwards the whole query string,
+so those labels reach Hotmart intact.
+
+`stack` replaced the old `included` label when "What you get" became the "Everything you get"
+value block, so anything before that rename sits under `included` in the old reports.
+
+## Offer
+
+$27 buys the Blueprint, the 30-day plan and the two Google Sheets. The Testosterone Blueprint
+is **not** part of that: it is a $15 order bump inside Hotmart's checkout, configured by
+`checkoutMode=10` in `go/blueprint/index.html`. The landing presents it in its own bordered
+panel with no button and no big price, and every mention says "at checkout". Copy that lets a
+buyer think it ships with the $27 comes back as a refund, so keep that wording.
 
 Nothing intercepts these clicks: they are plain anchors and no JS touches them.
 
