@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <!--
 =====================================================================
-  THE AESTHETIC PHYSIQUE BLUEPRINT: $27 SALES LANDING PAGE
+  THE AESTHETIC PHYSIQUE BLUEPRINT: $12 SALES LANDING PAGE
   Single static page. No build step. Deploy index.html + /assets.
 =====================================================================
 
@@ -19,25 +19,18 @@
                          real ones in there when they arrive. Only ever use real, confirmed
                          buyers, with permission. Never fabricate.
   DONE: Hero image    -> assets/hero.png (live)
-  DONE: Page count    -> 114-page guide (matches the actual PDF). The Testosterone
-                         Blueprint is 82 pages / 22 chapters and is the order bump.
+  DONE: Page count    -> 90-page guide (matches the actual PDF)
   TODO: Buyer count -> none. Only ever show a real, verifiable number.
   DONE: Footer        -> privacy.html, terms.html, aesthethic.engineer@gmail.com, disclaimer (live)
   DONE: Before/After  -> two auto-playing slideshows (assets/before-1..3.webp, after-1..3.webp)
   DONE: Book mockup   -> assets/aesthetic blueprint mockup.png (live)
-  TODO: OG image      -> assets/og-image.jpeg still shows the old price. It is a picture, so
-                         no HTML change can fix it: re-export by hand from og-template.html
-                         (already updated to $27) following the recipe in README.md.
+  DONE: OG image      -> assets/og-image.jpeg (1200x630, 132KB), monochrome and showing $12.
                          og:image/twitter:image use the absolute aesthetic-engineer.com URL.
                          The full-res export lives in assets/originals/og-image.jpeg.
 
   All assets are in. The page is launch-ready once hosted.
 
-  RULE: This page sells ONE product for $27: the Blueprint, the 30-day plan and the two
-        Google Sheets. The Testosterone Blueprint is NOT included in that. It is a $15
-        order bump inside Hotmart's checkout (checkoutMode=10, set in go/blueprint/).
-        The page may present it, and must always say "at checkout". Any copy that lets a
-        buyer think it ships with the $27 turns straight into a refund.
+  RULE: This page sells ONE product (the $12 guide). No other offers anywhere.
 =====================================================================
 -->
 <head>
@@ -52,7 +45,7 @@
 
   <!-- SEO -->
   <title>The Aesthetic Physique Blueprint: Build a Lean, Aesthetic Body (Science-Backed)</title>
-  <meta name="description" content="The exact science-backed system to build a lean, aesthetic physique: wide shoulders, V-taper, visible abs, naturally. The guide, the 30-day plan and two tools. $27." />
+  <meta name="description" content="The exact science-backed system to build a lean, aesthetic physique: wide shoulders, V-taper, visible abs, naturally. No dirty bulking. No starving. $12." />
   <meta name="theme-color" content="#0A0E1A" />
 
   <!-- The same page is served at /ig and /fb for campaign tracking, so every path points
@@ -62,7 +55,7 @@
   <!-- Open Graph / social share -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="The Aesthetic Physique Blueprint" />
-  <meta property="og:description" content="The science-backed system to build a lean, aesthetic physique naturally, without wasted years. The guide, the plan and two tools. $27." />
+  <meta property="og:description" content="The science-backed system to build a lean, aesthetic physique naturally, without wasted years. $12." />
   <meta property="og:image" content="https://aesthetic-engineer.com/assets/og-image.jpeg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
@@ -276,7 +269,7 @@
               flex items-center gap-3 sm:justify-center">
     <div class="hidden sm:block leading-tight">
       <p class="font-display text-3xl text-cream">The Aesthetic Physique Blueprint</p>
-      <p class="text-xs text-muted">Instant access · One-time $27</p>
+      <p class="text-xs text-muted">Instant PDF · One-time $12</p>
     </div>
     <div class="flex-1 sm:flex-none">
       <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
@@ -284,7 +277,7 @@
                 rounded-xl px-5 py-3 text-base cta-glow">
         Get The Blueprint
       </a>
-      <p class="mt-1.5 text-center text-[11px] text-muted">$27 · one-time · instant access</p>
+      <p class="mt-1.5 text-center text-[11px] text-muted">$12 · one-time · instant PDF</p>
     </div>
   </div>
 
@@ -312,9 +305,9 @@
         </h1>
 
         <p class="mt-4 text-base sm:text-lg text-muted max-w-xl">
-          Wide shoulders. A real V-taper. Visible abs. And the
-          <span class="text-cream font-semibold">hormone environment</span> that makes all
-          three possible. The exact system, built on mechanisms, not bro-science.
+          Wide shoulders. A real V-taper. Visible abs. The exact science-backed
+          system to get there <span class="text-cream font-semibold">naturally</span>.
+          No dirty bulking. No starving. No bro-science.
         </p>
 
         <p class="mt-3 text-sm sm:text-base text-muted max-w-xl">
@@ -333,9 +326,12 @@
                     rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint
           </a>
-          <p class="mt-2 text-sm text-muted">$27 · one-time · instant access</p>
-          <p class="mt-1 text-xs text-muted">The guide, the plan, and 2 tools. Yours in 60 seconds.</p>
+          <p class="mt-2 text-sm text-muted">$12 · one-time · instant PDF</p>
         </div>
+
+        <p class="mt-4 text-sm text-muted">
+          ⚡ Instant PDF download
+        </p>
       </div>
 
       <div class="order-2">
@@ -373,71 +369,31 @@
   </div>
 
   <!-- ============================================================= -->
-  <!-- 2b. EVERYTHING YOU GET (the value block)                      -->
-  <!--     The section that has to carry the $27, so it gets more air -->
-  <!--     and more weight than anything below the hero: one bordered -->
-  <!--     card per deliverable, each naming a real thing instead of  -->
-  <!--     a promise. Still high on the page, so the decision stays   -->
-  <!--     reachable in the first few mobile screens.                 -->
+  <!-- 2b. WHAT YOU GET (compact, so the decision is reachable in the -->
+  <!--     first three mobile screens instead of the ninth)          -->
   <!-- ============================================================= -->
   <section class="bg-ink">
-    <div class="max-w-3xl mx-auto px-5 py-16 sm:py-24">
+    <div class="max-w-3xl mx-auto px-5 py-10 sm:py-14">
       <span class="rule rule-accent" aria-hidden="true"></span>
-      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
-        Everything you <span class="italic">get.</span>
+      <h2 class="reveal font-display text-3xl sm:text-4xl leading-[1.05] text-cream">
+        What you <span class="italic">get.</span>
       </h2>
 
-      <div class="mt-10 space-y-5" data-stagger>
+      <ul class="reveal mt-5 space-y-2.5 text-muted">
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The 90-page Blueprint. 8 chapters, no fluff.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Train for shape: delts, back width, the V-taper.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Eat to build, and cut without losing muscle.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Lean bulk math, and the hormone levers that matter.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Metabolic Calorie Calculator, a Google Sheet.</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Physique Change Tracker, a Google Sheet.</li>
+      </ul>
 
-        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The guide</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Aesthetic Physique Blueprint</p>
-          <p class="mt-3 text-muted">114 pages, 8 chapters. Training, nutrition, the cut, the lean bulk,
-            the transitions between them, recovery, and hormones. Every prescription has the mechanism
-            under it, so you know why you're doing it and what to change when something stalls.
-            Not a list of tips. A system where every part feeds the others.</p>
-        </div>
-
-        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The plan</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">Your first 30 days, written out</p>
-          <p class="mt-3 text-muted">A decision tree that tells you which phase you start in based on your
-            body fat and your training age. Daily templates for training days and rest days. A weekly
-            checklist you run every Sunday. And a troubleshooting section for when the scale stops moving,
-            the lifts stall, or you look flat. You never have to guess what to do on Monday.</p>
-        </div>
-
-        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 1, included</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Metabolic Calorie Calculator</p>
-          <p class="mt-3 text-muted">A Google Sheet. Put in your stats, get your maintenance, your cut and
-            your bulk targets in seconds. Set your deficit or surplus as a percentage and it does the maths
-            for you. This is the number every other chapter is built on, and getting it wrong is why most
-            people spin their wheels for years.</p>
-        </div>
-
-        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 2, included</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Physique Change Tracker</p>
-          <p class="mt-3 text-muted">A Google Sheet. Log your weight and your measurements. It gives you the
-            seven day average that filters out the daily noise, and estimates your body fat from your
-            circumferences so you can watch it move week by week. The mirror lies on a Thursday.
-            This doesn't.</p>
-        </div>
-
-      </div>
-
-      <p class="reveal mt-8 text-lg sm:text-xl text-cream max-w-xl">
-        The guide, the plan, and two tools. One system.
-        <span class="text-muted">Everything above is yours the second you buy.</span>
-      </p>
-
-      <div class="reveal mt-8">
-        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=stack"
-           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
-          Get The Blueprint
-        </a>
-        <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+      <div class="reveal mt-7">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=included"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Get The Blueprint
+          </a>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
       </div>
     </div>
   </section>
@@ -611,21 +567,12 @@
         <div class="reveal bg-card border border-line rounded-2xl p-6">
           <p class="font-display text-2xl text-cream">Feed the <span class="italic">right tissue</span></p>
           <p class="mt-2 text-muted">Timing nutrients around training improves nutrient partitioning (GLUT4), sending
-            more of what you eat into muscle instead of fat. Same calories, better result. The nutrition
-            chapter names the foods, a short list you actually buy, instead of leaving you to
-            reverse-engineer a diet out of macros.</p>
+            more of what you eat into muscle instead of fat. Same calories, better result.</p>
         </div>
         <div class="reveal bg-card border border-line rounded-2xl p-6">
           <p class="font-display text-2xl text-cream">Lean bulk <span class="italic">math</span></p>
           <p class="mt-2 text-muted">There's a ceiling to how fast you can build muscle (think FFMI). Eat past it and the
             extra is just fat. The right small surplus builds muscle while staying aesthetic, no dirty-bulk rebound.</p>
-        </div>
-        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:col-span-2">
-          <p class="font-display text-2xl text-cream">Growth happens <span class="italic">after</span> the set</p>
-          <p class="mt-2 text-muted">Training is only the signal. Sleep, stress and how you space your hard sessions
-            decide how much of that signal becomes muscle, and they move your hormones at the same time.
-            Most guys train hard enough to need recovery and then never take it, so they pay for the
-            work twice and collect it once.</p>
         </div>
       </div>
 
@@ -634,7 +581,7 @@
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint
           </a>
-          <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
       </div>
     </div>
   </section>
@@ -657,7 +604,7 @@
                width="640" height="858" decoding="async"
                class="relative w-full rounded-2xl border border-line bg-card" />
         </div>
-        <p class="mt-5 text-center text-muted">114 pages. Zero fluff.<br/>
+        <p class="mt-5 text-center text-muted">90 pages. Zero fluff.<br/>
           <span class="text-cream font-semibold">A complete system, not a tip list.</span></p>
       </div>
 
@@ -677,8 +624,7 @@
           <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
             <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">02</span>
             <div><p class="font-semibold text-cream">Eat to build</p>
-              <p class="text-muted">The short list of foods that do the work, and when to eat them, so you grow
-                without burying your abs in fat.</p></div>
+              <p class="text-muted">Exactly what and when to eat to grow muscle, without burying your abs in fat.</p></div>
           </li>
           <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
             <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">03</span>
@@ -702,15 +648,13 @@
           </li>
           <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
             <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">07</span>
-            <div><p class="font-semibold text-cream">Recover, or none of it counts</p>
-              <p class="text-muted">Sleep, stress and how you space hard sessions. The part that turns the training
-                you already did into the shape you want.</p></div>
+            <div><p class="font-semibold text-cream">The full system</p>
+              <p class="text-muted">How every piece fits together into one repeatable plan you can run forever.</p></div>
           </li>
           <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
             <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">08</span>
-            <div><p class="font-semibold text-cream">The full system, and your first 30 days</p>
-              <p class="text-muted">Every piece in one repeatable plan, plus the decision tree, the daily templates
-                and the weekly checklist. You know exactly what to do in your next session.</p></div>
+            <div><p class="font-semibold text-cream">Your day-one plan</p>
+              <p class="text-muted">Get the guide and know exactly what to do in your next session, no more guessing.</p></div>
           </li>
         </ol>
 
@@ -752,7 +696,7 @@
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint
           </a>
-          <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
         </div>
       </div>
     </div>
@@ -813,108 +757,22 @@
           more than a review you have no way to verify.</p>
       </div>
 
-      <!-- REAL TESTIMONIALS GO HERE once confirmed buyers send them. Only real names, only
-           confirmed buyers, only with their permission. Never fabricate one, not even as a
-           placeholder that might ship by accident.
-
-           To switch over: delete the heading, the subhead and the card above, then uncomment
-           the grid below and fill in the three names, results and quotes. The markup already
-           inherits the page styles and the stagger, so nothing else has to change. Fewer than
-           three real ones? Delete the spare cards; sm:grid-cols-3 handles one or two fine. -->
-
-      <!--
-      <div class="mt-10 grid sm:grid-cols-3 gap-4" data-stagger>
-
-        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
-          <blockquote class="text-muted flex-1">QUOTE. Two or three sentences in their own words, about what
-            actually changed. Keep their phrasing, including the unpolished bits.</blockquote>
-          <figcaption class="mt-5 pt-5 border-t border-line">
-            <p class="font-semibold text-cream">FIRST NAME</p>
-            <p class="mt-0.5 text-sm text-muted">CONCRETE RESULT. A number and a timeframe, for example a
-              weight, a measurement or a lift, over N weeks.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
-          <blockquote class="text-muted flex-1">QUOTE.</blockquote>
-          <figcaption class="mt-5 pt-5 border-t border-line">
-            <p class="font-semibold text-cream">FIRST NAME</p>
-            <p class="mt-0.5 text-sm text-muted">CONCRETE RESULT.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
-          <blockquote class="text-muted flex-1">QUOTE.</blockquote>
-          <figcaption class="mt-5 pt-5 border-t border-line">
-            <p class="font-semibold text-cream">FIRST NAME</p>
-            <p class="mt-0.5 text-sm text-muted">CONCRETE RESULT.</p>
-          </figcaption>
-        </figure>
-
-      </div>
-      -->
+      <!-- REAL TESTIMONIALS GO HERE once confirmed buyers send them.
+           Only real names, with permission. Never fabricate. -->
 
       <div class="reveal mt-10 text-center">
         <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
            class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
           Get The Blueprint
         </a>
-        <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+        <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
         <p class="mt-2 text-sm text-muted">Backed by a 7-day money-back guarantee</p>
       </div>
     </div>
   </section>
 
   <!-- ============================================================= -->
-  <!-- 8b. THE TESTOSTERONE BLUEPRINT: ORDER BUMP, NOT INCLUDED      -->
-  <!--     Presented, never sold twice. No button and no big price,   -->
-  <!--     because the decision happens inside Hotmart's checkout,    -->
-  <!--     where checkoutMode=10 offers it as an optional add-on.     -->
-  <!--     The copy has to keep saying "at checkout": any wording      -->
-  <!--     that lets a buyer think it ships with the $27 comes back    -->
-  <!--     as a refund. Sits on bg-ink with a top rule rather than     -->
-  <!--     bg-panel, so the price block below keeps its own contrast.  -->
-  <!-- ============================================================= -->
-  <section class="bg-ink border-t border-line">
-    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20">
-      <div class="reveal bg-card border border-cream/25 rounded-3xl p-7 sm:p-10">
-        <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Add on, at checkout</p>
-
-        <h2 class="mt-4 font-display text-3xl sm:text-4xl leading-[1.05] text-cream">
-          And the hormone side, <span class="italic">in full.</span>
-        </h2>
-
-        <div class="mt-5 space-y-4 text-muted text-lg">
-          <p>Chapter 6 of the Blueprint covers the highest-return hormone levers and then stops,
-            because the full picture needs its own book.</p>
-          <p>The Testosterone Blueprint is that book. 82 pages, 22 chapters. Free testosterone and
-            SHBG, and why your lab number lies. DHT, the androgen nobody explains, and the supplements
-            quietly destroying it. The nine foods, the fats that kill 5-alpha reductase, liver, the gut,
-            sunlight without burning, sleep, the endocrine disruptors in your kitchen and your bathroom,
-            blood work and what to actually ask for, and the four supplements that earn their place out
-            of everything that's been sold to you.</p>
-          <p class="text-cream">It appears as an optional add-on when you check out. One click, $15.
-            Nothing to buy separately and nothing else to remember.</p>
-        </div>
-
-        <ul class="mt-7 space-y-2.5 text-muted">
-          <li class="flex gap-3"><span class="shrink-0">▹</span> 22 chapters, hormone by hormone</li>
-          <li class="flex gap-3"><span class="shrink-0">▹</span> What to test, and how to read the results</li>
-          <li class="flex gap-3"><span class="shrink-0">▹</span> The four supplements worth your money, and everything I threw out</li>
-          <li class="flex gap-3"><span class="shrink-0">▹</span> The TRT conversation, written honestly</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================= -->
   <!-- 9. THE OFFER (value anchor)                                   -->
-  <!--     The comparison rows are what you spend instead; only the   -->
-  <!--     two money rows are struck through, because a cost you      -->
-  <!--     already paid in years is not a discount. The add-on line    -->
-  <!--     under the price is deliberately small and unmissable: it    -->
-  <!--     is the last chance to say "$15 more, at checkout" before    -->
-  <!--     the buyer sees it in Hotmart.                               -->
   <!-- ============================================================= -->
   <section class="bg-panel border-y border-line">
     <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20 text-center">
@@ -923,56 +781,48 @@
         What's it worth to <span class="italic">stop wasting years?</span>
       </h2>
       <p class="reveal mt-4 text-lg text-muted">
-        What most guys spend on this instead:
+        This one guide replaces what most guys burn money and time on:
       </p>
 
-      <!-- The dividers draw themselves in sequence and the two money figures count up
-           from zero. The $27 below lands flat and instant: the contrast is the whole point. -->
+      <!-- The dividers draw themselves in sequence and the two comparison figures count up
+           from zero. The $12 below lands flat and instant: the contrast is the whole point. -->
       <ul class="value-list reveal mt-8 max-w-md mx-auto space-y-3 text-left">
-        <li class="relative flex items-center justify-between gap-4 pb-3">
-          <span class="text-muted">A coach feeding you generic AI plans</span><span class="text-muted line-through shrink-0 text-sm sm:text-base">$<span class="count" data-count="200">200</span>+/mo</span>
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">Years of trial-and-error</span><span class="text-muted line-through">priceless (in a bad way)</span>
           <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
         </li>
-        <li class="relative flex items-center justify-between gap-4 pb-3">
-          <span class="text-muted">A bloated online course</span><span class="text-muted line-through shrink-0 text-sm sm:text-base">$<span class="count" data-count="97">97</span>+</span>
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">A "coach" feeding you generic ai plans</span><span class="text-muted line-through">$<span class="count" data-count="200">200</span>+/mo</span>
           <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
         </li>
-        <li class="relative flex items-center justify-between gap-4 pb-3">
-          <span class="text-muted">One more failed dirty bulk</span><span class="text-muted shrink-0 text-right text-sm sm:text-base">months lost, permanently</span>
+        <li class="relative flex items-center justify-between pb-3">
+          <span class="text-muted">A bloated online course</span><span class="text-muted line-through">$<span class="count" data-count="97">97</span>+</span>
           <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
         </li>
-        <li class="flex items-center justify-between gap-4 pb-1">
-          <span class="text-muted">Four years of trial and error</span><span class="text-muted shrink-0 text-right text-sm sm:text-base">what it cost me</span>
+        <li class="flex items-center justify-between pb-1">
+          <span class="text-muted">One more failed dirty bulk you have to undo</span><span class="text-muted line-through">months lost</span>
         </li>
       </ul>
 
-      <!-- The stack, listed again right against the figure, so everything is counted
-           before the price appears. -->
-      <p class="reveal mt-10 text-xs font-semibold tracking-widest uppercase text-muted">What you get for it</p>
-      <ul class="reveal mt-4 max-w-md mx-auto space-y-2.5 text-left text-muted">
-        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Aesthetic Physique Blueprint</li>
-        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Your first 30 days, step by step</li>
-        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Metabolic Calorie Calculator</li>
-        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> The Physique Change Tracker</li>
-      </ul>
+      <!-- Value reinforcement, deliberately quiet: it lands between the comparison list and
+           the price so the tools are already counted before the figure appears. -->
+      <p class="reveal mt-8 text-sm text-muted max-w-md mx-auto">
+        Includes the Metabolic Calorie Calculator and the Physique Change Tracker.
+      </p>
 
-      <div class="reveal mt-8 inline-flex flex-col items-center bg-card border border-cream/30 rounded-3xl px-10 py-8 cta-glow" data-anim="scale">
+      <div class="reveal mt-6 inline-flex flex-col items-center bg-card border border-cream/30 rounded-3xl px-10 py-8 cta-glow" data-anim="scale">
         <p class="text-muted uppercase tracking-widest text-sm">Today, one time</p>
-        <p class="font-display text-7xl text-cream leading-none mt-1">$27</p>
-        <p class="text-muted mt-1">114 pages, both tools, instant access.</p>
+        <p class="font-display text-7xl text-cream leading-none mt-1">$12</p>
+        <p class="text-muted mt-1">The full 90-page system. Instant download.</p>
         <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
            class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
           Get The Blueprint
         </a>
-        <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+        <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
         <p class="mt-2 text-xs text-muted">🛡️ 7-day money-back guarantee</p>
       </div>
 
-      <p class="reveal mt-5 text-sm text-muted max-w-md mx-auto">
-        The Testosterone Blueprint is offered at checkout for $15 more, if you want it.
-      </p>
-
-      <p class="reveal mt-6 text-muted">Less than one night out you won't remember. This one you keep.</p>
+      <p class="reveal mt-6 text-muted">Less than one takeaway meal. This one lasts a lot longer.</p>
     </div>
   </section>
 
@@ -980,23 +830,19 @@
   <!-- 10. RISK REVERSAL / GUARANTEE                                 -->
   <!-- ============================================================= -->
   <section class="bg-ink">
-    <div class="max-w-3xl mx-auto px-5 py-16 sm:py-24">
-      <div class="reveal bg-card border border-cream/25 rounded-3xl p-8 sm:p-12 text-center">
-        <div class="mx-auto w-32 h-32 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center cta-glow">
-          <span class="font-display text-5xl text-cream leading-none">7</span>
-          <span class="mt-1 text-[10px] font-bold uppercase tracking-widest text-cream">Day Refund</span>
+    <div class="max-w-3xl mx-auto px-5 py-12 sm:py-16">
+      <div class="reveal bg-card border border-line rounded-3xl p-8 text-center">
+        <div class="mx-auto w-28 h-28 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center cta-glow">
+          <span class="font-display text-4xl text-cream leading-none">7</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-cream">Day Refund</span>
         </div>
-        <h2 class="font-display text-4xl sm:text-5xl leading-[1.05] text-cream mt-7">7-Day money-back guarantee</h2>
-        <p class="mt-5 text-lg sm:text-xl text-muted">
+        <h2 class="font-display text-3xl sm:text-4xl text-cream mt-5">7-Day money-back guarantee</h2>
+        <p class="mt-3 text-lg text-muted">
           Try the entire Blueprint for <span class="text-cream font-semibold">7 full days</span>. Read it, apply it,
           put the system to work. If it doesn't give you a clear, science-backed plan you can actually run, email us
           and we'll refund every cent. <span class="text-cream font-semibold">No questions asked.</span>
         </p>
-        <p class="mt-5 text-lg text-cream">
-          You have a week to decide if it was worth it. I'd rather refund you than have you keep
-          something you won't use.
-        </p>
-        <p class="mt-5 text-sm text-muted">All you risk is staying exactly where you are.</p>
+        <p class="mt-3 text-sm text-muted">All you risk is staying exactly where you are.</p>
       </div>
 
       <div class="reveal mt-8 text-center">
@@ -1004,7 +850,7 @@
              class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
             Get The Blueprint
           </a>
-          <p class="mt-2 text-xs text-muted">$27 · one-time · instant access</p>
+          <p class="mt-2 text-xs text-muted">$12 · one-time · instant PDF</p>
       </div>
     </div>
   </section>
@@ -1072,7 +918,7 @@
             How do I get it after I buy?
             <span class="faq-icon text-cream text-2xl leading-none">+</span>
           </summary>
-          <p class="pb-5 -mt-1 text-muted">Instantly. After checkout you get immediate access to the PDF and to both Google Sheets, on your phone, tablet, or laptop. No waiting, no shipping.</p>
+          <p class="pb-5 -mt-1 text-muted">Instantly. After checkout you get immediate access to download the PDF, read it on your phone, tablet, or laptop. No waiting, no shipping.</p>
         </details>
 
         <details class="reveal group bg-card border border-line rounded-2xl px-5">
@@ -1098,7 +944,7 @@
       </h2>
       <p class="reveal mt-5 text-lg text-muted max-w-xl mx-auto">
         You can keep guessing and watch another year pass with the same body in the mirror.
-        Or you can get the exact system for <span class="text-cream font-semibold">$27</span> and start building
+        Or you can get the exact system for <span class="text-cream font-semibold">$12</span> and start building
         the aesthetic, lean physique you actually want, the right way, naturally.
       </p>
 
@@ -1106,7 +952,7 @@
          class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
         Get The Blueprint
       </a>
-      <p class="reveal mt-3 text-sm text-muted">$27 · one-time · instant access</p>
+      <p class="reveal mt-3 text-sm text-muted">$12 · one-time · instant PDF</p>
       <p class="reveal mt-2 text-sm text-muted">7-day money-back guarantee</p>
     </div>
   </section>
