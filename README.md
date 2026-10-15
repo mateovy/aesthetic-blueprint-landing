@@ -104,6 +104,21 @@ so those labels reach Hotmart intact.
 `stack` replaced the old `included` label when "What you get" became the "Everything you get"
 value block, so anything before that rename sits under `included` in the old reports.
 
+## Spanish version (/es/)
+
+`es/index.html` is a hand translation of the English page: same markup, CSS and JS, Spanish
+copy and meta, `lang="es"`, and `/assets/...` paths (it sits one folder deeper). Both pages
+carry hreflang tags (en, es, x-default -> English) and an EN / ES switcher in the hero; there
+is no automatic redirect on browser language. When the English copy changes, mirror it in
+`es/index.html` by hand.
+
+Its CTAs go to `es/go/blueprint/`, a copy of the English bridge that forwards to the Spanish
+Hotmart product (`https://pay.hotmart.com/D108044264H`) with `checkoutMode=10&src=tiktok_es`.
+The link appears twice in that file, the `BASE` constant and the `<noscript>` href, and both
+have to change together. Product names: El Manual del Físico de Dios
+Griego ($9) and El Manual de la Testosterona ($10 order bump, configured on the Spanish product
+in Hotmart).
+
 ## Offer
 
 $9 buys the Blueprint (114 pages, 8 chapters), the 30-day plan and the two Google Sheets.

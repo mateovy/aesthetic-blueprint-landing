@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<!--
+=====================================================================
+  SPANISH LANDING (/es/). Same design, structure, CSS and JS as the English
+  page at the repo root; only the copy, the meta and the checkout bridge differ.
+
+  - Every CTA points at /es/go/blueprint/, which forwards to the SPANISH Hotmart
+    product with src=tiktok_es. The checkout link lives in es/go/blueprint/index.html.
+  - Assets are referenced as /assets/... (absolute), because this file sits one
+    folder deeper than the English page.
+  - Product names: "El Manual del Físico de Dios Griego" (main, $9) and
+    "El Manual de la Testosterona" (the $10 order bump, NOT included in the $9;
+    every mention must say "al pagar"). "Aesthetic Engineer" stays in English.
+  - When the English copy changes, mirror it here by hand: this is a translation,
+    not a generated copy.
+=====================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Icons. Declared explicitly so browsers stop probing /favicon.ico and
+       /apple-touch-icon*.png, which were 404ing on every fresh visit. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- SEO -->
+  <title>El Manual del Físico de Dios Griego: construye un cuerpo definido y estético (basado en ciencia)</title>
+  <meta name="description" content="El sistema exacto, basado en ciencia, para construir un físico definido y estético: hombros anchos, espalda en V y abdomen marcado, de forma natural. Sin volumen sucio. Sin pasar hambre. $9." />
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="canonical" href="https://aesthetic-engineer.com/es/" />
+
+  <!-- Language versions. The Spanish page lives at /es/; nothing redirects on browser
+       language, people switch with the EN / ES links in the hero. -->
+  <link rel="alternate" hreflang="en" href="https://aesthetic-engineer.com/" />
+  <link rel="alternate" hreflang="es" href="https://aesthetic-engineer.com/es/" />
+  <link rel="alternate" hreflang="x-default" href="https://aesthetic-engineer.com/" />
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:title" content="El Manual del Físico de Dios Griego" />
+  <meta property="og:description" content="El sistema basado en ciencia para construir un físico definido y estético de forma natural, sin perder años. $9." />
+  <meta property="og:image" content="https://aesthetic-engineer.com/assets/og-image-es.jpeg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://aesthetic-engineer.com/assets/og-image-es.jpeg" />
+
+  <!-- Fonts: self-hosted Playfair Display + Inter (latin subset, woff2). No third-party origins. -->
+  <!-- Preload only the two faces used above the fold; the rest load on demand via @font-face swap. -->
+  <link rel="preload" href="/assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- The checkout bridge sits on the conversion path, so fetch it now, at idle priority,
+       rather than making the buyer wait for a round trip after they have already tapped.
+       The third line warms the origin that Cloudflare's injected beacon loads from. -->
+  <link rel="prefetch" href="/es/go/blueprint/" as="document" />
+  <link rel="preconnect" href="https://pay.hotmart.com" crossorigin />
+  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
+  <!-- Hero image: preload at high priority so it starts fetching before CSS/JS parse (LCP). -->
+  <link rel="preload" href="/assets/hero-es.webp" as="image" fetchpriority="high" />
+
+  <!-- Full compiled stylesheet, loaded WITHOUT blocking first paint. The above-the-fold CSS is
+       inlined in the <style> below, so first paint needs zero external CSS. The <noscript>
+       link applies the stylesheet normally for visitors with JavaScript disabled. -->
+  <link rel="preload" href="/assets/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/styles.css" /></noscript>
+
+  <!-- If JS never runs, keep every animated-in element visible instead of blank. -->
+  <noscript><style>.reveal,.reveal h2 .italic,h2.reveal .italic{opacity:1!important;transform:none!important;filter:none!important}.rule{transform:none!important}</style></noscript>
+
+  <style>
+    /* ============================================================= */
+    /* Self-hosted fonts (latin subset, woff2). font-display:swap so   */
+    /* text paints immediately in the fallback and swaps when ready.   */
+    /* ============================================================= */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400-italic.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600-italic.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700-italic.woff2') format('woff2')}
+
+    /* ============================================================= */
+    /* Critical above-the-fold CSS (compiled from the hero markup).    */
+    /* The full stylesheet loads async; this styles first paint with   */
+    /* zero external CSS requests. Regenerate: see README.md.          */
+    /* ============================================================= */
+    *,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-inset-3{inset:-.75rem}.inset-x-0{left:0;right:0}.-right-24{right:-6rem}.-top-24{top:-6rem}.bottom-0{bottom:0}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-5{margin-bottom:1.25rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:.375rem}.h-96{height:24rem}.max-h-\[42vh\]{max-height:42vh}.w-1\.5{width:.375rem}.w-96{width:24rem}.w-full{width:100%}.max-w-6xl{max-width:72rem}.max-w-\[15rem\]{max-width:15rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.translate-y-full{--tw-translate-y:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.flex-col{flex-direction:column}.items-center{align-items:center}.items-stretch{align-items:stretch}.gap-10{gap:2.5rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-6{gap:1.5rem}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px;border-bottom-width:1px}.border-t{border-top-width:1px}.border-line{--tw-border-opacity:1;border-color:rgb(30 39 64/var(--tw-border-opacity,1))}.bg-card{--tw-bg-opacity:1;background-color:rgb(18 24 41/var(--tw-bg-opacity,1))}.bg-cream{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.bg-cream\/5{background-color:hsla(60,13%,95%,.05)}.bg-ink{--tw-bg-opacity:1;background-color:rgb(10 14 26/var(--tw-bg-opacity,1))}.bg-ink\/95{background-color:rgba(10,14,26,.95)}.bg-line{--tw-bg-opacity:1;background-color:rgb(30 39 64/var(--tw-bg-opacity,1))}.bg-muted{--tw-bg-opacity:1;background-color:rgb(154 163 178/var(--tw-bg-opacity,1))}.bg-panel{--tw-bg-opacity:1;background-color:rgb(13 18 32/var(--tw-bg-opacity,1))}.bg-gradient-to-b{background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.from-cream\/10{--tw-gradient-from:hsla(60,13%,95%,.1) var(--tw-gradient-from-position);--tw-gradient-to:hsla(60,13%,95%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{-o-object-fit:cover;object-fit:cover}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-7{padding-left:1.75rem;padding-right:1.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-12{padding-bottom:3rem}.pr-10{padding-right:2.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.font-display{font-family:Playfair Display,Georgia,serif}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.05\]{line-height:1.05}.leading-tight{line-height:1.25}.tracking-widest{letter-spacing:.1em}.text-cream{--tw-text-opacity:1;color:rgb(245 245 242/var(--tw-text-opacity,1))}.text-cream\/90{color:hsla(60,13%,95%,.9)}.text-ink{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.text-muted{--tw-text-opacity:1;color:rgb(154 163 178/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.blur-3xl{--tw-blur:blur(64px)}.blur-3xl,.blur-xl{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-xl{--tw-blur:blur(24px)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.selection\:bg-cream ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream ::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink ::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink ::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:bg-cream::-moz-selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:bg-cream::selection{--tw-bg-opacity:1;background-color:rgb(245 245 242/var(--tw-bg-opacity,1))}.selection\:text-ink::-moz-selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}.selection\:text-ink::selection{--tw-text-opacity:1;color:rgb(10 14 26/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:block{display:block}.sm\:max-h-none{max-height:none}.sm\:max-w-sm{max-width:24rem}.sm\:flex-none{flex:none}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:gap-10{gap:2.5rem}.sm\:pb-20{padding-bottom:5rem}.sm\:pt-16{padding-top:4rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width:1024px){.lg\:max-w-none{max-width:none}.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:text-7xl{font-size:4.5rem;line-height:1}}
+
+    /* ============================================================= */
+    /* Page-specific styles (override utilities; keep after them).     */
+    /* ============================================================= */
+    html, body { background:#0A0E1A; }
+    /* Guard against horizontal scroll: the scroll-reveal system parks elements at
+       translateX(±48px) until they animate in, which otherwise stick out past the right
+       edge and cause a sideways scroll / zoom-out on mobile. Confirmed this is the only
+       source of horizontal overflow (settled reveals overflow 0px). overflow-x: clip hides
+       the transient overhang without creating a scroll container, so the reveal still slides
+       in from off-screen and the desktop sticky mockup is unaffected. `hidden` is a fallback
+       for browsers without `clip`. */
+    html, body { overflow-x: hidden; overflow-x: clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing: -0.015em; font-weight: 700; }
+
+    /* ---- Scroll-reveal system ---- */
+    .reveal {
+      opacity:0; transform: translateY(36px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal[data-anim="left"]  { transform: translateX(-48px); }
+    .reveal[data-anim="right"] { transform: translateX(48px); }
+    .reveal[data-anim="scale"] { transform: scale(.9); }
+    .reveal[data-anim="zoom"]  { transform: scale(1.06); }
+    .reveal[data-anim="blur"]  { filter: blur(10px); }
+    /* Hero: a slow settle from 1.04 rather than a plain fade. Longer than the rest so it
+       reads as the page arriving, not as an element popping in. */
+    .reveal[data-anim="hero"]  { transform: scale(1.04); transition-duration: .9s; }
+    .reveal.in {
+      opacity:1; transform: none; filter:none;
+    }
+
+    /* ---- Section headings: the italic phrase lands last ----
+       The roman text arrives with the heading; the Playfair italic follows 50ms behind, so
+       the eye finishes on the emphasis word. Scoped to headings inside a .reveal, so an
+       italic that is never observed can never be left invisible. */
+    .reveal h2 .italic, h2.reveal .italic {
+      opacity:0; transform: translateY(.28em);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1) 50ms,
+                  transform .7s cubic-bezier(.16,1,.3,1) 50ms;
+    }
+    /* transforms need a block-level box; italics already carrying .block have one */
+    .reveal h2 .italic:not(.block), h2.reveal .italic:not(.block) { display:inline-block; }
+    .reveal.in h2 .italic, h2.reveal.in .italic { opacity:1; transform:none; }
+
+    /* ---- Rules that draw themselves ----
+       Every carousel post opens with a short rule; the page reuses it. Any horizontal
+       divider or accent line grows from its left edge when its section enters view. */
+    .rule {
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+      will-change: transform;
+    }
+    .rule.in { transform: scaleX(1); }
+    .rule-accent  { display:block; width:3rem; height:2px; background:#F5F5F2; margin-bottom:1.25rem; }
+    .rule-divider { display:block; height:1px; background:#1E2740; }
+    /* value-anchor rows draw in sequence, top to bottom */
+    .value-list li:nth-child(2) .rule { transition-delay: .08s; }
+    .value-list li:nth-child(3) .rule { transition-delay: .16s; }
+    /* the counting price anchors: fixed-width digits so the row doesn't jitter */
+    .count { font-variant-numeric: tabular-nums; }
+
+    /* ---- Card hover lift (applies to all .bg-card surfaces) ---- */
+    .bg-card {
+      transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease;
+    }
+    @media (hover:hover) {
+      .bg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.7); }
+    }
+
+    /* ---- Scroll progress bar ---- */
+    #progress {
+      position:fixed; top:0; left:0; height:3px; width:0%; z-index:60;
+      background: #F5F5F2;
+      transition: width .1s linear;
+    }
+
+    /* ---- Ambient floating glow ---- */
+    @keyframes floatGlow {
+      0%,100% { transform: translate(0,0) scale(1); opacity:.5; }
+      50%     { transform: translate(0,-24px) scale(1.08); opacity:.8; }
+    }
+    .float-glow { animation: floatGlow 9s ease-in-out infinite; }
+
+    /* ---- Marquee trust strip ---- */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display:flex; width:max-content; animation: marquee 28s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; filter:none !important; transition:none; }
+      .reveal h2 .italic, h2.reveal .italic { opacity:1 !important; transform:none !important; transition:none; }
+      .rule { transform:none !important; transition:none; }
+      .float-glow, .marquee-track { animation:none !important; }
+      /* CTA keeps its press feedback, minus the travel */
+      a.cta-glow:hover, button.cta-glow:hover,
+      a.cta-glow:active, button.cta-glow:active { transform:none; }
+      /* !important because .scroll-smooth sits on <html> itself and a class beats a bare
+         element selector, so without it smooth scrolling survived reduced-motion. */
+      html { scroll-behavior:auto !important; }
+    }
+
+    /* Accessible focus */
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid #F5F5F2; outline-offset: 3px; border-radius: 6px;
+    }
+
+    /* ---- CTA affordance ----
+       Resting lift, a hover that rises into pure white, and a press that pushes back down.
+       No pulse and no glow loop: a button that never stops moving reads cheap, a button
+       that answers the moment you touch it reads expensive. The press state is the one that
+       carries mobile, where there is no hover at all. */
+    .cta-glow { box-shadow: 0 6px 20px -8px rgba(0,0,0,.75); }
+    a.cta-glow, button.cta-glow {
+      transition: transform .18s cubic-bezier(.16,1,.3,1),
+                  box-shadow .18s ease,
+                  background-color .18s ease;
+    }
+    /* hover-capable pointers only, so a tap can't leave the lift stuck on a phone */
+    @media (hover:hover) {
+      a.cta-glow:hover, button.cta-glow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px -10px rgba(0,0,0,.85);
+        background-color: #FFFFFF;
+      }
+    }
+    a.cta-glow:active, button.cta-glow:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px -4px rgba(0,0,0,.8);
+    }
+
+    /* FAQ accordion */
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .2s ease; }
+
+    /* Subtle radial glow behind hero */
+    .hero-glow::before {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%);
+      pointer-events:none;
+    }
+
+    /* ---- EN / ES switcher ----
+       Absolutely placed in the hero's top-right corner so it costs the layout nothing:
+       on mobile it ends above the 2rem where the badge starts. */
+    .lang-switch {
+      position:absolute; top:.55rem; right:1.25rem; z-index:10;
+      display:flex; align-items:center; gap:.35rem;
+      font-size:11px; line-height:1; font-weight:600; letter-spacing:.12em; color:#9AA3B2;
+    }
+    .lang-switch a { padding:.3rem .15rem; color:#9AA3B2; transition:color .2s ease; }
+    .lang-switch a:hover, .lang-switch a[aria-current="page"] { color:#F5F5F2; }
+    @media (min-width:640px) { .lang-switch { top:1.25rem; } }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+
+  <!-- Scroll progress bar -->
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- ============================================================= -->
+  <!-- 1. STICKY MOBILE CTA BAR (reveals after hero)                 -->
+  <!-- ============================================================= -->
+  <div id="stickyCta"
+       class="fixed bottom-0 inset-x-0 z-50 translate-y-full transition-transform duration-300
+              border-t border-line bg-ink/95 backdrop-blur px-4 py-3
+              flex items-center gap-3 sm:justify-center">
+    <div class="hidden sm:block leading-tight">
+      <p class="font-display text-3xl text-cream">El Manual del Físico de Dios Griego</p>
+      <p class="text-xs text-muted">PDF al instante · Pago único de $9</p>
+    </div>
+    <div class="flex-1 sm:flex-none">
+      <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=sticky"
+         class="block text-center bg-cream text-ink font-extrabold
+                rounded-xl px-5 py-3 text-base cta-glow">
+        Quiero el Manual
+      </a>
+      <p class="mt-1.5 text-center text-[11px] text-muted">$9 · pago único · PDF al instante</p>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 2. HERO                                                       -->
+  <!-- ============================================================= -->
+  <header class="relative hero-glow overflow-hidden">
+    <!-- ambient floating glow -->
+    <div class="float-glow pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cream/5 blur-3xl" aria-hidden="true"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-8 pb-12 sm:pt-16 sm:pb-20
+                grid lg:grid-cols-2 gap-6 sm:gap-10 items-center">
+
+      <!-- EN / ES switcher. Plain links, no browser-language redirect. -->
+      <nav class="lang-switch" aria-label="Idioma">
+        <a href="/" hreflang="en" lang="en">EN</a><span aria-hidden="true">/</span><a href="/es/" hreflang="es" lang="es" aria-current="page">ES</a>
+      </nav>
+
+      <div class="order-1">
+        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase
+                  text-muted bg-cream/5 border border-line rounded-full px-3 py-1 mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-muted"></span>
+          Ciencia · Natural · Sin relleno
+        </p>
+
+        <h1 class="font-display leading-[1.05] text-cream
+                   text-4xl sm:text-6xl lg:text-7xl">
+          Construye un físico
+          <span class="italic">estético</span>
+          y definido, <span class="block">sin perder años adivinando.</span>
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-muted max-w-xl">
+          Hombros anchos. Una espalda en V. Abdomen marcado. Y el
+          <span class="text-cream font-semibold">entorno hormonal</span> que hace posibles
+          las tres cosas. El sistema exacto, basado en mecanismos con evidencia científica.
+        </p>
+
+        <p class="mt-3 text-sm sm:text-base text-muted max-w-xl">
+          Los mismos mecanismos de mis posts (el timing de GLUT4, el umbral de leucina, por qué estar
+          definido es una estrategia hormonal), armados en un solo sistema que de verdad puedes seguir.
+        </p>
+
+        <p class="hidden sm:block mt-3 text-base text-cream/90 max-w-xl">
+          ¿Entrenas duro y te sigues viendo igual? No eres flojo.
+          Nadie te enseñó a construir un físico estético de verdad.
+        </p>
+
+        <div class="mt-5">
+          <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=hero"
+             class="block sm:inline-block text-center bg-cream text-ink font-extrabold
+                    rounded-xl px-7 py-4 text-lg cta-glow">
+            Quiero el Manual
+          </a>
+          <p class="mt-2 text-sm text-muted">$9 · pago único · PDF al instante</p>
+          <p class="mt-1 text-xs text-muted">El manual, el plan y 2 herramientas. Tuyos en 60 segundos.</p>
+        </div>
+      </div>
+
+      <div class="order-2">
+        <!-- .hero-media carries the scroll parallax; the image itself carries the intro
+             settle, so the two transforms never overwrite each other. -->
+        <div class="hero-media relative mx-auto max-w-[15rem] sm:max-w-sm lg:max-w-none">
+          <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl"></div>
+          <img src="/assets/hero-es.webp" alt="Portada de El Manual del Físico de Dios Griego por Aesthetic Engineer: estatua griega con físico estético y definido"
+               width="1080" height="1446" fetchpriority="high" data-anim="hero"
+               class="reveal relative w-full max-h-[42vh] sm:max-h-none object-cover rounded-3xl border border-line bg-card" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ----- Scrolling trust strip (marquee) ----- -->
+  <div class="marquee overflow-hidden bg-panel border-y border-line py-3">
+    <div class="marquee-track items-center gap-10 text-sm font-semibold uppercase tracking-widest text-muted">
+      <!-- duplicated set for seamless loop -->
+      <span class="flex items-center gap-10 pr-10">
+        <span>⚡ PDF al instante</span><span class="text-muted">•</span>
+        <span>🔬 Sistema basado en ciencia</span><span class="text-muted">•</span>
+        <span>💪 Natural, sin químicos</span><span class="text-muted">•</span>
+        <span>🛡️ Garantía de reembolso de 7 días</span><span class="text-muted">•</span>
+        <span>📱 Léelo en cualquier dispositivo</span><span class="text-muted">•</span>
+      </span>
+      <span class="flex items-center gap-10 pr-10" aria-hidden="true">
+        <span>⚡ PDF al instante</span><span class="text-muted">•</span>
+        <span>🔬 Sistema basado en ciencia</span><span class="text-muted">•</span>
+        <span>💪 Natural, sin químicos</span><span class="text-muted">•</span>
+        <span>🛡️ Garantía de reembolso de 7 días</span><span class="text-muted">•</span>
+        <span>📱 Léelo en cualquier dispositivo</span><span class="text-muted">•</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 2a. THE STORY / CREDIBILITY (before the value block)          -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-2 gap-10 items-center">
+
+      <div class="reveal order-2 lg:order-1" data-anim="left">
+        <span class="rule rule-accent" aria-hidden="true"></span>
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3">Mi historia</p>
+        <h2 class="font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+          Perdí 4 años haciéndolo mal
+          <span class="italic">para que tú no tengas que hacerlo.</span>
+        </h2>
+
+        <div class="mt-6 space-y-4 text-muted text-lg">
+          <p>Empecé pesando <span class="text-cream font-semibold">51kg</span>. Flaco, invisible, incómodo en mi
+            propio cuerpo. Así que hice lo que vi en internet: <span class="text-cream">volumen sucio</span>.</p>
+          <p>Me destrozó. Llegué a <span class="text-cream font-semibold">~30% de grasa, como ves en las fotos de la izquierda</span>,
+            perdí toda la definición y me salió <span class="text-cream">ginecomastia</span>. Ni siquiera me veía musculoso, solo gordo.</p>
+          <p>Cuando toqué fondo, dejé de adivinar y me puse a leer la ciencia de verdad: cómo se
+            construye el músculo, por qué definir primero lo cambia todo y por qué el estímulo del entrenamiento importa tanto.</p>
+          <p class="text-cream font-semibold">Arreglé los fundamentos. Logré una transformación de la que estoy orgulloso,
+            y sigo en el camino para verme mejor. Este manual es ese sistema exacto, sin los cuatro años que yo perdí.</p>
+        </div>
+      </div>
+
+      <figure class="reveal order-1 lg:order-2" data-anim="right">
+        <div class="grid grid-cols-2 gap-3">
+
+          <!-- BEFORE slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-line bg-card">
+              <span class="absolute z-20 top-2 left-2 text-[11px] font-bold uppercase tracking-wider bg-ink/85 border border-line rounded-full px-2.5 py-1">Antes</span>
+              <img src="/assets/before-1.webp" alt="Antes de la transformación, foto 1" loading="lazy"
+                   width="720" height="1135"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="/assets/before-2.webp" alt="Antes de la transformación, foto 2" loading="lazy"
+                   width="720" height="1264"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="/assets/before-3.webp" alt="Antes de la transformación, foto 3" loading="lazy"
+                   width="720" height="1269"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Foto anterior de antes"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Foto siguiente de antes"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Ir a la foto 1 de antes" class="dot w-2 h-2 rounded-full bg-cream"></button>
+              <button type="button" aria-label="Ir a la foto 2 de antes" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Ir a la foto 3 de antes" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+          <!-- AFTER slideshow -->
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-cream/40 bg-card">
+              <span class="absolute z-20 top-2 right-2 text-[11px] font-bold uppercase tracking-wider bg-cream text-ink rounded-full px-2.5 py-1">Después</span>
+              <img src="/assets/after-1.webp" alt="Después de la transformación, foto 1" loading="lazy"
+                   width="720" height="960"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="/assets/after-2.webp" alt="Después de la transformación, foto 2" loading="lazy"
+                   width="720" height="1253"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <img src="/assets/after-3.webp" alt="Después de la transformación, foto 3" loading="lazy"
+                   width="720" height="1189"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="2" />
+
+              <button type="button" data-prev aria-label="Foto anterior de después"
+                      class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Foto siguiente de después"
+                      class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-1.5" data-dots>
+              <button type="button" aria-label="Ir a la foto 1 de después" class="dot w-2 h-2 rounded-full bg-cream"></button>
+              <button type="button" aria-label="Ir a la foto 2 de después" class="dot w-2 h-2 rounded-full bg-line"></button>
+              <button type="button" aria-label="Ir a la foto 3 de después" class="dot w-2 h-2 rounded-full bg-line"></button>
+            </div>
+          </div>
+
+        </div>
+        <figcaption class="mt-3 text-sm text-muted text-center">Transformación real. Fundamentos corregidos, sin atajos.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 2b. EVERYTHING YOU GET (the value block)                      -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-16 sm:py-24">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        Todo lo que <span class="italic">recibes.</span>
+      </h2>
+
+      <div class="mt-10 space-y-5" data-stagger>
+
+        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">El manual</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">El Manual del Físico de Dios Griego</p>
+          <p class="mt-3 text-muted">121 páginas, 9 capítulos. Entrenamiento, nutrición, la definición, el volumen
+            limpio, las transiciones entre una fase y otra, la recuperación y las hormonas. Cada indicación trae
+            el mecanismo detrás, así sabes por qué lo haces y qué cambiar cuando algo se estanca.
+            No es una lista de tips. Es un sistema donde cada parte alimenta a las demás.</p>
+        </div>
+
+        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">El plan</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">Tus primeros 30 días, por escrito</p>
+          <p class="mt-3 text-muted">Un árbol de decisión que te dice en qué fase empiezas según tu porcentaje de
+            grasa y tus años de entrenamiento. Plantillas diarias para días de entreno y días de descanso. Un
+            checklist semanal que repasas cada domingo. Y una sección de problemas comunes para cuando la báscula
+            no se mueve, los pesos se estancan o te ves desinflado. Nunca vas a tener que adivinar qué hacer el lunes.</p>
+        </div>
+
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Herramienta 1, incluida</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">La Calculadora Metabólica de Calorías</p>
+          <p class="mt-3 text-muted">Una hoja de Google Sheets. Metes tus datos y en segundos tienes tus calorías de
+            mantenimiento, de definición y de volumen. Pones tu déficit o tu superávit como porcentaje y la hoja hace
+            las cuentas por ti. Es el número sobre el que se construye cada capítulo, y calcularlo mal es la razón por
+            la que la mayoría pasa años dando vueltas sin avanzar.</p>
+        </div>
+
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Herramienta 2, incluida</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">El Registro de Cambios del Físico</p>
+          <p class="mt-3 text-muted">Una hoja de Google Sheets. Anotas tu peso y tus medidas. Te da el promedio de
+            siete días que filtra el ruido del día a día, y estima tu porcentaje de grasa a partir de tus
+            circunferencias para que lo veas moverse semana a semana. El espejo te miente cualquier jueves.
+            Esto no.</p>
+        </div>
+
+      </div>
+
+      <p class="reveal mt-8 text-lg sm:text-xl text-cream max-w-xl">
+        Un manual, un plan de 30 días y dos herramientas. Un solo sistema.
+        <span class="text-muted">Todo lo de arriba es tuyo en el momento en que compras.</span>
+      </p>
+
+      <div class="reveal mt-8">
+        <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=stack"
+           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+          Quiero el Manual
+        </a>
+        <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 3. THE PROBLEM (agitation)                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        Entrenas en serio. ¿Por qué no ves cambios?
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Porque los consejos que te dieron están rotos. Esta es la trampa en la que la mayoría
+        se queda atorada por años:
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">La mentira de "solo haz volumen"</p>
+          <p class="text-muted">Comiste todo lo que tenías enfrente para "crecer". Quedaste más blando, no más grande.
+            Ahora estás flaco <em>y</em> con grasa encima. Casi siempre te lo vende gente que usa esteroides.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Más series, más relleno</p>
+          <p class="text-muted">20 series por sesión, todos los ángulos, todas las máquinas, y tus hombros y tu
+            espalda se ven exactamente igual que el año pasado.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Mucho pump, poco estímulo</p>
+          <p class="text-muted">Haces medias repeticiones y parciales para "sentir el pump", pero nunca entrenas la
+            única posición que de verdad obliga al músculo a crecer.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Años perdidos</p>
+          <p class="text-muted">Consejos que se contradicen sin parar. Ningún sistema. Te estancas, te desanimas
+            y empiezas a creer que simplemente tienes "mala genética".</p>
+        </div>
+      </div>
+
+      <p class="reveal mt-10 text-xl text-cream font-semibold max-w-2xl">
+        No tienes mala genética. Tienes un mal mapa.
+        <span class="italic">Aquí está el correcto.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 5. WHY THIS IS DIFFERENT (the mechanism)                      -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        Lo que <span class="italic">nadie te dijo.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Te doy los mecanismos exactos y te los explico. Esto es <em>por qué</em> la mayoría se queda estancada, y justo lo que el sistema corrige.
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <!-- card -->
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Define <span class="italic">primero</span></p>
+          <p class="mt-2 text-muted">Cargar demasiada grasa sube la aromatasa: tu cuerpo convierte testosterona en
+            estrógeno, y eso hace más difícil ganar músculo y más fácil guardar grasa. Estar definido va primero.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Menos series, <span class="italic">fallo real</span></p>
+          <p class="mt-2 text-muted">El crecimiento (la señal de mTOR) lo impulsan series duras cerca del fallo técnico, no 20 series de relleno.
+            Menos series, pero más duras, construyen más y te dejan recuperado para volver a hacerlo.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">La posición <span class="italic">estirada</span></p>
+          <p class="mt-2 text-muted">Los músculos crecen más cuando trabajan en un estiramiento profundo. Entrena la posición
+            estirada y sacas más crecimiento del <em>mismo</em> esfuerzo. La mayoría corta el recorrido y se pierde parte del crecimiento.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Hombros = <span class="italic">frecuencia</span></p>
+          <p class="mt-2 text-muted">El deltoides lateral es el músculo estético #1 y se recupera rápido.
+            Hacer elevaciones laterales con la frecuencia correcta es como de verdad te pones <em>ancho</em>.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Alimenta el <span class="italic">tejido correcto</span></p>
+          <p class="mt-2 text-muted">Comer alrededor del entrenamiento mejora el reparto de nutrientes (GLUT4) y manda
+            más de lo que comes al músculo en vez de a la grasa. Mismas calorías, mejor resultado. El capítulo de
+            nutrición te da los alimentos con nombre, una lista corta de cosas que de verdad compras, en vez de
+            dejarte armar una dieta a partir de macros.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream">Las cuentas del <span class="italic">volumen limpio</span></p>
+          <p class="mt-2 text-muted">Tu cuerpo solo puede construir músculo a cierto ritmo. Si comes por encima de ese ritmo, lo
+            que sobra se va a grasa. El superávit pequeño y correcto construye músculo sin que pierdas la estética, sin el rebote del volumen sucio.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:col-span-2">
+          <p class="font-display text-2xl text-cream">El crecimiento pasa <span class="italic">después</span> de la serie</p>
+          <p class="mt-2 text-muted">El entrenamiento es solo la señal. El sueño, el estrés y cómo espacias tus sesiones duras
+            deciden cuánto de esa señal se vuelve músculo, y de paso mueven tus hormonas.
+            La mayoría entrena lo bastante duro como para necesitar recuperarse y después nunca se recupera.
+            Hace todo el esfuerzo y se queda sin el resultado.</p>
+        </div>
+      </div>
+
+      <div class="reveal mt-10 text-center">
+        <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=mechanism"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Quiero el Manual
+          </a>
+          <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 6. WHAT'S INSIDE                                              -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-5 gap-10 items-start">
+
+      <div class="lg:col-span-2 reveal lg:sticky lg:top-10">
+        <div class="relative mx-auto max-w-xs">
+          <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl"></div>
+          <img src="/assets/aesthetic-blueprint-mockup-es.webp" alt="Portada del Manual del Físico de Dios Griego, guía en PDF"
+               width="640" height="1008" decoding="async"
+               class="relative w-full rounded-2xl border border-line bg-card" />
+        </div>
+        <p class="mt-5 text-center text-muted">121 páginas. Cero relleno.<br/>
+          <span class="text-cream font-semibold">Un sistema completo, no una lista de tips.</span></p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <span class="rule rule-accent" aria-hidden="true"></span>
+        <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+          Lo que hay <span class="italic">adentro.</span>
+        </h2>
+        <p class="reveal mt-4 text-lg text-muted">9 capítulos. Cada uno elimina una razón por la que estás estancado.</p>
+
+        <ol class="mt-8 space-y-3" data-stagger>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">01</span>
+            <div><p class="font-semibold text-cream">Entrena para el espejo</p>
+              <p class="text-muted">Entrena justo los músculos que crean el físico en V que ellas sí notan.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">02</span>
+            <div><p class="font-semibold text-cream">Come para construir</p>
+              <p class="text-muted">La lista corta de alimentos que hacen el trabajo, y cuándo comerlos, para crecer
+                sin enterrar tu abdomen en grasa.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">03</span>
+            <div><p class="font-semibold text-cream">Define bien</p>
+              <p class="text-muted">Quema grasa y saca la definición sin soltar ni un gramo del músculo que tanto te costó.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">04</span>
+            <div><p class="font-semibold text-cream">Volumen limpio, sin la grasa</p>
+              <p class="text-muted">Las cuentas del superávit que construyen músculo y te mantienen estético, lo opuesto al volumen sucio.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">05</span>
+            <div><p class="font-semibold text-cream">Cambiar de fase</p>
+              <p class="text-muted">Cuándo hacer volumen, cuándo definir y cómo pasar de una a otra sin perder tu progreso ni tu forma.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">06</span>
+            <div><p class="font-semibold text-cream">Mueve las palancas hormonales</p>
+              <p class="text-muted">Los hábitos naturales que suben tu testosterona.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">07</span>
+            <div><p class="font-semibold text-cream">Recupérate, o nada de esto cuenta</p>
+              <p class="text-muted">Sueño, estrés y cómo espacias las sesiones duras. La parte que convierte el entrenamiento
+                que ya hiciste en la forma que quieres.</p></div>
+          </li>
+          <li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+            <span class="font-display text-3xl text-cream leading-none w-9 shrink-0">08</span>
+            <div><p class="font-semibold text-cream">El sistema completo y tus primeros 30 días</p>
+              <p class="text-muted">Cada pieza en un plan que puedes repetir, más el árbol de decisión, las plantillas diarias
+                y el checklist semanal. Sabes exactamente qué hacer en tu próxima sesión.</p></div>
+          </li>
+        </ol>
+
+        <!-- The two included tools. Same card as a chapter so they read as part of the
+             package, but a brighter border and a + instead of a number so nobody reads
+             them as chapters 09 and 10. -->
+        <div class="mt-10">
+          <p class="reveal text-xs font-semibold tracking-widest uppercase text-muted mb-3">Y dos herramientas, incluidas</p>
+
+          <ul class="space-y-3" data-stagger>
+            <li class="reveal flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
+              <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">+</span>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="font-semibold text-cream">La Calculadora Metabólica de Calorías</p>
+                  <span class="text-[10px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2 py-0.5">Google Sheet</span>
+                </div>
+                <p class="mt-1 text-muted">Metes tus datos y te da tus calorías de mantenimiento, definición y volumen en
+                  segundos. Dejas de adivinar el único número del que depende todo lo demás.</p>
+              </div>
+            </li>
+            <li class="reveal flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
+              <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">+</span>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="font-semibold text-cream">El Registro de Cambios del Físico</p>
+                  <span class="text-[10px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2 py-0.5">Google Sheet</span>
+                </div>
+                <p class="mt-1 text-muted">Anotas tus medidas y las convierte en una estimación de tu porcentaje de grasa que
+                  puedes seguir semana a semana. Más confiable que una báscula de grasa corporal y más honesta que el
+                  espejo en un mal día.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-8">
+          <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=chapters"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Quiero el Manual
+          </a>
+          <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 7. WHO IT'S FOR / NOT FOR                                     -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        ¿Esto es <span class="italic">para ti?</span>
+      </h2>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6" data-anim="left">
+          <p class="font-display text-2xl text-cream mb-4">✅ Es para ti si…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-cream">▹</span> Te ves mal y las chicas ni te miran.</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> Vas a entrenar y comer con intención, solo te falta el plan correcto.</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> Quieres el <em>por qué</em>, no un simple "créeme, bro".</li>
+            <li class="flex gap-3"><span class="text-cream">▹</span> Quieres ese físico en V que llama la atención.</li>
+          </ul>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6" data-anim="right">
+          <p class="font-display text-2xl text-cream mb-4">🚫 No es para ti si…</p>
+          <ul class="space-y-3 text-muted">
+            <li class="flex gap-3"><span class="text-muted">▹</span> Buscas una pastilla mágica o un truco de la noche a la mañana.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> No piensas cambiar nada de lo que haces ahora.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> Prefieres seguir juntando tips sueltos en vez de seguir un sistema.</li>
+            <li class="flex gap-3"><span class="text-muted">▹</span> Ya estás definido, estético y con todo bajo control (lo dudo, si estás en esta página).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 8. SOCIAL PROOF                                               -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        Todavía no hay testimonios. <span class="italic">Y te explico por qué está bien.</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">
+        Una respuesta directa en vez de un muro de cinco estrellas.
+      </p>
+
+      <div class="reveal mt-10 max-w-3xl mx-auto bg-card border border-line rounded-2xl p-8 sm:p-10 space-y-5 text-lg text-muted leading-relaxed">
+        <p>Esto salió hace poco. Podría llenar este espacio con reseñas de cinco estrellas de gente que
+          no existe, y muchas páginas a este precio hacen justo eso. Prefiero decirte la verdad y
+          que el riesgo lo cargue la garantía, no tú.</p>
+        <p>Léelo completo. Aplícalo. Si no es el plan más claro y más basado en mecanismos que alguien
+          te haya dado, escríbeme dentro de los 7 días y te devuelvo hasta el último centavo. Eso vale
+          más que una reseña que no tienes forma de comprobar.</p>
+      </div>
+
+      <!-- REAL TESTIMONIALS GO HERE once confirmed buyers send them. Only real names, only
+           confirmed buyers, only with their permission. Never fabricate one. Same switch-over
+           steps as the English page. -->
+
+      <!--
+      <div class="mt-10 grid sm:grid-cols-3 gap-4" data-stagger>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
+          <blockquote class="text-muted flex-1">CITA. Dos o tres frases con sus propias palabras, sobre lo que
+            de verdad cambió. Respeta su forma de hablar, aunque no sea perfecta.</blockquote>
+          <figcaption class="mt-5 pt-5 border-t border-line">
+            <p class="font-semibold text-cream">NOMBRE</p>
+            <p class="mt-0.5 text-sm text-muted">RESULTADO CONCRETO. Un número y un plazo, por ejemplo un peso,
+              una medida o una marca, en N semanas.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
+          <blockquote class="text-muted flex-1">CITA.</blockquote>
+          <figcaption class="mt-5 pt-5 border-t border-line">
+            <p class="font-semibold text-cream">NOMBRE</p>
+            <p class="mt-0.5 text-sm text-muted">RESULTADO CONCRETO.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal bg-card border border-line rounded-2xl p-6 flex flex-col">
+          <blockquote class="text-muted flex-1">CITA.</blockquote>
+          <figcaption class="mt-5 pt-5 border-t border-line">
+            <p class="font-semibold text-cream">NOMBRE</p>
+            <p class="mt-0.5 text-sm text-muted">RESULTADO CONCRETO.</p>
+          </figcaption>
+        </figure>
+
+      </div>
+      -->
+
+      <div class="reveal mt-10 text-center">
+        <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=social-proof"
+           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+          Quiero el Manual
+        </a>
+        <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+        <p class="mt-2 text-sm text-muted">Con garantía de reembolso de 7 días</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 8b. THE TESTOSTERONE BLUEPRINT: ORDER BUMP, NOT INCLUDED      -->
+  <!--     Every mention must keep saying "al pagar": any wording     -->
+  <!--     that lets a buyer think it ships with the $9 is a refund.  -->
+  <!-- ============================================================= -->
+  <section class="bg-ink border-t border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20">
+      <div class="reveal bg-card border border-cream/25 rounded-3xl p-7 sm:p-10">
+        <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Extra opcional, al pagar</p>
+
+        <h2 class="mt-4 font-display text-3xl sm:text-4xl leading-[1.05] text-cream">
+          Y el lado hormonal, <span class="italic">completo.</span>
+        </h2>
+
+        <div class="mt-5 space-y-4 text-muted text-lg">
+          <p>El capítulo 6 del Manual cubre las palancas hormonales que más rinden y ahí se detiene,
+            porque el panorama completo necesita su propio libro.</p>
+          <p>El Manual de la Testosterona es ese libro. 22 capítulos. Testosterona libre y SHBG, y por qué
+            el número de tu análisis miente. La DHT, el andrógeno que nadie explica, y los suplementos que
+            la destruyen sin que te des cuenta. Los nueve alimentos, las grasas que frenan la 5-alfa reductasa,
+            el hígado, el intestino, el sol sin quemarte, el sueño, los disruptores endocrinos de tu cocina y
+            de tu baño, los análisis de sangre y qué pedir de verdad, y los cuatro suplementos que se ganan su
+            lugar entre todo lo que te han vendido.</p>
+          <p class="text-cream">Te aparece como extra opcional cuando pagas. Un clic, $10.
+            Nada que comprar por separado y nada más que recordar.</p>
+        </div>
+
+        <ul class="mt-7 space-y-2.5 text-muted">
+          <li class="flex gap-3"><span class="shrink-0">▹</span> 22 capítulos, hormona por hormona</li>
+          <li class="flex gap-3"><span class="shrink-0">▹</span> Qué analizarte y cómo leer los resultados</li>
+          <li class="flex gap-3"><span class="shrink-0">▹</span> Los cuatro suplementos que valen tu dinero, y todo lo que descarté</li>
+          <li class="flex gap-3"><span class="shrink-0">▹</span> La conversación sobre la TRT, contada con honestidad</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 9. THE OFFER (value anchor)                                   -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20 text-center">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        ¿Cuánto vale dejar de <span class="italic">perder años?</span>
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted">
+        En lo que la mayoría gasta en lugar de esto:
+      </p>
+
+      <!-- The dividers draw themselves in sequence and the two money figures count up from
+           zero. The $9 below lands flat and instant: the contrast is the whole point. -->
+      <ul class="value-list reveal mt-8 max-w-md mx-auto space-y-3 text-left">
+        <li class="relative flex items-center justify-between gap-4 pb-3">
+          <span class="text-muted">Un coach que te pasa planes genéricos hechos con IA</span><span class="text-muted line-through shrink-0 text-sm sm:text-base">$<span class="count" data-count="200">200</span>+/mes</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="relative flex items-center justify-between gap-4 pb-3">
+          <span class="text-muted">Un curso online inflado</span><span class="text-muted line-through shrink-0 text-sm sm:text-base">$<span class="count" data-count="97">97</span>+</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="relative flex items-center justify-between gap-4 pb-3">
+          <span class="text-muted">Otro volumen sucio fallido</span><span class="text-muted shrink-0 text-right text-sm sm:text-base">meses perdidos, para siempre</span>
+          <span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>
+        </li>
+        <li class="flex items-center justify-between gap-4 pb-1">
+          <span class="text-muted">Cuatro años de prueba y error</span><span class="text-muted shrink-0 text-right text-sm sm:text-base">lo que me costó a mí</span>
+        </li>
+      </ul>
+
+      <!-- The stack listed again, right against the figure. -->
+      <p class="reveal mt-10 text-xs font-semibold tracking-widest uppercase text-muted">Lo que te llevas</p>
+      <ul class="reveal mt-4 max-w-md mx-auto space-y-2.5 text-left text-muted">
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> El Manual del Físico de Dios Griego</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> Tus primeros 30 días, paso a paso</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> La Calculadora Metabólica de Calorías</li>
+        <li class="flex gap-3"><span class="text-cream shrink-0">▹</span> El Registro de Cambios del Físico</li>
+      </ul>
+
+      <div class="reveal mt-8 inline-flex flex-col items-center bg-card border border-cream/30 rounded-3xl px-10 py-8 cta-glow" data-anim="scale">
+        <p class="text-muted uppercase tracking-widest text-sm">Hoy, pago único</p>
+        <p class="font-display text-7xl text-cream leading-none mt-1">$9</p>
+        <p class="text-muted mt-1">121 páginas, las dos herramientas, descarga inmediata.</p>
+        <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=pricing"
+           class="mt-6 inline-block bg-cream text-ink font-extrabold rounded-xl px-8 py-4 text-lg cta-glow">
+          Quiero el Manual
+        </a>
+        <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+        <p class="mt-2 text-xs text-muted">🛡️ Garantía de reembolso de 7 días</p>
+      </div>
+
+      <p class="reveal mt-5 text-sm text-muted max-w-md mx-auto">
+        El Manual de la Testosterona se ofrece al pagar por $10 más, si lo quieres.
+      </p>
+
+      <p class="reveal mt-6 text-muted">Cuesta menos que una comida a domicilio. Y te dura mucho más.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 10. RISK REVERSAL / GUARANTEE                                 -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-3xl mx-auto px-5 py-12 sm:py-16">
+      <div class="reveal bg-card border border-line rounded-3xl p-8 text-center">
+        <div class="mx-auto w-28 h-28 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center cta-glow">
+          <span class="font-display text-4xl text-cream leading-none">7</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-cream">Días</span>
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl text-cream mt-5">Garantía de reembolso de 7 días</h2>
+        <p class="mt-3 text-lg text-muted">
+          Prueba el Manual completo durante <span class="text-cream font-semibold">7 días</span>. Léelo, aplícalo,
+          pon el sistema a trabajar. Si no te da un plan claro, basado en ciencia, que de verdad puedas seguir,
+          escríbenos y te devolvemos hasta el último centavo. <span class="text-cream font-semibold">Sin preguntas.</span>
+        </p>
+        <p class="mt-3 text-sm text-muted">Lo único que arriesgas es quedarte exactamente donde estás.</p>
+      </div>
+
+      <div class="reveal mt-8 text-center">
+        <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=guarantee"
+             class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+            Quiero el Manual
+          </a>
+          <p class="mt-2 text-xs text-muted">$9 · pago único · PDF al instante</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 11. FAQ (accordion)                                           -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream text-center">
+        Preguntas, <span class="italic">respondidas.</span>
+      </h2>
+
+      <div class="mt-10 space-y-3" data-stagger>
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            ¿De verdad me va a funcionar?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Si eres natural y estás dispuesto a aplicarlo, sí. Esto no depende de tu personalidad
+            ni de la "genética". Es la mecánica de cómo un cuerpo construye una forma estética. Sigue el sistema
+            y los resultados llegan.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Soy principiante total. ¿No es demasiado avanzado?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No. Los principiantes son los que más ganan, porque se saltan por completo los años de errores.
+            Empieza desde los fundamentos y va subiendo, con un plan para el primer día para que sepas exactamente qué hacer primero.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            Llevo años entrenando y me estanqué. ¿Voy a aprender algo?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Casi seguro. La mayoría de los estancamientos largos vienen de unos pocos principios
+            que te faltan: entrenar en la posición estirada, la cantidad de series correcta, definir antes de hacer volumen.
+            Corrige eso y todo vuelve a moverse.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            ¿Necesito un gimnasio caro o suplementos?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">No. Un gimnasio básico con mancuernas y algunas máquinas alcanza de sobra. Esto se trata
+            de entrenar y comer con inteligencia, no de llenar un estante de suplementos.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            ¿No son los mismos mitos de gimnasio de siempre, reciclados?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Todo lo contrario. Cada recomendación viene de un mecanismo real: cómo se activa la
+            síntesis de proteína muscular, por qué la grasa corporal afecta tus hormonas, cómo funciona el timing de los nutrientes. Todo traducido a un lenguaje simple que puedes aplicar.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            ¿Cómo lo recibo después de comprar?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Al instante. Después de pagar tienes acceso inmediato al PDF y a las dos hojas de Google Sheets, en tu celular, tablet o computadora. Sin esperas, sin envíos.</p>
+        </details>
+
+        <details class="reveal group bg-card border border-line rounded-2xl px-5">
+          <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">
+            ¿Y si no es para mí?
+            <span class="faq-icon text-cream text-2xl leading-none">+</span>
+          </summary>
+          <p class="pb-5 -mt-1 text-muted">Tienes una garantía de reembolso de 7 días. Prueba todo el sistema sin riesgo. Si no te
+            sirve, escríbenos dentro de los 7 días y te devolvemos hasta el último centavo, sin preguntas.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 12. FINAL CTA                                                 -->
+  <!-- ============================================================= -->
+  <section class="relative hero-glow bg-ink overflow-hidden">
+    <div class="relative max-w-3xl mx-auto px-5 py-16 sm:py-24 text-center">
+      <span class="rule rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-5xl sm:text-6xl leading-[1.05] text-cream">
+        Otro año estancado, <span class="block italic">o el plan que lo termina.</span>
+      </h2>
+      <p class="reveal mt-5 text-lg text-muted max-w-xl mx-auto">
+        Puedes seguir adivinando y ver pasar otro año con el mismo cuerpo en el espejo.
+        O puedes tener el sistema exacto por <span class="text-cream font-semibold">$9</span> y empezar a construir
+        el físico estético y definido que de verdad quieres, de la forma correcta y natural.
+      </p>
+
+      <a href="/es/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=final"
+         class="reveal mt-9 inline-block bg-cream text-ink font-extrabold rounded-xl px-10 py-5 text-xl cta-glow">
+        Quiero el Manual
+      </a>
+      <p class="reveal mt-3 text-sm text-muted">$9 · pago único · PDF al instante</p>
+      <p class="reveal mt-2 text-sm text-muted">Garantía de reembolso de 7 días</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 13. FOOTER                                                    -->
+  <!-- ============================================================= -->
+  <footer class="bg-ink border-t border-line">
+    <div class="max-w-5xl mx-auto px-5 py-10">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div>
+          <p class="font-display text-3xl text-cream">El Manual del Físico de Dios Griego</p>
+          <p class="text-sm text-muted mt-1">por Aesthetic Engineer</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="/privacy.html" class="text-muted hover:text-cream transition-colors">Política de privacidad</a>
+          <a href="/terms.html" class="text-muted hover:text-cream transition-colors">Términos</a>
+          <a href="mailto:aesthethic.engineer@gmail.com" class="text-muted hover:text-cream transition-colors">Contacto</a>
+        </nav>
+      </div>
+
+      <p class="mt-8 text-xs text-muted/80 leading-relaxed max-w-3xl">
+        Los resultados dependen de tu constancia y tu esfuerzo. Este manual es educativo, no es
+        consejo médico. Consulta a un médico antes de empezar cualquier programa de entrenamiento o nutrición.
+      </p>
+      <p class="mt-4 text-xs text-muted/60">© <span id="year"></span> El Manual del Físico de Dios Griego. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================= -->
+  <!-- VANILLA JS: sticky CTA, FAQ icons (native), scroll reveals    -->
+  <!-- ============================================================= -->
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky CTA: show as soon as the hero's own button is gone.
+    //
+    // It used to watch the whole <header>, so the bar only arrived once the entire hero
+    // had left the screen. That is later than it needs to be: the moment worth covering is
+    // when the visitor scrolls past the first button, not when the last pixel of the image
+    // goes. Watching the button itself brings it forward by roughly half a screen.
+    //
+    // Falls back to the header if the button is ever renamed or removed, so the bar can
+    // never end up permanently hidden.
+    (function () {
+      var sticky = document.getElementById('stickyCta');
+      if (!sticky) return;
+      var watch = document.querySelector('header a[href*="/go/blueprint/"]') ||
+                  document.querySelector('header');
+      if (!watch) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          // target still in view -> keep the bar parked
+          sticky.classList.toggle('translate-y-full', e.isIntersecting);
+        });
+      }, { rootMargin: '0px 0px 0px 0px' });
+      io.observe(watch);
+    })();
+
+    // Scroll progress bar
+    (function () {
+      var bar = document.getElementById('progress');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // Scroll reveals. Failure mode is always "visible without animation", never "invisible":
+    //   - IntersectionObserver missing  -> reveal everything immediately
+    //   - observer stalls / throttled (common in webviews) -> safety net below reveals all
+    //   - JS never runs at all          -> the <noscript> style in <head> forces reveals visible
+    (function () {
+      // .rule rides the same observer: dividers and accent lines draw themselves from the
+      // left as their section arrives, on exactly the same trigger as the content.
+      var els = document.querySelectorAll('.reveal, .rule');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      // Auto-stagger: delay each reveal by its index within a [data-stagger] parent
+      document.querySelectorAll('[data-stagger]').forEach(function (parent) {
+        var kids = parent.querySelectorAll(':scope > .reveal');
+        kids.forEach(function (kid, i) { kid.style.transitionDelay = (i * 90) + 'ms'; });
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Reveal safety net: ~2.5s after load, reveal anything still hidden regardless of scroll
+    // position, so a slow, throttled or failed observer can never leave content invisible.
+    // Runs independently of the block above, so it fires even if that one threw.
+    (function () {
+      setTimeout(function () {
+        var hidden = document.querySelectorAll('.reveal:not(.in), .rule:not(.in)');
+        for (var i = 0; i < hidden.length; i++) { hidden[i].classList.add('in'); }
+      }, 2500);
+    })();
+
+    // Before/After slideshows (independent prev/next + dots per side)
+    (function () {
+      document.querySelectorAll('[data-slideshow]').forEach(function (box) {
+        var slides = box.querySelectorAll('.slide');
+        var dots = box.querySelectorAll('.dot');
+        if (!slides.length) return;
+        var i = 0;
+        function show(n) {
+          i = (n + slides.length) % slides.length;
+          slides.forEach(function (s, idx) {
+            s.classList.toggle('opacity-100', idx === i);
+            s.classList.toggle('opacity-0', idx !== i);
+          });
+          dots.forEach(function (d, idx) {
+            d.classList.toggle('bg-cream', idx === i);
+            d.classList.toggle('bg-line', idx !== i);
+          });
+        }
+        var prev = box.querySelector('[data-prev]');
+        var next = box.querySelector('[data-next]');
+        if (prev) prev.addEventListener('click', function () { show(i - 1); });
+        if (next) next.addEventListener('click', function () { show(i + 1); });
+        dots.forEach(function (d, idx) { d.addEventListener('click', function () { show(idx); }); });
+
+        // Auto-play (pauses on hover; restarts shortly after manual interaction; respects reduced-motion)
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var timer = null;
+        function start() { if (!reduce && !timer) timer = setInterval(function () { show(i + 1); }, 4000); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        box.addEventListener('mouseenter', stop);
+        box.addEventListener('mouseleave', start);
+        box.addEventListener('click', function () { stop(); setTimeout(start, 8000); });
+        start();
+      });
+    })();
+
+    // Subtle hero parallax. Drives the .hero-media wrapper, not the image, so it can't
+    // stomp on the image's own intro transform (scale 1.04 -> 1). Respects reduced-motion.
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var media = document.querySelector('.hero-media');
+      if (!media) return;
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            var y = Math.min(window.scrollY, 700);
+            media.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // Price anchors count up from zero when the value section arrives. The markup already
+    // holds the final figure, so no-JS and reduced-motion visitors just read it flat.
+    (function () {
+      var els = document.querySelectorAll('[data-count]');
+      if (!els.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      els.forEach(function (el) { el.textContent = '0'; });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          io.unobserve(e.target);
+          var el = e.target;
+          var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+          var t0 = null, dur = 900, done = false;
+          function land() { done = true; el.textContent = target; }
+          function step(t) {
+            if (done) return;
+            if (t0 === null) t0 = t;
+            var k = Math.min((t - t0) / dur, 1);
+            var eased = 1 - Math.pow(1 - k, 3);
+            el.textContent = Math.round(target * eased);
+            if (k < 1) { requestAnimationFrame(step); } else { land(); }
+          }
+          requestAnimationFrame(step);
+          // Same safety net as the reveals: if frames stop being delivered (throttled tab,
+          // slow webview) the figure must still land on its real value, never one short.
+          setTimeout(function () { if (!done) land(); }, dur + 250);
+        });
+      }, { threshold: 0.6 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // iOS only fires :active on elements it considers tappable. One empty passive listener
+    // is the standard nudge, and it is what makes the CTA press state land on iPhone.
+    document.addEventListener('touchstart', function () {}, { passive: true });
+  </script>
+</body>
+</html>

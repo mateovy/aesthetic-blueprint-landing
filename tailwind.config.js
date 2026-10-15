@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './index.html',
+    './es/index.html',
     './privacy.html',
     './terms.html',
     './og-template.html',

@@ -79,6 +79,12 @@
        search engines back at the root and none of them reads as duplicate content. -->
   <link rel="canonical" href="https://aesthetic-engineer.com/" />
 
+  <!-- Language versions. The Spanish page lives at /es/; nothing redirects on browser
+       language, people switch with the EN / ES links in the hero. -->
+  <link rel="alternate" hreflang="en" href="https://aesthetic-engineer.com/" />
+  <link rel="alternate" hreflang="es" href="https://aesthetic-engineer.com/es/" />
+  <link rel="alternate" hreflang="x-default" href="https://aesthetic-engineer.com/" />
+
   <!-- Open Graph / social share -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="The Aesthetic Physique Blueprint" />
@@ -279,6 +285,18 @@
       background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%);
       pointer-events:none;
     }
+
+    /* ---- EN / ES switcher ----
+       Absolutely placed in the hero's top-right corner so it costs the layout nothing:
+       on mobile it ends above the 2rem where the badge starts. */
+    .lang-switch {
+      position:absolute; top:.55rem; right:1.25rem; z-index:10;
+      display:flex; align-items:center; gap:.35rem;
+      font-size:11px; line-height:1; font-weight:600; letter-spacing:.12em; color:#9AA3B2;
+    }
+    .lang-switch a { padding:.3rem .15rem; color:#9AA3B2; transition:color .2s ease; }
+    .lang-switch a:hover, .lang-switch a[aria-current="page"] { color:#F5F5F2; }
+    @media (min-width:640px) { .lang-switch { top:1.25rem; } }
   </style>
 </head>
 
@@ -316,6 +334,11 @@
     <div class="float-glow pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cream/5 blur-3xl" aria-hidden="true"></div>
     <div class="relative max-w-6xl mx-auto px-5 pt-8 pb-12 sm:pt-16 sm:pb-20
                 grid lg:grid-cols-2 gap-6 sm:gap-10 items-center">
+
+      <!-- EN / ES switcher. Plain links, no browser-language redirect. -->
+      <nav class="lang-switch" aria-label="Language">
+        <a href="/" hreflang="en" lang="en" aria-current="page">EN</a><span aria-hidden="true">/</span><a href="/es/" hreflang="es" lang="es">ES</a>
+      </nav>
 
       <div class="order-1">
         <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase
@@ -393,122 +416,7 @@
   </div>
 
   <!-- ============================================================= -->
-  <!-- 2b. EVERYTHING YOU GET (the value block)                      -->
-  <!--     Six flat bullets used to sit here and the whole offer read  -->
-  <!--     as a promise. Now it is a stack of components: one bordered -->
-  <!--     card per deliverable, each with its type label, its real    -->
-  <!--     name and what it actually does. More air and more weight    -->
-  <!--     than any section but the hero, and still high on the page   -->
-  <!--     so the decision stays reachable in the first few screens.   -->
-  <!-- ============================================================= -->
-  <section class="bg-ink">
-    <div class="max-w-3xl mx-auto px-5 py-16 sm:py-24">
-      <span class="rule rule-accent" aria-hidden="true"></span>
-      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
-        Everything you <span class="italic">get.</span>
-      </h2>
-
-      <div class="mt-10 space-y-5" data-stagger>
-
-        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The guide</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Aesthetic Physique Blueprint</p>
-          <p class="mt-3 text-muted">114 pages, 8 chapters. Training, nutrition, the cut, the lean bulk,
-            the transitions between them, recovery, and hormones. Every prescription has the mechanism
-            under it, so you know why you're doing it and what to change when something stalls.
-            Not a list of tips. A system where every part feeds the others.</p>
-        </div>
-
-        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The plan</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">Your first 30 days, written out</p>
-          <p class="mt-3 text-muted">A decision tree that tells you which phase you start in based on your
-            body fat and your training age. Daily templates for training days and rest days. A weekly
-            checklist you run every Sunday. And a troubleshooting section for when the scale stops moving,
-            the lifts stall, or you look flat. You never have to guess what to do on Monday.</p>
-        </div>
-
-        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 1, included</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Metabolic Calorie Calculator</p>
-          <p class="mt-3 text-muted">A Google Sheet. Put in your stats, get your maintenance, your cut and
-            your bulk targets in seconds. Set your deficit or surplus as a percentage and it does the maths
-            for you. This is the number every other chapter is built on, and getting it wrong is why most
-            people spin their wheels for years.</p>
-        </div>
-
-        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
-          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 2, included</p>
-          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Physique Change Tracker</p>
-          <p class="mt-3 text-muted">A Google Sheet. Log your weight and your measurements. It gives you the
-            seven day average that filters out the daily noise, and estimates your body fat from your
-            circumferences so you can watch it move week by week. The mirror lies on a Thursday.
-            This doesn't.</p>
-        </div>
-
-      </div>
-
-      <p class="reveal mt-8 text-lg sm:text-xl text-cream max-w-xl">
-        Two guides, two tools, one system.
-        <span class="text-muted">Everything above is yours the second you buy.</span>
-      </p>
-
-      <div class="reveal mt-8">
-        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=stack"
-           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
-          Get The Blueprint
-        </a>
-        <p class="mt-2 text-xs text-muted">$9 · one-time · instant PDF</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================= -->
-  <!-- 3. THE PROBLEM (agitation)                                    -->
-  <!-- ============================================================= -->
-  <section class="bg-panel border-y border-line">
-    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
-      <span class="rule rule-accent" aria-hidden="true"></span>
-      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
-        You're putting in the work. So why no change?
-      </h2>
-      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
-        Because the advice you were handed is broken. Here's the trap most guys
-        get stuck in for years:
-      </p>
-
-      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
-        <div class="reveal bg-card border border-line rounded-2xl p-6">
-          <p class="font-display text-2xl text-cream mb-2">The "just bulk" lie</p>
-          <p class="text-muted">You ate everything in sight to "get big." You got softer, not bigger.
-            Now you're skinny-fat, small <em>and</em> covered. Usually promoted by enhanced people</p>
-        </div>
-        <div class="reveal bg-card border border-line rounded-2xl p-6">
-          <p class="font-display text-2xl text-cream mb-2">More volume, more junk</p>
-          <p class="text-muted">20 sets a session, every angle, every machine, and your shoulders and
-            back still look exactly the same as last year.</p>
-        </div>
-        <div class="reveal bg-card border border-line rounded-2xl p-6">
-          <p class="font-display text-2xl text-cream mb-2">Form without function</p>
-          <p class="text-muted">You half-rep through partials and "feel the pump", but never train the one
-            position that actually forces a muscle to grow.</p>
-        </div>
-        <div class="reveal bg-card border border-line rounded-2xl p-6">
-          <p class="font-display text-2xl text-cream mb-2">Years, gone</p>
-          <p class="text-muted">Endless conflicting tips. No system. So you stall, get discouraged,
-            and start to think you just have "bad genetics."</p>
-        </div>
-      </div>
-
-      <p class="reveal mt-10 text-xl text-cream font-semibold max-w-2xl">
-        You don't have bad genetics. You have a bad map.
-        <span class="italic">Here's the right one.</span>
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================================= -->
-  <!-- 4. THE STORY / CREDIBILITY                                    -->
+  <!-- 2a. THE STORY / CREDIBILITY (before the value block)          -->
   <!-- ============================================================= -->
   <section class="bg-ink">
     <div class="max-w-6xl mx-auto px-5 py-14 sm:py-20 grid lg:grid-cols-2 gap-10 items-center">
@@ -591,6 +499,121 @@
         </div>
         <figcaption class="mt-3 text-sm text-muted text-center">Real transformation. Fundamentals fixed, not shortcuts.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 2b. EVERYTHING YOU GET (the value block)                      -->
+  <!--     Six flat bullets used to sit here and the whole offer read  -->
+  <!--     as a promise. Now it is a stack of components: one bordered -->
+  <!--     card per deliverable, each with its type label, its real    -->
+  <!--     name and what it actually does. More air and more weight    -->
+  <!--     than any section but the hero, and still high on the page   -->
+  <!--     so the decision stays reachable in the first few screens.   -->
+  <!-- ============================================================= -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto px-5 py-16 sm:py-24">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        Everything you <span class="italic">get.</span>
+      </h2>
+
+      <div class="mt-10 space-y-5" data-stagger>
+
+        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The guide</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Aesthetic Physique Blueprint</p>
+          <p class="mt-3 text-muted">114 pages, 8 chapters. Training, nutrition, the cut, the lean bulk,
+            the transitions between them, recovery, and hormones. Every prescription has the mechanism
+            under it, so you know why you're doing it and what to change when something stalls.
+            Not a list of tips. A system where every part feeds the others.</p>
+        </div>
+
+        <div class="reveal bg-card border border-line rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">The plan</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">Your first 30 days, written out</p>
+          <p class="mt-3 text-muted">A decision tree that tells you which phase you start in based on your
+            body fat and your training age. Daily templates for training days and rest days. A weekly
+            checklist you run every Sunday. And a troubleshooting section for when the scale stops moving,
+            the lifts stall, or you look flat. You never have to guess what to do on Monday.</p>
+        </div>
+
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 1, included</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Metabolic Calorie Calculator</p>
+          <p class="mt-3 text-muted">A Google Sheet. Put in your stats, get your maintenance, your cut and
+            your bulk targets in seconds. Set your deficit or surplus as a percentage and it does the maths
+            for you. This is the number every other chapter is built on, and getting it wrong is why most
+            people spin their wheels for years.</p>
+        </div>
+
+        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6 sm:p-8">
+          <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">Tool 2, included</p>
+          <p class="mt-4 font-display text-2xl sm:text-3xl text-cream">The Physique Change Tracker</p>
+          <p class="mt-3 text-muted">A Google Sheet. Log your weight and your measurements. It gives you the
+            seven day average that filters out the daily noise, and estimates your body fat from your
+            circumferences so you can watch it move week by week. The mirror lies on a Thursday.
+            This doesn't.</p>
+        </div>
+
+      </div>
+
+      <p class="reveal mt-8 text-lg sm:text-xl text-cream max-w-xl">
+        Two guides, two tools, one system.
+        <span class="text-muted">Everything above is yours the second you buy.</span>
+      </p>
+
+      <div class="reveal mt-8">
+        <a href="/go/blueprint/?utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=stack"
+           class="inline-block bg-cream text-ink font-extrabold rounded-xl px-7 py-4 text-lg cta-glow">
+          Get The Blueprint
+        </a>
+        <p class="mt-2 text-xs text-muted">$9 · one-time · instant PDF</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 3. THE PROBLEM (agitation)                                    -->
+  <!-- ============================================================= -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
+      <span class="rule rule-accent" aria-hidden="true"></span>
+      <h2 class="reveal font-display text-4xl sm:text-5xl leading-[1.05] text-cream">
+        You're putting in the work. So why no change?
+      </h2>
+      <p class="reveal mt-4 text-lg text-muted max-w-2xl">
+        Because the advice you were handed is broken. Here's the trap most guys
+        get stuck in for years:
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">The "just bulk" lie</p>
+          <p class="text-muted">You ate everything in sight to "get big." You got softer, not bigger.
+            Now you're skinny-fat, small <em>and</em> covered. Usually promoted by enhanced people</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">More volume, more junk</p>
+          <p class="text-muted">20 sets a session, every angle, every machine, and your shoulders and
+            back still look exactly the same as last year.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Form without function</p>
+          <p class="text-muted">You half-rep through partials and "feel the pump", but never train the one
+            position that actually forces a muscle to grow.</p>
+        </div>
+        <div class="reveal bg-card border border-line rounded-2xl p-6">
+          <p class="font-display text-2xl text-cream mb-2">Years, gone</p>
+          <p class="text-muted">Endless conflicting tips. No system. So you stall, get discouraged,
+            and start to think you just have "bad genetics."</p>
+        </div>
+      </div>
+
+      <p class="reveal mt-10 text-xl text-cream font-semibold max-w-2xl">
+        You don't have bad genetics. You have a bad map.
+        <span class="italic">Here's the right one.</span>
+      </p>
     </div>
   </section>
 
