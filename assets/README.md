@@ -10,7 +10,7 @@ The page references small WebP derivatives, not the original photos:
 | `aesthetic-blueprint-mockup.webp` | `aesthetic blueprint mockup.png` | 320px CSS (flat across breakpoints) × 2 → 640px wide |
 | `og-image.jpeg` | `originals/og-image.jpeg` | fixed 1200×630, the Open Graph card size |
 | `before-1.webp` / `before-2.webp` / `before-3.webp` | `originals/before 1.jpeg` / `before 2.jpeg` / `before 3.jpeg` | 356px CSS (max, tablet width) × 2 → 720px wide |
-| `after-1.webp` / `after-2.webp` / `after-3.webp` | `originals/after 1.JPG` / `after 2.PNG` / `after 3.jpg` | same as above → 720px wide |
+| `after-1.webp` / `after-2.webp` / `after-3.webp` | `originals/after 1.JPG` / `after 2.png` / `after 3.png` | same as above → 720×960 (3:4, the slideshow frame), referenced as `?v=2` |
 
 The before/after camera originals live in `originals/`, kept as the source to regenerate
 from. `hero.png` and `aesthetic blueprint mockup.png` are still in this folder. None of them
@@ -33,6 +33,20 @@ sips --resampleWidth 720 fixed.jpg
 # encode; q=88-92 lands comfortably under the size budget at these dimensions
 cwebp -q 90 fixed.jpg -o after-1.webp
 ```
+
+The current after photos were made by cropping each one to 3:4 around the subject and
+encoding straight to 720×960. `after 1.JPG` is stored sideways with an EXIF orientation tag
+that cwebp ignores, so it is rotated first:
+
+```
+cp "originals/after 1.JPG" a1.jpg && sips -r 90 a1.jpg
+cwebp -crop 628 1314 2570 3427 -resize 720 960 -q 90 a1.jpg -o after-1.webp
+cwebp -crop 26 529 926 1235   -resize 720 960 -q 90 "originals/after 2.png" -o after-2.webp
+cwebp -crop 0 547 1168 1555   -resize 720 960 -q 90 "originals/after 3.png" -o after-3.webp
+```
+
+Images are cached for a year under their filename (see `_headers`), so after replacing one
+in place, bump its `?v=` in `index.html` and `es/index.html` and regenerate `ig.html`/`fb.html`.
 
 Budget: hero under 250KB, everything else under 150KB. In practice quality 88-92 lands
 these around 30-140KB, well inside budget, so there's no need to drop quality further.
