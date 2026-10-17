@@ -16,7 +16,7 @@
   search engines the same thing.
 
   Regenerate both copies after ANY edit to index.html:
-    for f in ig fb; do { sed -n '1,/^-->$/p' "$f.html"; cat index.html; } > "$f.tmp" \
+    for f in ig fb; do { sed -n '1,/^-\{2\}>$/p' "$f.html"; cat index.html; } > "$f.tmp" \
       && mv "$f.tmp" "$f.html"; done
 -->
 <!DOCTYPE html>
