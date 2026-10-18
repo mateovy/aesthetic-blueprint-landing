@@ -31,7 +31,7 @@ IntersectionObserver. Everything degrades to "visible, unanimated" rather than "
 - Section heading italics fade and rise 50ms behind the roman text, so the eye lands on the
   emphasis word last.
 - `[data-count]` figures count up from zero over 900ms. The markup holds the final value, so
-  no-JS and reduced-motion visitors just read it. The `$9` is deliberately never animated.
+  no-JS and reduced-motion visitors just read it. The `$12` is deliberately never animated.
 - `.cta-glow` — resting lift, hover into pure white, and a press state. No pulse: the press
   is what makes it feel real on mobile, where there is no hover.
 
@@ -116,16 +116,16 @@ Its CTAs go to `es/go/blueprint/`, a copy of the English bridge that forwards to
 Hotmart product (`https://pay.hotmart.com/D108044264H`) with `checkoutMode=10&src=tiktok_es`.
 The link appears twice in that file, the `BASE` constant and the `<noscript>` href, and both
 have to change together. Product names: El Manual del Físico de Dios
-Griego ($9) and El Manual de la Testosterona ($10 order bump, configured on the Spanish product
+Griego ($12) and El Manual de la Testosterona ($10 order bump, configured on the Spanish product
 in Hotmart).
 
 ## Offer
 
-$9 buys the Blueprint (114 pages, 8 chapters), the 30-day plan and the two Google Sheets.
+$12 buys the Blueprint (114 pages, 8 chapters), the 30-day plan and the two Google Sheets.
 The Testosterone Blueprint is **not** part of that: it is a $10 order bump inside Hotmart's
 checkout, configured by `checkoutMode=10` in `go/blueprint/index.html`. The landing presents
 it in its own bordered panel, with no button and no big price, and every mention says "at
-checkout". Copy that lets a buyer think it ships with the $9 comes back as a refund, so keep
+checkout". Copy that lets a buyer think it ships with the $12 comes back as a refund, so keep
 that wording.
 
 Nothing intercepts these clicks: they are plain anchors and no JS touches them.
