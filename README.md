@@ -1,9 +1,12 @@
 # Aesthetic Engineer landing page
 
 Static site. The pages are generated from `src/` by `build.mjs` (no npm dependencies), and the
-generated files are committed, so the deploy is still "push the files as they are": Cloudflare
-Pages serves `index.html`, `es/index.html`, `ig.html`, `fb.html`, `privacy.html`, `terms.html`,
-the `go/` bridges and `assets/` with no build step on its side.
+generated files are committed, so the deploy is still "push the files as they are": a Cloudflare
+Worker with static assets (Workers Builds, connected to this GitHub repo) serves `index.html`,
+`es/index.html`, `ig.html`, `fb.html`, `privacy.html`, `terms.html`, the `go/` bridges and
+`assets/` with no build step on its side. A push to `main` deploys to aesthetic-engineer.com;
+a push to any other branch makes a preview at
+`https://<branch>-aesthetic-blueprint-landing.mateo-valenciay.workers.dev`.
 
 ```
 node build.mjs           # build everything (pages, ig/fb copies, stylesheet, evidence photos)
