@@ -76,6 +76,13 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
     return `<div class="grid gap-5 sm:grid-cols-3 sm:items-stretch pt-3">${cards}</div>`;
   };
 
+  // Responsive attributes for a photo that ships several widths. The author slide shows each
+  // photo in a tall frame (about 0.40 wide-to-high) that is half the carousel wide.
+  const AUTHOR_SIZES = '(min-width: 1024px) 245px, (min-width: 448px) 205px, calc(50vw - 34px)';
+  const srcsetOf = (ph, sizes) => ph.srcset
+    ? ` srcset="${ph.srcset.map(([p, w]) => `${asset(p)} ${w}w`).join(', ')}" sizes="${sizes}"`
+    : '';
+
   // ---------------------------------------------------------------- carousel
   const slides = [];
   const SIZES = '(min-width: 1024px) 540px, (min-width: 480px) 448px, calc(100vw - 32px)';
@@ -89,11 +96,11 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
         <p class="text-center text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${c.carousel.author.label}</p>
         <div class="mt-2 grid grid-cols-2 gap-2 flex-1 min-h-0">
           <figure class="relative rounded-xl overflow-hidden border border-line bg-ink">
-            <img src="${asset(b.src)}" alt="${c.carousel.author.altBefore}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+            <img src="${asset(b.src)}"${srcsetOf(b, AUTHOR_SIZES)} alt="${c.carousel.author.altBefore}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
             <figcaption class="absolute top-2 left-2 text-[11px] font-bold uppercase tracking-wider bg-ink/85 border border-line rounded-full px-2.5 py-1">${c.carousel.author.before}</figcaption>
           </figure>
           <figure class="relative rounded-xl overflow-hidden border border-cream/40 bg-ink">
-            <img src="${asset(a.src)}" alt="${c.carousel.author.altAfter}" width="${a.width}" height="${a.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+            <img src="${asset(a.src)}"${srcsetOf(a, AUTHOR_SIZES)} alt="${c.carousel.author.altAfter}" width="${a.width}" height="${a.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
             <figcaption class="absolute top-2 right-2 text-[11px] font-bold uppercase tracking-wider bg-cream text-ink rounded-full px-2.5 py-1">${c.carousel.author.after}</figcaption>
           </figure>
         </div>

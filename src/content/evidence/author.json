@@ -53,14 +53,34 @@
   },
   "carouselPhotos": {
     "before": {
-      "src": "assets/carousel/author-before.webp",
-      "width": 400,
-      "height": 533
+      "src": "assets/carousel/author-before-540.webp",
+      "width": 540,
+      "height": 1333,
+      "srcset": [
+        [
+          "assets/carousel/author-before-360.webp",
+          360
+        ],
+        [
+          "assets/carousel/author-before-540.webp",
+          540
+        ]
+      ]
     },
     "after": {
-      "src": "assets/carousel/author-after.webp",
-      "width": 400,
-      "height": 533
+      "src": "assets/carousel/author-after-540.webp",
+      "width": 540,
+      "height": 1333,
+      "srcset": [
+        [
+          "assets/carousel/author-after-360.webp",
+          360
+        ],
+        [
+          "assets/carousel/author-after-540.webp",
+          540
+        ]
+      ]
     }
   }
 }
