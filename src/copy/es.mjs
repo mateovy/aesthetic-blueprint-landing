@@ -12,8 +12,8 @@ export default {
   product: 'El Manual del Físico de Dios Griego',
   bumpName: 'El Manual de la Testosterona',
   author: 'Aesthetic Engineer',
-  mockup: { src: 'assets/carousel/mockup-es.webp?v=2', src720: 'assets/carousel/mockup-es-720.webp?v=2', alt: 'El Manual del Físico de Dios Griego, portada de la guía en PDF' },
-  insideMockup: { src: 'assets/aesthetic-blueprint-mockup-es.webp', width: 640, height: 1008, alt: 'Portada del Manual del Físico de Dios Griego, guía en PDF' },
+  mockup: { src: 'assets/carousel/mockup-es.webp?v=3', src720: 'assets/carousel/mockup-es-720.webp?v=3', alt: 'El Manual del Físico de Dios Griego, portada de la guía en PDF' },
+  insideMockup: { src: 'assets/aesthetic-blueprint-mockup-es.webp?v=2', width: 640, height: 857, alt: 'Portada del Manual del Físico de Dios Griego, guía en PDF' },
 
   meta: {
     title: 'Sal del skinny fat en el orden correcto | El Manual del Físico de Dios Griego',
