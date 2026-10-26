@@ -163,7 +163,9 @@ carousel slide). See `assets/README.md` for the rest and the regenerate commands
 ## Social share images
 
 `og-template.html` and `og-template-es.html` are the layouts for `assets/og-image.jpeg` and
-`assets/og-image-es.jpeg` (1200x630). To re-export one:
+`assets/og-image-es.jpeg` (1200x630). Both carry the current headline ("Fix skinny-fat in the right
+order." / "Sal del skinny fat en el orden correcto.") and the cover; full-size PNGs are in
+`assets/originals/og-image-{en,es}.png`. To re-export one:
 
 ```
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
@@ -193,12 +195,7 @@ restores its files.
 
 ## What's still missing
 
-- **Samuel's full testimonial**: `quote.text` (Spanish, his exact words) and
-  `quote.translation.en.text` (the English translation) in `src/content/evidence/samuel.json`.
-  Only the highlight is in so far.
 - **Proof numbers.** 56 sales / 0 refunds as of 2026-10-25. Update `config.proof` from Hotmart.
-- **English share image.** `assets/og-image.jpeg` still uses the old headline ("Build a lean,
-  aesthetic physique"). The price on it is right ($12). Re-export if you want it to match.
 - **3-tier mode.** Needs Hotmart offer codes before it can be switched on.
 - **`assets/originals/`** is served publicly (the deploy copies the repo). It holds full-size
   author photos. Move it out of the repo if that matters to you.

@@ -21,7 +21,7 @@ export default {
     description: 'Lean out to a base first, then build muscle without getting fat again. The phase system for skinny-fat guys, with your first 30 days mapped out. {price}.',
     ogTitle: 'The Aesthetic Physique Blueprint',
     ogDescription: 'Fix skinny-fat in the right order: lean out first, then build without getting fat again. {price}.',
-    ogImage: 'https://aesthetic-engineer.com/assets/og-image.jpeg',
+    ogImage: 'https://aesthetic-engineer.com/assets/og-image.jpeg?v=2',
     ogLocale: 'en_US',
     ogLocaleAlt: 'es_LA',
     canonical: 'https://aesthetic-engineer.com/',

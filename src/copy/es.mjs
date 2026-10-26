@@ -20,7 +20,7 @@ export default {
     description: 'Primero baja la grasa hasta una base, luego gana músculo sin volver a engordar. El sistema de fases para el skinny fat, con tus primeros 30 días ya trazados. {price}.',
     ogTitle: 'El Manual del Físico de Dios Griego',
     ogDescription: 'Sal del skinny fat en el orden correcto: primero defines, luego construyes sin volver a engordar. {price}.',
-    ogImage: 'https://aesthetic-engineer.com/assets/og-image-es.jpeg?v=2',
+    ogImage: 'https://aesthetic-engineer.com/assets/og-image-es.jpeg?v=3',
     ogLocale: 'es_LA',
     ogLocaleAlt: 'en_US',
     canonical: 'https://aesthetic-engineer.com/es/',
