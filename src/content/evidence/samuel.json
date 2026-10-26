@@ -5,7 +5,10 @@
   "permission": true,
   "permissionNote": "Photos and testimonial authorized (confirmed by the author, 2026-10-26).",
   "featured": true,
-  "time": { "en": "1 year", "es": "1 año" },
+  "time": {
+    "en": "1 year",
+    "es": "1 año"
+  },
   "quote": {
     "lang": "es",
     "highlight": "Ya me había rendido con mi físico.",
@@ -18,7 +21,61 @@
     }
   },
   "photos": {
-    "before": [ { "src": "assets/evidence/samuel-before.webp", "width": 720, "height": 960 } ],
-    "after": [ { "src": "assets/evidence/samuel-after.webp", "width": 720, "height": 960 } ]
+    "before": [
+      {
+        "src": "assets/evidence/samuel-before.webp",
+        "width": 540,
+        "height": 720
+      },
+      {
+        "src": "assets/evidence/samuel-before-2.webp",
+        "width": 398,
+        "height": 531
+      }
+    ],
+    "after": [
+      {
+        "src": "assets/evidence/samuel-after.webp",
+        "width": 528,
+        "height": 704
+      },
+      {
+        "src": "assets/evidence/samuel-after-2.webp",
+        "width": 504,
+        "height": 672
+      }
+    ]
+  },
+  "carouselPhotos": {
+    "before": {
+      "src": "assets/evidence/samuel-before-tall.webp",
+      "width": 518,
+      "height": 1280,
+      "srcset": [
+        [
+          "assets/evidence/samuel-before-tall-360.webp",
+          360
+        ],
+        [
+          "assets/evidence/samuel-before-tall.webp",
+          518
+        ]
+      ]
+    },
+    "after": {
+      "src": "assets/evidence/samuel-after-tall.webp",
+      "width": 476,
+      "height": 1176,
+      "srcset": [
+        [
+          "assets/evidence/samuel-after-tall-360.webp",
+          360
+        ],
+        [
+          "assets/evidence/samuel-after-tall.webp",
+          476
+        ]
+      ]
+    }
   }
 }

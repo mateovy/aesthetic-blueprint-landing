@@ -161,13 +161,14 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
 
   // Mark's order ends on the proof: the featured customer's before/after is the last slide.
   if (featured) {
-    const b = featured.photos.before[0], a = featured.photos.after[0];
+    const b = (featured.carouselPhotos || {}).before || featured.photos.before[0];
+    const a = (featured.carouselPhotos || {}).after || featured.photos.after[0];
     const { highlight } = quoteParts(featured);
     slides.push(`<div class="absolute inset-0 p-3 sm:p-4 flex flex-col">
         <p class="text-center text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${evidenceLabel(featured)}</p>
         <div class="mt-2 grid grid-cols-2 gap-2 flex-1 min-h-0">
-          ${photo(b, `${featured.name}, ${c.results.before}`, c.results.before, false, { frame: 'h-full' })}
-          ${photo(a, `${featured.name}, ${c.results.after}`, c.results.after, true, { frame: 'h-full' })}
+          ${photo(b, `${featured.name}, ${c.results.before}`, c.results.before, false, { frame: 'h-full', srcset: srcsetOf(b, AUTHOR_SIZES) })}
+          ${photo(a, `${featured.name}, ${c.results.after}`, c.results.after, true, { frame: 'h-full', srcset: srcsetOf(a, AUTHOR_SIZES) })}
         </div>
         ${highlight ? `<p class="mt-2.5 mb-0.5 text-center font-display text-lg sm:text-xl text-cream leading-snug">"${highlight}"</p>` : ''}
       </div>`);
@@ -254,9 +255,10 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
   const evidenceCard = (e) => {
     const { highlight, text, note } = quoteParts(e);
     const multi = e.photos.before.length > 1 || e.photos.after.length > 1;
-    const photos = multi && e.type === 'author'
-      ? `${slideshow('before', e.photos.before, { tag: c.results.before, alt: c.story.altBefore, prev: c.story.prevBefore, next: c.story.nextBefore, go: c.story.goBefore })}
-          ${slideshow('after', e.photos.after, { tag: c.results.after, alt: c.story.altAfter, prev: c.story.prevAfter, next: c.story.nextAfter, go: c.story.goAfter })}`
+    const alt = (side) => e.type === 'author' ? (side === 'before' ? c.story.altBefore : c.story.altAfter) : `${e.name}, ${side === 'before' ? c.results.before : c.results.after},`;
+    const photos = multi
+      ? `${slideshow('before', e.photos.before, { tag: c.results.before, alt: alt('before'), prev: c.story.prevBefore, next: c.story.nextBefore, go: c.story.goBefore })}
+          ${slideshow('after', e.photos.after, { tag: c.results.after, alt: alt('after'), prev: c.story.prevAfter, next: c.story.nextAfter, go: c.story.goAfter })}`
       : `${photo(e.photos.before[0], `${e.name}, ${c.results.before}`, c.results.before, false)}
           ${photo(e.photos.after[0], `${e.name}, ${c.results.after}`, c.results.after, true)}`;
     const full = text ? `<details class="sm:hidden mt-3">

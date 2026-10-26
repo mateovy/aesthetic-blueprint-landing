@@ -190,8 +190,6 @@ restores its files.
 
 ## What's still missing
 
-- **Samuel's photos**: `assets/evidence/samuel-before.webp` and `samuel-after.webp` (3:4,
-  720x960). Until they exist the page shows "Photo coming soon" in Results and in the carousel.
 - **Samuel's full testimonial**: `quote.text` (Spanish, his exact words) and
   `quote.translation.en.text` (the English translation) in `src/content/evidence/samuel.json`.
   Only the highlight is in so far.

@@ -270,11 +270,11 @@
         <p class="text-center text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">Samuel · Customer result · 1 year</p>
         <div class="mt-2 grid grid-cols-2 gap-2 flex-1 min-h-0">
           <div class="relative h-full rounded-xl overflow-hidden border border-line bg-ink">
-            <div class="absolute inset-0 flex items-center justify-center p-3 text-center text-xs text-muted">Photo coming soon</div>
+            <img src="/assets/evidence/samuel-before-tall.webp" srcset="/assets/evidence/samuel-before-tall-360.webp 360w, /assets/evidence/samuel-before-tall.webp 518w" sizes="(min-width: 1024px) 245px, (min-width: 448px) 205px, calc(50vw - 34px)" alt="Samuel, Before" width="518" height="1280" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
             <span class="absolute top-2 left-2 bg-ink/85 border border-line text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">Before</span>
           </div>
           <div class="relative h-full rounded-xl overflow-hidden border border-cream/40 bg-ink">
-            <div class="absolute inset-0 flex items-center justify-center p-3 text-center text-xs text-muted">Photo coming soon</div>
+            <img src="/assets/evidence/samuel-after-tall.webp" srcset="/assets/evidence/samuel-after-tall-360.webp 360w, /assets/evidence/samuel-after-tall.webp 476w" sizes="(min-width: 1024px) 245px, (min-width: 448px) 205px, calc(50vw - 34px)" alt="Samuel, After" width="476" height="1176" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
             <span class="absolute top-2 right-2 bg-cream text-ink text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">After</span>
           </div>
         </div>
@@ -635,13 +635,33 @@
       </figure><figure class="reveal bg-card border border-line rounded-2xl p-4 sm:p-6 flex flex-col">
         <figcaption class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">Samuel · Customer result · 1 year</figcaption>
         <div class="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
-          <div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-line bg-ink">
-            <div class="absolute inset-0 flex items-center justify-center p-3 text-center text-xs text-muted">Photo coming soon</div>
-            <span class="absolute top-2 left-2 bg-ink/85 border border-line text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">Before</span>
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-line bg-card">
+              <span class="absolute z-20 top-2 left-2 bg-ink/85 border border-line text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">Before</span>
+              <img src="/assets/evidence/samuel-before.webp" alt="Samuel, Before, 1" loading="lazy" decoding="async"
+                   width="540" height="720"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="/assets/evidence/samuel-before-2.webp" alt="Samuel, Before, 2" loading="lazy" decoding="async"
+                   width="398" height="531"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <button type="button" data-prev aria-label="Previous before photo" class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next before photo" class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-1 flex justify-center" data-dots><button type="button" aria-label="Go to before photo 1" class="dot-hit"><span class="dot w-2 h-2 rounded-full bg-cream"></span></button><button type="button" aria-label="Go to before photo 2" class="dot-hit"><span class="dot w-2 h-2 rounded-full bg-line"></span></button></div>
           </div>
-          <div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-cream/40 bg-ink">
-            <div class="absolute inset-0 flex items-center justify-center p-3 text-center text-xs text-muted">Photo coming soon</div>
-            <span class="absolute top-2 right-2 bg-cream text-ink text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">After</span>
+          <div data-slideshow>
+            <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-cream/40 bg-card">
+              <span class="absolute z-20 top-2 right-2 bg-cream text-ink text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">After</span>
+              <img src="/assets/evidence/samuel-after.webp" alt="Samuel, After, 1" loading="lazy" decoding="async"
+                   width="528" height="704"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" data-index="0" />
+              <img src="/assets/evidence/samuel-after-2.webp" alt="Samuel, After, 2" loading="lazy" decoding="async"
+                   width="504" height="672"
+                   class="slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500" data-index="1" />
+              <button type="button" data-prev aria-label="Previous after photo" class="absolute z-20 left-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">‹</button>
+              <button type="button" data-next aria-label="Next after photo" class="absolute z-20 right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink/70 hover:bg-ink border border-line flex items-center justify-center text-cream">›</button>
+            </div>
+            <div class="mt-1 flex justify-center" data-dots><button type="button" aria-label="Go to after photo 1" class="dot-hit"><span class="dot w-2 h-2 rounded-full bg-cream"></span></button><button type="button" aria-label="Go to after photo 2" class="dot-hit"><span class="dot w-2 h-2 rounded-full bg-line"></span></button></div>
           </div>
         </div>
         <blockquote class="mt-5">
