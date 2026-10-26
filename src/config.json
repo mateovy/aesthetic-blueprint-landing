@@ -26,7 +26,7 @@
 
   "authorPhotos": {
     "_note": "Where the author's before/after slideshow sits: 'story' (inside 'My story') or 'results' (inside the results section, labelled as the author).",
-    "placement": "story"
+    "placement": "results"
   },
 
   "tiers": {

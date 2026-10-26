@@ -126,7 +126,11 @@ const evidenceAll = fs.readdirSync(EVD)
     if (e.type === 'author') authors++;
     if (typeof e.permission !== 'boolean') fail(`${where}: "permission" must be true or false`);
     if (!e.name) fail(`${where}: "name" is required (first name or initials)`);
-    if (!e.quote || !e.quote.text) fail(`${where}: "quote.text" is required (their exact words)`);
+    if (!e.quote || !(e.quote.text || e.quote.highlight)) fail(`${where}: the quote needs "highlight" and/or "text" (their exact words)`);
+    if (e.type === 'customer' && e.permission && e.quote && e.quote.highlight && !e.quote.text) warn(`${where}: only the highlight is filled in. Paste their full testimonial into "quote.text" (and its translation).`);
+    if (e.quote && e.quote.translation) for (const [l, t] of Object.entries(e.quote.translation)) {
+      if (typeof t === 'object' && e.quote.text && !t.text) warn(`${where}: "quote.translation.${l}.text" is empty, so the ${l.toUpperCase()} page shows only the highlight.`);
+    }
     if (e.quote && !['en', 'es'].includes(e.quote.lang)) fail(`${where}: "quote.lang" must be "en" or "es"`);
     if (!e.photos || !(e.photos.before || []).length || !(e.photos.after || []).length) fail(`${where}: needs at least one before and one after photo`);
     if (e.type === 'customer' && e.permission && !e.permissionNote) warn(`${where}: add "permissionNote" (where and when they said yes)`);
@@ -190,7 +194,13 @@ function pixelate(img, bx, by, bw, bh) {
   }
 }
 function processPhoto(e, side, idx, ph) {
-  if (ph.src) return ph; // already a published, processed file
+  if (ph.src) { // already a published, processed file: make sure it's really there
+    if (!fs.existsSync(r(ph.src.split('?')[0]))) {
+      warn(`evidence/${e.file}: ${ph.src} doesn't exist yet. The page shows a placeholder. Don't publish to main like this.`);
+      return { ...ph, missing: true };
+    }
+    return ph;
+  }
   const src = path.join(EVD, ph.original || '');
   const out = `assets/evidence/${e.id}-${side}-${idx + 1}.webp`;
   if (!ph.original || !fs.existsSync(src)) { fail(`evidence/${e.file}: photo "${ph.original}" not found in src/content/evidence/`); return { src: out, width: 720, height: 960 }; }

@@ -36,16 +36,34 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
   const authorIn = config.authorPhotos.placement === 'results' ? 'results' : 'story';
   const tiersOn = config.tiers.enabled;
 
-  // ---------------------------------------------------------------- quote helper
-  const quoteOf = (e) => {
+  // ---------------------------------------------------------------- quotes and photos
+  // A quote has a highlight (one line, shown big) and/or the full text. On the page in the
+  // other language it shows `translation[lang]`, marked as translated. The author writes both
+  // versions himself, so only customer quotes carry that note.
+  const quoteParts = (e) => {
     const q = e.quote || {};
-    if (!q.text) return '';
-    if (q.lang === c.lang || !q.translation || !q.translation[c.lang]) {
-      return `<blockquote class="text-cream/90">"${q.text}"</blockquote>`;
+    const tr = q.lang !== c.lang && q.translation ? q.translation[c.lang] : null;
+    let highlight = q.highlight || '', text = q.text || '';
+    if (tr) {
+      if (typeof tr === 'string') { highlight = ''; text = tr; }
+      else { highlight = tr.highlight || ''; text = tr.text || ''; }
     }
-    return `<blockquote class="text-cream/90">"${q.translation[c.lang]}"</blockquote>
-            <p class="mt-1 text-xs text-muted">${c.results.translated}</p>`;
+    if (!highlight && text && text.length < 90) { highlight = text; text = ''; }
+    return { highlight, text, note: tr && e.type === 'customer' ? c.results.translated : '' };
   };
+  const paras = (t) => t.split(/\n\s*\n/).map((p) => `<p>${p.trim()}</p>`).join('');
+  const evidenceLabel = (e) => {
+    const time = e.time && e.time[c.lang] ? ` · ${e.time[c.lang]}` : '';
+    return e.type === 'author' ? `${c.results.authorLabel}${time}` : `${e.name} · ${c.results.customerResult}${time}`;
+  };
+  // One before/after photo in a frame. A photo the build couldn't find renders as a labelled
+  // placeholder (build.mjs warns about it), so a missing file never breaks the layout.
+  const photo = (ph, alt, tag, isAfter, { frame = 'aspect-[3/4]', srcset = '' } = {}) => `<div class="relative ${frame} rounded-xl overflow-hidden border ${isAfter ? 'border-cream/40' : 'border-line'} bg-ink">
+            ${ph.missing
+              ? `<div class="absolute inset-0 flex items-center justify-center p-3 text-center text-xs text-muted">${c.results.photoPending}</div>`
+              : `<img src="${asset(ph.src)}"${srcset} alt="${alt}" width="${ph.width}" height="${ph.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />`}
+            <span class="absolute top-2 ${isAfter ? 'right-2 bg-cream text-ink' : 'left-2 bg-ink/85 border border-line'} text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1">${tag}</span>
+          </div>`;
 
   // ---------------------------------------------------------------- urgency (off by default)
   const urgency = () => {
@@ -141,16 +159,17 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
       <p class="mt-3 text-base sm:text-lg text-muted max-w-xs">${c.carousel.guarantee.body}</p>
     </div>`);
 
+  // Mark's order ends on the proof: the featured customer's before/after is the last slide.
   if (featured) {
     const b = featured.photos.before[0], a = featured.photos.after[0];
-    const time = featured.time && featured.time[c.lang] ? ` · ${featured.time[c.lang]}` : '';
+    const { highlight } = quoteParts(featured);
     slides.push(`<div class="absolute inset-0 p-3 sm:p-4 flex flex-col">
-        <p class="text-center text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${c.carousel.customer.label}: ${featured.name}${time}</p>
+        <p class="text-center text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${evidenceLabel(featured)}</p>
         <div class="mt-2 grid grid-cols-2 gap-2 flex-1 min-h-0">
-          <img src="${asset(b.src)}" alt="${featured.name}, ${c.results.before}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async" class="w-full h-full object-cover rounded-xl border border-line" />
-          <img src="${asset(a.src)}" alt="${featured.name}, ${c.results.after}" width="${a.width}" height="${a.height}" loading="lazy" decoding="async" class="w-full h-full object-cover rounded-xl border border-cream/40" />
+          ${photo(b, `${featured.name}, ${c.results.before}`, c.results.before, false, { frame: 'h-full' })}
+          ${photo(a, `${featured.name}, ${c.results.after}`, c.results.after, true, { frame: 'h-full' })}
         </div>
-        <div class="mt-2 text-sm text-center">${quoteOf(featured)}</div>
+        ${highlight ? `<p class="mt-2.5 mb-0.5 text-center font-display text-lg sm:text-xl text-cream leading-snug">"${highlight}"</p>` : ''}
       </div>`);
   }
 
@@ -231,47 +250,53 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
       </figure>` : '';
 
   // ---------------------------------------------------------------- evidence cards
+  // Highlight first, then the full text: always open from sm up, a "read more" on phones.
   const evidenceCard = (e) => {
-    const b = e.photos.before[0], a = e.photos.after[0];
-    const label = e.type === 'author' ? c.results.authorLabel : c.results.customerLabel;
-    const time = e.time && e.time[c.lang] ? `<p class="text-sm text-muted">${c.results.in} ${e.time[c.lang]}</p>` : '';
-    return `<figure class="reveal bg-card border ${e.type === 'author' ? 'border-cream/30' : 'border-line'} rounded-2xl p-4 sm:p-5 flex flex-col">
-        <p class="text-[11px] font-semibold tracking-widest uppercase text-muted">${label}</p>
-        <div class="mt-3 grid grid-cols-2 gap-2">
-          <div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-line bg-ink">
-            <img src="${asset(b.src)}" alt="${e.name}, ${c.results.before}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
-            <span class="absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider bg-ink/85 border border-line rounded-full px-2 py-0.5">${c.results.before}</span>
-          </div>
-          <div class="relative aspect-[3/4] rounded-xl overflow-hidden border border-cream/40 bg-ink">
-            <img src="${asset(a.src)}" alt="${e.name}, ${c.results.after}" width="${a.width}" height="${a.height}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
-            <span class="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-cream text-ink rounded-full px-2 py-0.5">${c.results.after}</span>
-          </div>
+    const { highlight, text, note } = quoteParts(e);
+    const multi = e.photos.before.length > 1 || e.photos.after.length > 1;
+    const photos = multi && e.type === 'author'
+      ? `${slideshow('before', e.photos.before, { tag: c.results.before, alt: c.story.altBefore, prev: c.story.prevBefore, next: c.story.nextBefore, go: c.story.goBefore })}
+          ${slideshow('after', e.photos.after, { tag: c.results.after, alt: c.story.altAfter, prev: c.story.prevAfter, next: c.story.nextAfter, go: c.story.goAfter })}`
+      : `${photo(e.photos.before[0], `${e.name}, ${c.results.before}`, c.results.before, false)}
+          ${photo(e.photos.after[0], `${e.name}, ${c.results.after}`, c.results.after, true)}`;
+    const full = text ? `<details class="sm:hidden mt-3">
+            <summary class="flex items-center gap-2 text-sm font-semibold text-cream py-1">${c.results.readMore}<span class="faq-icon text-lg leading-none" aria-hidden="true">+</span></summary>
+            <div class="mt-2 space-y-3 text-muted">${paras(text)}</div>
+          </details>
+          <div class="hidden sm:block mt-3 space-y-3 text-muted">${paras(text)}</div>` : '';
+    return `<figure class="reveal bg-card border ${e.type === 'author' ? 'border-cream/30' : 'border-line'} rounded-2xl p-4 sm:p-6 flex flex-col">
+        <figcaption class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${evidenceLabel(e)}</figcaption>
+        <div class="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
+          ${photos}
         </div>
-        <div class="mt-4 flex-1">${quoteOf(e)}</div>
-        <figcaption class="mt-4 pt-4 border-t border-line">
-          <p class="font-semibold text-cream">${e.name}</p>
-          ${time}
-        </figcaption>
+        ${highlight || text ? `<blockquote class="mt-5">
+          ${highlight ? `<p class="font-display text-2xl sm:text-[1.7rem] leading-snug text-cream">"${highlight}"</p>` : ''}
+          ${full}
+        </blockquote>` : ''}
+        ${note ? `<p class="mt-3 text-xs text-muted">${note}</p>` : ''}
       </figure>`;
   };
 
+  // Results: only items with permission ever reach this point (build.mjs filters them).
   const resultItems = [...(authorIn === 'results' && author ? [author] : []), ...customers];
-  const resultsBody = customers.length
-    ? `${rule(true)}
-      ${h2(c.results.h2Evidence, ' text-center')}
-      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.leadEvidence}</p>
-      <div class="mt-10 grid gap-5 ${resultItems.length > 1 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'max-w-md mx-auto'}" data-stagger>
+  const resultsSection = resultItems.length ? `<!-- ======================================================== 7. RESULTS (evidence, permission only) -->
+  <section class="bg-ink" id="results">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      ${rule(true)}
+      ${eyebrow(c.results.eyebrow, true)}
+      ${h2(c.results.h2, ' text-center')}
+      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.lead}</p>
+      <div class="mt-10 grid gap-5 items-start ${resultItems.length > 1 ? 'md:grid-cols-2' : 'max-w-md mx-auto'}" data-stagger>
         ${resultItems.map(evidenceCard).join('')}
       </div>
-      <p class="mt-6 text-sm text-muted text-center">${c.results.disclaimer}</p>`
-    : `${rule(true)}
-      ${h2(c.results.h2Empty, ' text-center')}
-      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.leadEmpty}</p>
-      ${resultItems.length ? `<div class="mt-10 grid gap-5 max-w-md mx-auto">${resultItems.map(evidenceCard).join('')}</div>
-      <p class="mt-4 text-sm text-muted text-center">${c.results.disclaimer}</p>` : ''}
-      <div class="reveal mt-10 max-w-3xl mx-auto bg-card border border-line rounded-2xl p-6 sm:p-10 space-y-5 text-lg text-muted leading-relaxed">
-        ${c.results.emptyBody.map((t) => `<p>${t}</p>`).join('')}
-      </div>`;
+      <p class="mt-6 text-sm text-muted text-center">${c.results.disclaimer}</p>
+      <div class="reveal mt-10 text-center">
+        ${cta('results', BTN)}
+        <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>
+        <p class="mt-2 text-sm text-muted">${c.results.guaranteeLine}</p>
+      </div>
+    </div>
+  </section>` : '';
 
   const guarantee = `<div class="reveal bg-card border border-line rounded-3xl p-6 sm:p-8 text-center flex flex-col items-center justify-center">
           <div class="w-24 h-24 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center">
@@ -539,17 +564,7 @@ ${CSS}
     </div>
   </section>
 
-  <!-- ======================================================== 7. RESULTS (evidence, permission only) -->
-  <section class="bg-ink">
-    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
-      ${resultsBody}
-      <div class="reveal mt-10 text-center">
-        ${cta('social-proof', BTN)}
-        <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>
-        <p class="mt-2 text-sm text-muted">${c.results.guaranteeLine}</p>
-      </div>
-    </div>
-  </section>
+  ${resultsSection}
 
   <!-- ======================================================== 8. FOR / NOT FOR (belief 5) -->
   <section class="bg-panel border-y border-line">

@@ -77,7 +77,6 @@ export default {
       body: 'Read it. Run it. If it\'s not for you, email me and get every cent back.',
       badge: 'Day refund',
     },
-    customer: { label: 'Customer result' },
   },
 
   proof: '{buyers}+ already have the system · {refunds}&nbsp;refunds',
@@ -130,7 +129,7 @@ export default {
     h2: 'I wasted 4 years getting this wrong <em>so you don\'t have to.</em>',
     paragraphs: [
       'I started at <span class="text-cream font-semibold">51 kg</span>. Skinny, and invisible in a T-shirt. So I did what the internet said: I <span class="text-cream">dirty bulked</span>.',
-      'It went wrong. I got to about <span class="text-cream font-semibold">30% body fat</span> (the "before" photos), lost all my definition, and got <span class="text-cream">gyno</span>. I didn\'t look muscular. I looked soft.',
+      'It went wrong. I got to about <span class="text-cream font-semibold">30% body fat</span>, lost all my definition, and got <span class="text-cream">gyno</span>. I didn\'t look muscular. I looked soft.',
       'So I stopped guessing and read the research: how muscle is built, why getting lean first matters so much, and what makes a set count.',
     ],
     strong: 'I fixed the order. I got lean first, then built. I\'m proud of the change, and I\'m still working on it. This guide is that system, minus the four years I wasted.',
@@ -200,21 +199,17 @@ export default {
   },
 
   results: {
-    h2Evidence: 'Results from guys <em>running the system.</em>',
-    leadEvidence: 'Real people, real photos, shared with permission.',
-    h2Empty: 'No testimonials yet. <em>Here\'s why that\'s fine.</em>',
-    leadEmpty: 'A straight answer instead of a wall of five stars.',
-    emptyBody: [
-      'It\'s new, and real results take weeks to show. I could fill this space with fake five-star reviews, and plenty of pages at this price do. I\'d rather tell you the truth and let the guarantee carry the risk instead of you.',
-      'Read it. Run it. If it isn\'t the clearest plan anyone has given you, email me within 7 days and I\'ll refund every cent. That\'s worth more than a review you can\'t check.',
-    ],
+    eyebrow: 'Results',
+    h2: 'Results, <em>shared with permission.</em>',
+    lead: 'Real people, real photos.',
     authorLabel: 'The author, first to run the system',
-    customerLabel: 'Customer',
-    in: 'in',
+    customerResult: 'Customer result',
+    readMore: 'Read his full story',
     translated: 'Translated from Spanish',
     disclaimer: 'Individual results vary and depend on consistency and starting point.',
     guaranteeLine: 'Backed by a 7-day money-back guarantee',
     before: 'Before', after: 'After',
+    photoPending: 'Photo coming soon',
   },
 
   fit: {

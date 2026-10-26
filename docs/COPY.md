@@ -89,6 +89,10 @@ line "Follow the system, get the result".
   "What's inside" and the final offer, so it was said three times instead of four.
 - **Separate guarantee section and separate final CTA:** merged into the final offer (one
   card, one guarantee, one button) per the brief's structure.
+- **"No testimonials yet" (2026-10-26):** replaced by Results once real, authorized evidence
+  existed (the author at 18 months, Samuel at 1 year). Nothing else on the page claimed there
+  were no testimonials. The story lost its "(the 'before' photos)" aside because the author's
+  photos moved into Results.
 
 ## Spanish
 

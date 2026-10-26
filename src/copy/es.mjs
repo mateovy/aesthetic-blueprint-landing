@@ -76,7 +76,6 @@ export default {
       body: 'Léelo. Aplícalo. Si no es para ti, escríbeme y te devuelvo cada centavo.',
       badge: 'Días de garantía',
     },
-    customer: { label: 'Resultado de un cliente' },
   },
 
   proof: '{buyers}+ ya tienen el sistema · {refunds}&nbsp;reembolsos',
@@ -129,7 +128,7 @@ export default {
     h2: 'Perdí 4 años haciéndolo mal <em>para que tú no tengas que hacerlo.</em>',
     paragraphs: [
       'Empecé pesando <span class="text-cream font-semibold">51 kg</span>. Flaco, e invisible con camiseta. Así que hice lo que decía internet: <span class="text-cream">volumen sucio</span>.',
-      'Salió mal. Llegué a cerca de <span class="text-cream font-semibold">30% de grasa</span> (las fotos de "antes"), perdí toda la definición y me salió <span class="text-cream">ginecomastia</span>. No me veía musculoso. Me veía blando.',
+      'Salió mal. Llegué a cerca de <span class="text-cream font-semibold">30% de grasa</span>, perdí toda la definición y me salió <span class="text-cream">ginecomastia</span>. No me veía musculoso. Me veía blando.',
       'Entonces dejé de adivinar y me puse a leer la investigación: cómo se construye el músculo, por qué importa tanto definir primero y qué hace que una serie cuente.',
     ],
     strong: 'Corregí el orden. Primero bajé la grasa, luego construí. Estoy orgulloso del cambio, y sigo trabajando en él. Este manual es ese sistema, sin los cuatro años que yo perdí.',
@@ -199,21 +198,17 @@ export default {
   },
 
   results: {
-    h2Evidence: 'Resultados de quienes <em>aplican el sistema.</em>',
-    leadEvidence: 'Personas reales, fotos reales, compartidas con permiso.',
-    h2Empty: 'Todavía no hay testimonios. <em>Y te explico por qué está bien.</em>',
-    leadEmpty: 'Una respuesta directa en lugar de un muro de cinco estrellas.',
-    emptyBody: [
-      'Es nuevo, y los resultados reales tardan semanas en verse. Podría llenar este espacio con reseñas de cinco estrellas inventadas, y muchas páginas a este precio lo hacen. Prefiero decirte la verdad y que el riesgo lo cargue la garantía, no tú.',
-      'Léelo. Aplícalo. Si no es el plan más claro que alguien te ha dado, escríbeme dentro de los 7 días y te devuelvo cada centavo. Eso vale más que una reseña que no puedes comprobar.',
-    ],
+    eyebrow: 'Resultados',
+    h2: 'Resultados, <em>compartidos con permiso.</em>',
+    lead: 'Personas reales, fotos reales.',
     authorLabel: 'El autor, el primero en aplicar el sistema',
-    customerLabel: 'Cliente',
-    in: 'en',
+    customerResult: 'Resultado de un cliente',
+    readMore: 'Lee su historia completa',
     translated: 'Traducido del inglés',
-    disclaimer: 'Los resultados individuales varían y dependen de la constancia y del punto de partida.',
+    disclaimer: 'Los resultados varían según la constancia y el punto de partida.',
     guaranteeLine: 'Con garantía de reembolso de 7 días',
     before: 'Antes', after: 'Después',
+    photoPending: 'Foto pendiente',
   },
 
   fit: {
@@ -308,7 +303,7 @@ export default {
     by: 'por Aesthetic Engineer',
     privacy: 'Política de privacidad', terms: 'Términos', contact: 'Contacto',
     privacyHref: '/privacy.html', termsHref: '/terms.html',
-    disclaimer: 'Los resultados individuales varían y dependen de la constancia y del punto de partida. Este manual es educativo. No es consejo médico. Consulta a un médico antes de empezar cualquier programa de entrenamiento o nutrición.',
+    disclaimer: 'Los resultados varían según la constancia y el punto de partida. Este manual es educativo. No es consejo médico. Consulta a un médico antes de empezar cualquier programa de entrenamiento o nutrición.',
     rights: 'El Manual del Físico de Dios Griego. Todos los derechos reservados.',
   },
 };

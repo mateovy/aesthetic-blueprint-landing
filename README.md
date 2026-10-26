@@ -58,8 +58,11 @@ Only real people, with their permission. The build enforces the rest.
    - `type`: `"customer"`. (`"author"` is only you, and always shows the label "The author,
      first to run the system". It can never be presented as a customer.)
    - `name`: first name or initials. `time`: the real time it took, per language.
-   - `quote.text`: their exact words. `quote.lang`: the language they wrote in. On the other
-     language's page, `quote.translation` shows instead, marked "Translated from…".
+   - `quote.highlight`: one line of theirs, shown big first (e.g. "Ya me había rendido con mi
+     físico."). `quote.text`: their full testimonial, word for word; paragraphs separated by a
+     blank line (`\n\n`). It shows open on desktop and behind "Read his full story" on phones.
+     `quote.lang`: the language they wrote in. `quote.translation.<lang>` holds the
+     `highlight` and `text` for the other page, which marks them "Translated from…".
    - `permission`: `true` only once you have it. `false` keeps them off the page entirely.
    - `permissionNote`: where and when they said yes.
    - `featured: true` also adds them as a slide in the hero carousel.
@@ -71,13 +74,18 @@ Only real people, with their permission. The build enforces the rest.
    `rotate` (90/180/270) fixes a sideways phone photo. `frame: [x, y, width]` (in %) picks the
    3:4 crop by hand; leave `null` for centred.
 5. `node build.mjs`. Photos come out as `assets/evidence/<id>-before-1.webp` etc. (720x960).
+   If you already have processed photos, point `photos` at them with `src` instead of
+   `original` (that is how `samuel.json` works). A `src` file that doesn't exist yet renders as
+   a "Photo coming soon" placeholder and the build warns: don't merge to main like that.
 
-While no customer has `permission: true`, the results section keeps the honest
-"No testimonials yet" text. As soon as one does, it switches to the evidence grid, with
-"Individual results vary and depend on consistency and starting point." underneath.
+The Results section ("Results, shared with permission.") lists every item with
+`permission: true`: the author first, then customers, each labelled
+"The author, first to run the system · 18 months" or "Samuel · Customer result · 1 year",
+with "Individual results vary and depend on consistency and starting point." underneath.
+With no items at all the section is left out; there is no "no testimonials yet" text any more.
 
-`config.authorPhotos.placement`: `"story"` keeps your before/after in "My story" (default);
-`"results"` moves it into the results section as an author card.
+`config.authorPhotos.placement`: `"results"` (current) shows your before/after as the author
+card in Results; `"story"` puts it back beside "My story" instead.
 
 ## Turn on the 3-tier offer (Mark's model, off by default)
 
@@ -109,9 +117,10 @@ whole query string to Hotmart. The build refuses to write a page with a button m
 those UTMs or pointing at the other language's bridge.
 
 `utm_content` per button, both languages: `sticky`, `hero`, `phases`, `mechanism`, `chapters`,
-`social-proof`, `pricing`, `final`. Compared with the version before the rework: `stack`
+`results`, `pricing`, `final`. Compared with the version before the rework: `stack`
 (the old "Everything you get" section) and `guarantee` (the old guarantee section) no longer
-exist, and `phases` (How it works) is new. Older Hotmart reports still show those labels.
+exist, `phases` (How it works) is new, and `results` replaced `social-proof` when the
+"No testimonials yet" section became Results. Older Hotmart reports still show the old labels.
 
 The bridges contain the Hotmart product links (`go/blueprint/index.html`,
 `es/go/blueprint/index.html`). They are not generated: edit them directly. Inside an iOS
@@ -121,8 +130,8 @@ redirecting, because Hotmart's checkout doesn't open there.
 ## Page structure
 
 1. Hero: carousel (product, author before/after labelled as the author, "no dirty bulk, no
-   starving", who it's for, system vs. random advice, guarantee, a featured customer when one
-   exists), proof line, headline, outcomes, offer card, 3 short FAQs
+   starving", who it's for, system vs. random advice, guarantee, and last the featured
+   customer's before/after, Samuel), proof line, headline, outcomes, offer card, 3 short FAQs
 2. The trap (big idea as the headline) · 3. My story · 4. How it works (3 phases + decision tree)
 5. Why it works (approved claims + references accordion) · 6. What's inside (8 chapters, 2 free tools)
 7. Results · 8. For / not for · 9. What not doing it costs · 10. Add-on at checkout
@@ -181,9 +190,11 @@ restores its files.
 
 ## What's still missing
 
-- **Your real transformation time.** `time` in `src/content/evidence/author.json` is empty, so
-  no duration is shown. Fill it in only with the real number.
-- **Customer evidence.** None yet. Ask buyers for photos and permission (see above).
+- **Samuel's photos**: `assets/evidence/samuel-before.webp` and `samuel-after.webp` (3:4,
+  720x960). Until they exist the page shows "Photo coming soon" in Results and in the carousel.
+- **Samuel's full testimonial**: `quote.text` (Spanish, his exact words) and
+  `quote.translation.en.text` (the English translation) in `src/content/evidence/samuel.json`.
+  Only the highlight is in so far.
 - **Proof numbers.** 56 sales / 0 refunds as of 2026-10-25. Update `config.proof` from Hotmart.
 - **English share image.** `assets/og-image.jpeg` still uses the old headline ("Build a lean,
   aesthetic physique"). The price on it is right ($12). Re-export if you want it to match.
