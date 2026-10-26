@@ -1,0 +1,23 @@
+{
+  "_readme": "Copy this file to <first-name>.json (no leading underscore) to add a customer. Files starting with _ are ignored. See README.md, section 'Evidence'.",
+  "id": "jd",
+  "type": "customer",
+  "name": "J.D.",
+  "permission": false,
+  "permissionNote": "Where and when they said yes, e.g. 'Instagram DM, 2026-11-02, screenshot in Drive/evidence'.",
+  "featured": false,
+  "time": { "en": "10 weeks", "es": "10 semanas" },
+  "quote": {
+    "lang": "en",
+    "text": "Their exact words, copied, typos and all.",
+    "translation": { "es": "Traducción fiel, marcada como traducida en la página." }
+  },
+  "photos": {
+    "before": [
+      { "original": "originals/jd-before.jpg", "rotate": 0, "frame": null, "face": { "mode": "blur", "box": [35, 5, 30, 22] } }
+    ],
+    "after": [
+      { "original": "originals/jd-after.jpg", "rotate": 0, "frame": null, "face": { "mode": "crop", "box": [35, 5, 30, 22] } }
+    ]
+  }
+}

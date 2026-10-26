@@ -1,143 +1,192 @@
 # Aesthetic Engineer landing page
 
-Static site, no framework and no bundler. The deploy is "push the files as they are":
-`index.html`, `privacy.html`, `terms.html`, and `assets/` go straight to the host.
-
-## Styling
-
-Tailwind is precompiled to a static, purged stylesheet at `assets/styles.css`, which is
-committed to the repo so the deploy stays copy-the-files. The pages no longer load the
-Tailwind Play CDN (that CDN shipped ~300KB of JS and compiled styles in the browser on
-every visit).
-
-- Design tokens (colors, fonts) live in `tailwind.config.js`.
-- The Tailwind entry file is `assets/tailwind.input.css` (just the three `@tailwind` directives).
-- Page-specific custom CSS (scroll reveals, self-drawing rules, marquee, progress bar, CTA
-  states, compare slider, hero glow) stays inline in the `<style>` block of `index.html`. It
-  is loaded after `styles.css`, so it overrides utilities the same way it did under the CDN.
-
-## Motion
-
-The vocabulary is deliberately small and all of it is CSS transitions/transforms driven by one
-IntersectionObserver. Everything degrades to "visible, unanimated" rather than "invisible":
-`<noscript>` styles, a 2.5s safety net that reveals anything still hidden, and a
-`prefers-reduced-motion` block that switches the whole system off.
-
-- `.reveal` — the existing fade/slide system. `data-anim` picks the variant; `hero` is the
-  slow 1.04 → 1 settle on the hero image.
-- `.rule` — any horizontal divider or accent line, `scaleX(0) → 1` from the left over 600ms.
-  `.rule-accent` is the short opener above each section heading (the carousel device);
-  `.rule-divider` is a full-width hairline. Both ride the same observer as `.reveal`.
-- Section heading italics fade and rise 50ms behind the roman text, so the eye lands on the
-  emphasis word last.
-- `[data-count]` figures count up from zero over 900ms. The markup holds the final value, so
-  no-JS and reduced-motion visitors just read it. The `$12` is deliberately never animated.
-- `.cta-glow` — resting lift, hover into pure white, and a press state. No pulse: the press
-  is what makes it feel real on mobile, where there is no hover.
-
-Two things are JS rather than CSS because they cannot be expressed as transitions: the
-count-up, and the compare slider's one-time "drag me" hint (animating a custom property needs
-`@property`, which is not safe to rely on in older mobile browsers). Both are skipped
-entirely under `prefers-reduced-motion`.
-
-### Regenerate the stylesheet
-
-Run this after changing any class in the HTML, or any token in `tailwind.config.js`:
+Static site. The pages are generated from `src/` by `build.mjs` (no npm dependencies), and the
+generated files are committed, so the deploy is still "push the files as they are": Cloudflare
+Pages serves `index.html`, `es/index.html`, `ig.html`, `fb.html`, `privacy.html`, `terms.html`,
+the `go/` bridges and `assets/` with no build step on its side.
 
 ```
-npx tailwindcss@3 -c tailwind.config.js -i assets/tailwind.input.css -o assets/styles.css --minify
+node build.mjs           # build everything (pages, ig/fb copies, stylesheet, evidence photos)
+node build.mjs --check   # validate only, writes nothing
 ```
 
-Then commit the updated `assets/styles.css`.
+Needs Node 18+. The stylesheet step runs `npx tailwindcss@3` (downloads it the first time).
+Processing customer photos also needs `sips` (built into macOS) and `cwebp` (`brew install webp`).
 
-The config `content` array covers `index.html`, `privacy.html`, `terms.html`, and
-`og-template.html`, so classes used in any of those are kept and everything else is purged.
-Classes that the vanilla JS toggles at runtime (`opacity-0`, `opacity-100`, `bg-cream`,
-`bg-line`, `translate-y-full`) are pinned in the config `safelist` so a future JS refactor
-cannot silently drop them.
+**Do not edit `index.html`, `es/index.html`, `ig.html` or `fb.html` by hand.** The next build
+overwrites them. Edit `src/` and rebuild.
+
+## Where things live
+
+| To change | Edit |
+|---|---|
+| Price, bump price, page counts, proof numbers, tiers, urgency, author photo placement | `src/config.json` |
+| English words | `src/copy/en.mjs` |
+| Spanish words | `src/copy/es.mjs` (same keys as English; the build stops if one is missing) |
+| Results / testimonials | `src/content/evidence/*.json` |
+| Study citations | `src/content/references.mjs` |
+| Layout and section order | `src/page.mjs` |
+| Page CSS / JS | `src/styles/page.css`, `src/scripts/page.js` |
+| Why the copy says what it says | `docs/COPY.md` |
+
+## Change the price
+
+1. Change the price **in Hotmart first**. The page only displays a number; Hotmart is what charges.
+2. In `src/config.json`, set `price.amount` (and `bump.amount` if the order bump changed).
+3. `node build.mjs`. Every price on both pages, the meta description and the FAQ update together.
+4. The share images are pictures, so they don't update themselves. Re-export them:
+   `og-template.html` → `assets/og-image.jpeg` and `og-template-es.html` →
+   `assets/og-image-es.jpeg` (screenshot at 1200x630, see "Social share images"). Then bump the
+   `?v=` on `meta.ogImage` in the copy file so scrapers and caches fetch the new one.
+
+## Proof line ("56+ already have the system · 0 refunds")
+
+`config.proof`. Real numbers only, copied from Hotmart by hand: `buyers` is total sales,
+`refunds` is total refunds, `asOf` is the date you copied them. The build warns when `asOf`
+is more than 30 days old. Set `enabled: false` to hide the line.
+
+## Add evidence (a customer result)
+
+Only real people, with their permission. The build enforces the rest.
+
+1. Get written permission (DM, email) to use their photos, first name or initials, and quote.
+   Keep a screenshot.
+2. Put their raw photos in `src/content/evidence/originals/`. That folder is in `.gitignore`:
+   the raw photos never reach git or the site. Only the processed copies do.
+3. Copy `src/content/evidence/_template.json` to `src/content/evidence/<name>.json` (no
+   leading underscore; files starting with `_` are ignored) and fill it in:
+   - `type`: `"customer"`. (`"author"` is only you, and always shows the label "The author,
+     first to run the system". It can never be presented as a customer.)
+   - `name`: first name or initials. `time`: the real time it took, per language.
+   - `quote.text`: their exact words. `quote.lang`: the language they wrote in. On the other
+     language's page, `quote.translation` shows instead, marked "Translated from…".
+   - `permission`: `true` only once you have it. `false` keeps them off the page entirely.
+   - `permissionNote`: where and when they said yes.
+   - `featured: true` also adds them as a slide in the hero carousel.
+4. Hiding the face, per photo: `"face": { "mode": "blur" | "crop", "box": [x, y, width, height] }`,
+   in % of the photo. `blur` pixelates the face; `crop` frames the photo from below the chin.
+   Both happen **in the image file**, so the published photo never contains the face. To read
+   the box, run `node build.mjs --grid originals/<photo>.jpg`: it writes a copy with a numbered
+   10% grid next to the original.
+   `rotate` (90/180/270) fixes a sideways phone photo. `frame: [x, y, width]` (in %) picks the
+   3:4 crop by hand; leave `null` for centred.
+5. `node build.mjs`. Photos come out as `assets/evidence/<id>-before-1.webp` etc. (720x960).
+
+While no customer has `permission: true`, the results section keeps the honest
+"No testimonials yet" text. As soon as one does, it switches to the evidence grid, with
+"Individual results vary and depend on consistency and starting point." underneath.
+
+`config.authorPhotos.placement`: `"story"` keeps your before/after in "My story" (default);
+`"results"` moves it into the results section as an author card.
+
+## Turn on the 3-tier offer (Mark's model, off by default)
+
+1. In Hotmart, create an **offer** on the product for each tier price (Product → Offers). Each
+   offer has a code. The tier buttons send it as `off=<code>`, which Hotmart uses to open the
+   checkout at that price. Without a code the build refuses to turn tiers on.
+2. In `config.tiers.items`, fill `hotmartOffer`, `price`, `features` and `name` for each tier.
+   Exactly one tier has `popular: true` (it gets the "Most popular" badge). `decoy: true` is
+   just a label for you: the cheap tier that makes the middle one look right.
+   `compareAt` shows a struck-through price: only use a price you really charged or will charge.
+3. Set `price.amount` to the popular tier's price (used in the sticky bar and the copy).
+4. If a tier includes The Testosterone Blueprint, remove it as an order bump from that offer in
+   Hotmart, and adjust the add-on wording in the copy, so nobody gets offered it twice.
+5. `config.tiers.enabled: true`, then `node build.mjs`. The tiers replace the offer card in the
+   hero and in the final offer, each button with its own `utm_content` (`hero-tier-system`, …).
+
+## Urgency (off by default)
+
+Only for a real deadline. `config.urgency`: `enabled`, `endsAt` (ISO date with time zone) and
+the text with `{date}`. The build refuses a date in the past, and the line removes itself
+in the browser once the date passes.
+
+## Checkout links and UTMs
+
+Every button is a plain link to the bridge (`/go/blueprint/` or `/es/go/blueprint/`) with
+`utm_source=landing&utm_medium=web&utm_campaign=blueprint&utm_content=<section>`. The bridge
+adds `checkoutMode=10` (the order bump) and `src=tiktok` / `src=tiktok_es`, and forwards the
+whole query string to Hotmart. The build refuses to write a page with a button missing any of
+those UTMs or pointing at the other language's bridge.
+
+`utm_content` per button, both languages: `sticky`, `hero`, `phases`, `mechanism`, `chapters`,
+`social-proof`, `pricing`, `final`. Compared with the version before the rework: `stack`
+(the old "Everything you get" section) and `guarantee` (the old guarantee section) no longer
+exist, and `phases` (How it works) is new. Older Hotmart reports still show those labels.
+
+The bridges contain the Hotmart product links (`go/blueprint/index.html`,
+`es/go/blueprint/index.html`). They are not generated: edit them directly. Inside an iOS
+TikTok/Instagram/Facebook browser the bridge shows "open in your browser" instead of
+redirecting, because Hotmart's checkout doesn't open there.
+
+## Page structure
+
+1. Hero: carousel (product, author before/after labelled as the author, "no dirty bulk, no
+   starving", who it's for, system vs. random advice, guarantee, a featured customer when one
+   exists), proof line, headline, outcomes, offer card, 3 short FAQs
+2. The trap (big idea as the headline) · 3. My story · 4. How it works (3 phases + decision tree)
+5. Why it works (approved claims + references accordion) · 6. What's inside (8 chapters, 2 free tools)
+7. Results · 8. For / not for · 9. What not doing it costs · 10. Add-on at checkout
+11. Final offer (outcomes, card, guarantee) · 12. FAQ, footer
+
+The carousel is native horizontal scroll with snap points, so it swipes with no JavaScript;
+the script only adds the arrows, the dots and the current-slide state.
+
+## Styling and performance
+
+Tailwind is precompiled into `assets/styles.css` by the build. Design tokens are in
+`tailwind.config.js`. The build also compiles just the utilities used above the fold and
+inlines them in `<head>`, so first paint needs no stylesheet request. That inline CSS sits
+**before** the stylesheet link on purpose: it is a subset of `styles.css`, and if it came after,
+a plain `.flex-col` there would beat an `sm:flex-row` in the stylesheet.
+
+Measured with Lighthouse (mobile, served with gzip like Cloudflare does): performance 93,
+accessibility 100 on both pages. The previous version measured 82 / 91 the same way.
 
 ## Images
 
-The page loads small WebP derivatives (`hero.webp`, `before-1.webp`, etc.), sized to the
-actual rendered width times 2 for retina. Full-resolution originals stay in `assets/` as
-unreferenced source files. See `assets/README.md` for the full table and the regenerate
-command (needs `sips`, built into macOS, and `cwebp` via `brew install webp`).
+WebP derivatives sized for their rendered width ×2. The hero carousel uses
+`assets/carousel/` (mockups at 720 and 1080 wide with `srcset`, small author photos for the
+carousel slide). See `assets/README.md` for the rest and the regenerate commands.
 
-## Social share image
+## Social share images
 
-`og-template.html` is the source layout for `assets/og-image.jpeg` (1200x630, ~132KB).
-`og:image` and `twitter:image` in `index.html` point at the absolute URL
-`https://aesthetic-engineer.com/assets/og-image.jpeg` so link previews resolve for scrapers,
-and `og:image:width`/`height` must keep matching the file.
-
-Keep the referenced file small. Facebook and Twitter tolerate multi-megabyte images, but
-WhatsApp routinely refuses to render a preview for them, and that is the channel where this
-link gets pasted most. The full-resolution export stays at `assets/originals/og-image.jpeg`;
-re-derive the referenced copy from it:
+`og-template.html` and `og-template-es.html` are the layouts for `assets/og-image.jpeg` and
+`assets/og-image-es.jpeg` (1200x630). To re-export one:
 
 ```
-cp assets/originals/og-image.jpeg assets/og-image.jpeg
-sips -z 630 1200 assets/og-image.jpeg
-sips -s format jpeg -s formatOptions 90 assets/og-image.jpeg
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+  --allow-file-access-from-files --virtual-time-budget=3000 --window-size=1200,630 \
+  --screenshot=og.png "file://$PWD/og-template-es.html"
+sips -s format jpeg -s formatOptions 85 og.png --out assets/og-image-es.jpeg
 ```
 
-After changing the price or any copy, the image has to be re-exported by hand: it is a
-picture, so nothing in the HTML can update it.
+Keep the file small (WhatsApp skips multi-megabyte previews) and bump its `?v=`.
 
-## Before / after
+## Offer rules
 
-Two side-by-side slideshows (`[data-slideshow]`), one for before and one for after, each with
-its own prev/next arrows, dots and auto-play. Auto-play pauses on hover, restarts a few
-seconds after a manual interaction, and is skipped entirely under `prefers-reduced-motion`.
-The slides crossfade via the `opacity-0`/`opacity-100` utilities, which is why those two are
-pinned in the config `safelist`.
-
-This section is deliberately left as-is. A drag-to-compare slider was tried and reverted.
-
-## Checkout links
-
-Nine plain `<a>` elements pointing at `/go/blueprint/`, each with its own `utm_content`
-(`sticky`, `hero`, `stack`, `mechanism`, `chapters`, `social-proof`, `pricing`, `guarantee`,
-`final`) so you can see which section converts. The bridge forwards the whole query string,
-so those labels reach Hotmart intact.
-
-`stack` replaced the old `included` label when "What you get" became the "Everything you get"
-value block, so anything before that rename sits under `included` in the old reports.
-
-## Spanish version (/es/)
-
-`es/index.html` is a hand translation of the English page: same markup, CSS and JS, Spanish
-copy and meta, `lang="es"`, and `/assets/...` paths (it sits one folder deeper). Both pages
-carry hreflang tags (en, es, x-default -> English) and an EN / ES switcher in the hero; there
-is no automatic redirect on browser language. When the English copy changes, mirror it in
-`es/index.html` by hand.
-
-Its CTAs go to `es/go/blueprint/`, a copy of the English bridge that forwards to the Spanish
-Hotmart product (`https://pay.hotmart.com/D108044264H`) with `checkoutMode=10&src=tiktok_es`.
-The link appears twice in that file, the `BASE` constant and the `<noscript>` href, and both
-have to change together. Product names: El Manual del Físico de Dios
-Griego ($12) and El Manual de la Testosterona ($10 order bump, configured on the Spanish product
-in Hotmart).
-
-## Offer
-
-$12 buys the Blueprint (114 pages, 8 chapters), the 30-day plan and the two Google Sheets.
-The Testosterone Blueprint is **not** part of that: it is a $10 order bump inside Hotmart's
-checkout, configured by `checkoutMode=10` in `go/blueprint/index.html`. The landing presents
-it in its own bordered panel, with no button and no big price, and every mention says "at
-checkout". Copy that lets a buyer think it ships with the $12 comes back as a refund, so keep
-that wording.
-
-Nothing intercepts these clicks: they are plain anchors and no JS touches them.
-
-There was an interstitial here that caught taps inside iOS webviews and offered "Copy link",
-because on iPhone the TikTok/IG/FB/Snap browser refuses to open Hotmart's checkout and tells
-the buyer to open it in a real browser. It was removed on request. **That failure mode still
-exists on iPhone**, it just goes unhandled now, so watch iOS conversion. The full
-implementation is in git history if it needs to come back.
+$12 buys the Blueprint, the 30-day plan and the two Google Sheets. The Testosterone Blueprint
+($10) is **not** included: it is the order bump inside Hotmart's checkout. Every mention says
+"at checkout" / "al pagar". Copy that lets a buyer think it ships with the $12 turns into a
+refund.
 
 ## Brand
 
-Strictly monochrome: no accent colors, ever. Playfair Display for headlines (italic for the
-emphasized word), Inter for body. Keep it that way so the page matches the carousels a
-visitor just came from.
+Strictly monochrome, no accent colours. Playfair Display for headlines (italic for the
+emphasized words, written as `<em>` in the copy files), Inter for body text.
+
+## Going back
+
+The version before this rework is tagged `pre-mark-v1`. `git checkout pre-mark-v1 -- .`
+restores its files.
+
+## What's still missing
+
+- **Your real transformation time.** `time` in `src/content/evidence/author.json` is empty, so
+  no duration is shown. Fill it in only with the real number.
+- **Customer evidence.** None yet. Ask buyers for photos and permission (see above).
+- **Proof numbers.** 56 sales / 0 refunds as of 2026-10-25. Update `config.proof` from Hotmart.
+- **English share image.** `assets/og-image.jpeg` still uses the old headline ("Build a lean,
+  aesthetic physique"). The price on it is right ($12). Re-export if you want it to match.
+- **3-tier mode.** Needs Hotmart offer codes before it can be switched on.
+- **`assets/originals/`** is served publicly (the deploy copies the repo). It holds full-size
+  author photos. Move it out of the repo if that matters to you.

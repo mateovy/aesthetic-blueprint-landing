@@ -1,0 +1,87 @@
+{
+  "_readme": "The one place to change the offer. Run `node build.mjs` after any edit. See README.md, section 'Config'.",
+
+  "price": {
+    "amount": 12,
+    "symbol": "$",
+    "currency": "USD"
+  },
+
+  "bump": {
+    "amount": 10
+  },
+
+  "pages": {
+    "en": 114,
+    "es": 121
+  },
+
+  "proof": {
+    "_note": "Real numbers only, copied from Hotmart by hand. Update asOf every time you change them.",
+    "enabled": true,
+    "buyers": 56,
+    "refunds": 0,
+    "asOf": "2026-10-25"
+  },
+
+  "authorPhotos": {
+    "_note": "Where the author's before/after slideshow sits: 'story' (inside 'My story') or 'results' (inside the results section, labelled as the author).",
+    "placement": "story"
+  },
+
+  "tiers": {
+    "_note": "Mark's 3-tier offer. Off by default. Each tier needs its own Hotmart offer code ('off'). Compare-at prices must be real prices you have charged or will charge, never invented anchors.",
+    "enabled": false,
+    "items": [
+      {
+        "id": "guide",
+        "name": { "en": "The Guide", "es": "El Manual" },
+        "price": 9,
+        "compareAt": null,
+        "hotmartOffer": "",
+        "popular": false,
+        "decoy": true,
+        "features": {
+          "en": ["The {pages}-page guide"],
+          "es": ["El manual de {pages} páginas"]
+        }
+      },
+      {
+        "id": "system",
+        "name": { "en": "The System", "es": "El Sistema" },
+        "price": 12,
+        "compareAt": null,
+        "hotmartOffer": "",
+        "popular": true,
+        "decoy": false,
+        "features": {
+          "en": ["The {pages}-page guide", "Your first 30 days, written out", "The Metabolic Calorie Calculator", "The Physique Change Tracker"],
+          "es": ["El manual de {pages} páginas", "Tus primeros 30 días, por escrito", "La Calculadora Metabólica de Calorías", "El Registro de Cambios del Físico"]
+        }
+      },
+      {
+        "id": "complete",
+        "name": { "en": "The Complete Set", "es": "El Set Completo" },
+        "price": 20,
+        "compareAt": 22,
+        "hotmartOffer": "",
+        "popular": false,
+        "decoy": false,
+        "features": {
+          "en": ["Everything in The System", "The Testosterone Blueprint"],
+          "es": ["Todo lo de El Sistema", "El Manual de la Testosterona"]
+        }
+      }
+    ]
+  },
+
+  "urgency": {
+    "_note": "Only for a REAL deadline (a price that actually changes on that date). Off by default. The line hides itself after endsAt.",
+    "enabled": false,
+    "endsAt": "",
+    "text": {
+      "en": "The price goes up after {date}.",
+      "es": "El precio sube después del {date}."
+    }
+  }
+}

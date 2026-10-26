@@ -1,0 +1,119 @@
+    /* ============================================================= */
+    /* Page-specific styles (override utilities; keep after them).     */
+    /* ============================================================= */
+    html, body { background:#0A0E1A; }
+    /* The scroll reveals park elements at translateX(+-48px) until they animate in; clip the
+       overhang so it never causes a sideways scroll on mobile. `hidden` is the fallback. */
+    html, body { overflow-x: hidden; overflow-x: clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing: -0.015em; font-weight: 700; }
+    .font-display em, h1 em, h2 em { font-style: italic; }
+
+    /* Skip link: hidden until focused with the keyboard. */
+    .skip-link { position:absolute; left:1rem; top:-4rem; z-index:70; background:#F5F5F2; color:#0A0E1A;
+      font-weight:700; padding:.6rem 1rem; border-radius:.5rem; transition: top .15s ease; }
+    .skip-link:focus { top:1rem; }
+
+    /* ---- Scroll-reveal system ---- */
+    .reveal {
+      opacity:0; transform: translateY(36px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal[data-anim="left"]  { transform: translateX(-48px); }
+    .reveal[data-anim="right"] { transform: translateX(48px); }
+    .reveal[data-anim="scale"] { transform: scale(.94); }
+    .reveal.in { opacity:1; transform: none; filter:none; }
+
+    /* Section headings: the italic phrase lands 50ms after the roman text. */
+    .reveal h2 em, h2.reveal em {
+      opacity:0; transform: translateY(.28em);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1) 50ms, transform .7s cubic-bezier(.16,1,.3,1) 50ms;
+      display:inline-block;
+    }
+    .reveal.in h2 em, h2.reveal.in em { opacity:1; transform:none; }
+
+    /* ---- Rules that draw themselves ---- */
+    .rule { transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.16,1,.3,1); will-change: transform; }
+    .rule.in { transform: scaleX(1); }
+    .rule-accent  { display:block; width:3rem; height:2px; background:#F5F5F2; margin-bottom:1.25rem; }
+    .rule-accent.mx-auto { transform-origin:center; }
+    .rule-divider { display:block; height:1px; background:#1E2740; }
+    .value-list li:nth-child(2) .rule { transition-delay: .08s; }
+    .value-list li:nth-child(3) .rule { transition-delay: .16s; }
+    .count { font-variant-numeric: tabular-nums; }
+
+    /* ---- Card hover lift ---- */
+    .bg-card { transition: transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease; }
+    @media (hover:hover) {
+      .bg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.7); }
+      .carousel.bg-card:hover, details.bg-card:hover, header .bg-card:hover { transform:none; box-shadow:none; }
+    }
+
+    /* ---- Scroll progress bar ---- */
+    #progress { position:fixed; top:0; left:0; height:3px; width:0%; z-index:60; background:#F5F5F2; transition: width .1s linear; }
+
+    /* ---- Hero carousel ----
+       Native horizontal scroll with snap points: swipes and keyboard-scrolls with no JS at all.
+       The script only adds the arrows, the dots and the "which slide is showing" state. */
+    .carousel {
+      display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
+      scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
+      margin:0; padding:0;
+    }
+    .carousel::-webkit-scrollbar { display:none; }
+    .slide-c { position:relative; flex:0 0 100%; aspect-ratio:4/5; scroll-snap-align:center; overflow:hidden; }
+    .c-btn {
+      width:2.25rem; height:2.25rem; border-radius:999px; flex:none;
+      display:inline-flex; align-items:center; justify-content:center; font-size:1.35rem; line-height:1;
+      color:#F5F5F2; background:#121829; border:1px solid #1E2740; transition: opacity .2s ease, background-color .2s ease;
+    }
+    .c-btn:hover { background:#0A0E1A; }
+    .c-btn[disabled] { opacity:.35; cursor:default; }
+    .c-dot { width:1.5rem; height:1.75rem; display:inline-flex; align-items:center; justify-content:center; }
+    .c-dot span { width:.5rem; height:.5rem; border-radius:999px; background:#1E2740; transition: background-color .2s ease, width .2s ease; }
+    .c-dot[aria-current="true"] span { background:#F5F5F2; width:1.25rem; }
+    .dot-hit { width:1.5rem; height:1.75rem; display:inline-flex; align-items:center; justify-content:center; }
+
+    /* Subtle radial glow behind hero and final offer */
+    .hero-glow::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; filter:none !important; transition:none; }
+      .reveal h2 em, h2.reveal em { opacity:1 !important; transform:none !important; transition:none; }
+      .rule { transform:none !important; transition:none; }
+      a.cta-glow:hover, button.cta-glow:hover, a.cta-glow:active, button.cta-glow:active { transform:none; }
+      html { scroll-behavior:auto !important; }
+    }
+
+    /* Accessible focus */
+    a:focus-visible, button:focus-visible, summary:focus-visible, .carousel:focus-visible {
+      outline: 3px solid #F5F5F2; outline-offset: 3px; border-radius: 6px;
+    }
+
+    /* ---- CTA affordance: resting lift, hover into white, press back down ---- */
+    .cta-glow { box-shadow: 0 6px 20px -8px rgba(0,0,0,.75); }
+    a.cta-glow, button.cta-glow { transition: transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease, background-color .18s ease; }
+    @media (hover:hover) {
+      a.cta-glow:hover, button.cta-glow:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -10px rgba(0,0,0,.85); background-color:#FFFFFF; }
+    }
+    a.cta-glow:active, button.cta-glow:active { transform: translateY(1px); box-shadow: 0 2px 8px -4px rgba(0,0,0,.8); }
+
+    /* FAQ accordions */
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] > summary .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .2s ease; }
+
+    /* ---- EN / ES switcher, top-right of the hero ---- */
+    .lang-switch {
+      position:absolute; top:.6rem; right:1rem; z-index:10;
+      display:flex; align-items:center; gap:.35rem;
+      font-size:11px; line-height:1; font-weight:600; letter-spacing:.12em; color:#9AA3B2;
+    }
+    .lang-switch a { padding:.45rem .3rem; color:#9AA3B2; transition:color .2s ease; }
+    .lang-switch a:hover, .lang-switch a[aria-current="page"] { color:#F5F5F2; }
+    @media (min-width:640px) { .lang-switch { top:1rem; right:1.25rem; } }

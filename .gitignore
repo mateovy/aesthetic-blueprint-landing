@@ -1,0 +1,5 @@
+# Raw customer photos. Only the processed, face-safe WebPs in assets/evidence/ are published.
+src/content/evidence/originals/
+
+# macOS
+.DS_Store

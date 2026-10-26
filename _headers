@@ -55,3 +55,11 @@
 /es/go/*
   Cache-Control: public, max-age=600
   X-Robots-Tag: noindex
+
+# Build sources and notes are public (the deploy copies the repo), but they are not pages.
+/src/*
+  X-Robots-Tag: noindex
+/docs/*
+  X-Robots-Tag: noindex
+/build.mjs
+  X-Robots-Tag: noindex

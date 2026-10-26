@@ -1,0 +1,66 @@
+{
+  "id": "author",
+  "type": "author",
+  "name": "Aesthetic Engineer",
+  "permission": true,
+  "featured": false,
+  "time": {
+    "en": "",
+    "es": ""
+  },
+  "quote": {
+    "lang": "en",
+    "text": "I fixed the fundamentals.",
+    "translation": {
+      "es": "Arreglé los fundamentos."
+    }
+  },
+  "photos": {
+    "before": [
+      {
+        "src": "assets/before-1.webp",
+        "width": 720,
+        "height": 1135
+      },
+      {
+        "src": "assets/before-2.webp",
+        "width": 720,
+        "height": 1264
+      },
+      {
+        "src": "assets/before-3.webp",
+        "width": 720,
+        "height": 1269
+      }
+    ],
+    "after": [
+      {
+        "src": "assets/after-1.webp?v=2",
+        "width": 720,
+        "height": 960
+      },
+      {
+        "src": "assets/after-2.webp?v=2",
+        "width": 720,
+        "height": 960
+      },
+      {
+        "src": "assets/after-3.webp?v=2",
+        "width": 720,
+        "height": 960
+      }
+    ]
+  },
+  "carouselPhotos": {
+    "before": {
+      "src": "assets/carousel/author-before.webp",
+      "width": 400,
+      "height": 533
+    },
+    "after": {
+      "src": "assets/carousel/author-after.webp",
+      "width": 400,
+      "height": 533
+    }
+  }
+}
