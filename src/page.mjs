@@ -5,7 +5,7 @@
 // Section order follows Mark's template and the belief each section installs:
 //   1 hero (carousel, proof, headline, offer)   2 trap (belief 1)       3 story (1, 5)
 //   4 how it works (2)    5 why it works (3, 4)    6 what's inside    7 results
-//   8 for / not for (5)   9 cost of not doing it   10 add-on (4)      11 final offer (6)
+//   7b timeline (what to expect, and when)    8 for / not for (5)   9 cost of not doing it   10 add-on (4)      11 final offer (6)
 //   12 FAQ + footer
 
 import fs from 'node:fs';
@@ -26,7 +26,7 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
   const eyebrow = (t, center = false) =>
     `<p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3${center ? ' text-center' : ''}">${t}</p>`;
   const h2 = (html, extra = '') =>
-    `<h2 class="reveal font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream${extra}">${html}</h2>`;
+    `<h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream${extra}">${html}</h2>`;
   const check = `<svg class="w-5 h-5 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   const cross = `<svg class="w-4 h-4 shrink-0 mt-0.5 text-muted" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
 
@@ -251,7 +251,9 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
       </figure>` : '';
 
   // ---------------------------------------------------------------- evidence cards
-  // Highlight first, then the full text: always open from sm up, a "read more" on phones.
+  // Highlight first, then the full text, written once: a <details> that ships open, so it reads
+  // in full without JS. From sm up its summary is hidden (always open); page.js closes it on
+  // phones, where the summary becomes the "read more".
   const evidenceCard = (e) => {
     const { highlight, text, note } = quoteParts(e);
     const multi = e.photos.before.length > 1 || e.photos.after.length > 1;
@@ -261,12 +263,11 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
           ${slideshow('after', e.photos.after, { tag: c.results.after, alt: alt('after'), prev: c.story.prevAfter, next: c.story.nextAfter, go: c.story.goAfter })}`
       : `${photo(e.photos.before[0], `${e.name}, ${c.results.before}`, c.results.before, false)}
           ${photo(e.photos.after[0], `${e.name}, ${c.results.after}`, c.results.after, true)}`;
-    const full = text ? `<details class="sm:hidden mt-3">
-            <summary class="flex items-center gap-2 text-sm font-semibold text-cream py-1">${c.results.readMore}<span class="faq-icon text-lg leading-none" aria-hidden="true">+</span></summary>
-            <div class="mt-2 space-y-3 text-muted">${paras(text)}</div>
-          </details>
-          <div class="hidden sm:block mt-3 space-y-3 text-muted">${paras(text)}</div>` : '';
-    return `<figure class="reveal bg-card border ${e.type === 'author' ? 'border-cream/30' : 'border-line'} rounded-2xl p-4 sm:p-6 flex flex-col">
+    const full = text ? `<details class="mt-3" open data-full-story>
+            <summary class="sm:hidden flex items-center gap-2 text-sm font-semibold text-cream py-1">${c.results.readMore}<span class="faq-icon text-lg leading-none" aria-hidden="true">+</span></summary>
+            <div class="mt-2 sm:mt-0 space-y-3 text-muted">${paras(text)}</div>
+          </details>` : '';
+    return `<figure class="bg-card border ${e.type === 'author' ? 'border-cream/30' : 'border-line'} rounded-2xl p-4 sm:p-6 flex flex-col">
         <figcaption class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">${evidenceLabel(e)}</figcaption>
         <div class="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
           ${photos}
@@ -287,12 +288,12 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
       ${rule(true)}
       ${eyebrow(c.results.eyebrow, true)}
       ${h2(c.results.h2, ' text-center')}
-      <p class="reveal mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.lead}</p>
-      <div class="mt-10 grid gap-5 items-start ${resultItems.length > 1 ? 'md:grid-cols-2' : 'max-w-md mx-auto'}" data-stagger>
+      <p class="mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.lead}</p>
+      <div class="mt-10 grid gap-5 items-start ${resultItems.length > 1 ? 'md:grid-cols-2' : 'max-w-md mx-auto'}">
         ${resultItems.map(evidenceCard).join('')}
       </div>
       <p class="mt-6 text-sm text-muted text-center">${c.results.disclaimer}</p>
-      <div class="reveal mt-10 text-center">
+      <div class="mt-10 text-center">
         ${cta('results', BTN)}
         <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>
         <p class="mt-2 text-sm text-muted">${c.results.guaranteeLine}</p>
@@ -300,7 +301,7 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
     </div>
   </section>` : '';
 
-  const guarantee = `<div class="reveal bg-card border border-line rounded-3xl p-6 sm:p-8 text-center flex flex-col items-center justify-center">
+  const guarantee = `<div class="bg-card border border-line rounded-3xl p-6 sm:p-8 text-center flex flex-col items-center justify-center">
           <div class="w-24 h-24 rounded-full bg-cream/5 border-2 border-cream/30 flex flex-col items-center justify-center">
             <span class="font-display text-4xl text-cream leading-none">7</span>
             <span class="text-[10px] font-bold uppercase tracking-widest text-cream mt-1">${c.final.guaranteeBadge}</span>
@@ -370,7 +371,6 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
 
   <link rel="preload" href="/assets/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="/assets/styles.css" /></noscript>
-  <noscript><style>.reveal,.reveal h2 .italic,h2.reveal .italic,.reveal h2 em,h2.reveal em{opacity:1!important;transform:none!important;filter:none!important}.rule{transform:none!important}</style></noscript>
 
   <!-- Page-specific overrides: after styles.css so they win, and after the critical CSS. -->
   <style>
@@ -431,24 +431,24 @@ ${CSS}
       ${rule()}
       ${eyebrow(c.trap.eyebrow)}
       ${h2(c.trap.h2)}
-      <p class="reveal mt-4 text-lg text-muted max-w-2xl">${c.trap.lead}</p>
-      <div class="reveal mt-8 grid sm:grid-cols-2 gap-3 max-w-3xl">
+      <p class="mt-4 text-lg text-muted max-w-2xl">${c.trap.lead}</p>
+      <div class="mt-8 grid sm:grid-cols-2 gap-3 max-w-3xl">
         ${c.trap.mechanism.map((m) => `<p class="text-xl sm:text-2xl text-muted border-l-2 border-cream/40 pl-4">${m}</p>`).join('')}
       </div>
-      <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
-        ${c.trap.cards.map(([t, b]) => `<div class="reveal bg-card border border-line rounded-2xl p-6">
+      <div class="mt-10 grid sm:grid-cols-2 gap-4">
+        ${c.trap.cards.map(([t, b]) => `<div class="bg-card border border-line rounded-2xl p-6">
           <p class="font-display text-2xl text-cream mb-2">${t}</p>
           <p class="text-muted">${b}</p>
         </div>`).join('\n        ')}
       </div>
-      <p class="reveal mt-10 text-xl sm:text-2xl text-cream font-semibold max-w-2xl">${c.trap.close}</p>
+      <p class="mt-10 text-xl sm:text-2xl text-cream font-semibold max-w-2xl">${c.trap.close}</p>
     </div>
   </section>
 
   <!-- ======================================================== 3. THE STORY (beliefs 1, 5) -->
   <section class="bg-ink">
     <div class="max-w-6xl mx-auto px-4 sm:px-5 py-14 sm:py-20 ${authorIn === 'story' ? 'grid lg:grid-cols-2 gap-10 items-center' : ''}">
-      <div class="reveal ${authorIn === 'story' ? 'order-2 lg:order-1' : 'max-w-3xl'}" data-anim="left">
+      <div class="${authorIn === 'story' ? 'order-2 lg:order-1' : 'max-w-3xl'}">
         ${rule()}
         ${eyebrow(c.story.eyebrow)}
         <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream">${c.story.h2}</h2>
@@ -457,7 +457,7 @@ ${CSS}
           <p class="text-cream font-semibold">${c.story.strong}</p>
         </div>
       </div>
-      ${authorIn === 'story' ? `<div class="reveal order-1 lg:order-2" data-anim="right">${authorFigure}</div>` : ''}
+      ${authorIn === 'story' ? `<div class="order-1 lg:order-2">${authorFigure}</div>` : ''}
     </div>
   </section>
 
@@ -467,15 +467,15 @@ ${CSS}
       ${rule()}
       ${eyebrow(c.how.eyebrow)}
       ${h2(c.how.h2)}
-      <p class="reveal mt-4 text-lg text-muted max-w-2xl">${c.how.lead}</p>
-      <ol class="mt-10 grid md:grid-cols-3 gap-4" data-stagger>
-        ${c.how.phases.map(([k, t, b], i) => `<li class="reveal bg-card border ${i === 0 ? 'border-cream/30' : 'border-line'} rounded-2xl p-6">
+      <p class="mt-4 text-lg text-muted max-w-2xl">${c.how.lead}</p>
+      <ol class="mt-10 grid md:grid-cols-3 gap-4">
+        ${c.how.phases.map(([k, t, b], i) => `<li class="bg-card border ${i === 0 ? 'border-cream/30' : 'border-line'} rounded-2xl p-6">
           <p class="text-[11px] font-semibold tracking-widest uppercase text-muted">${k}</p>
           <p class="mt-2 font-display text-2xl text-cream leading-tight">${t}</p>
           <p class="mt-3 text-muted">${b}</p>
         </li>`).join('\n        ')}
       </ol>
-      <div class="reveal mt-8 bg-card border border-line rounded-2xl p-6 sm:p-8">
+      <div class="mt-8 bg-card border border-line rounded-2xl p-6 sm:p-8">
         <p class="font-display text-2xl sm:text-3xl text-cream leading-tight">${c.how.tree.title}</p>
         <p class="mt-3 text-muted max-w-2xl">${c.how.tree.body}</p>
         <div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-3" aria-hidden="true">
@@ -487,7 +487,7 @@ ${CSS}
         </div>
         <p class="sr-only">${c.how.tree.inputs.join(' + ')} → ${c.how.tree.output}</p>
       </div>
-      <div class="reveal mt-10">
+      <div class="mt-10">
         ${cta('phases', BTN)}
         <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>
       </div>
@@ -500,22 +500,22 @@ ${CSS}
       ${rule()}
       ${eyebrow(c.why.eyebrow)}
       ${h2(c.why.h2)}
-      <p class="reveal mt-4 text-lg text-muted max-w-2xl">${c.why.lead}</p>
+      <p class="mt-4 text-lg text-muted max-w-2xl">${c.why.lead}</p>
       <div class="mt-10 grid sm:grid-cols-2 gap-4" data-stagger>
-        ${c.why.cards.map((k) => `<div class="reveal bg-card border border-line rounded-2xl p-6">
+        ${c.why.cards.map((k) => `<div class="bg-card border border-line rounded-2xl p-6">
           <p class="font-display text-2xl text-cream">${k.title}</p>
           <p class="mt-2 text-muted">${k.body}</p>
           ${k.ref ? `<p class="mt-3 text-xs text-muted">[${k.ref}] ${c.why.refShort[k.ref - 1]}</p>` : ''}
         </div>`).join('\n        ')}
       </div>
-      <details class="reveal mt-8 bg-card border border-line rounded-2xl px-5" id="references">
+      <details class="mt-8 bg-card border border-line rounded-2xl px-5" id="references">
         <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">${c.why.refsTitle} (${refs.length})<span class="faq-icon text-cream text-2xl leading-none" aria-hidden="true">+</span></summary>
         <p class="-mt-2 mb-4 text-sm text-muted">${c.why.refsNote}</p>
         <ol class="pb-5 space-y-3 text-sm text-muted list-decimal pl-5">
           ${refs.map((r) => `<li>${r}</li>`).join('\n          ')}
         </ol>
       </details>
-      <div class="reveal mt-10 text-center">
+      <div class="mt-10 text-center">
         ${cta('mechanism', BTN)}
         <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>
       </div>
@@ -525,7 +525,7 @@ ${CSS}
   <!-- ======================================================== 6. WHAT'S INSIDE -->
   <section class="bg-panel border-y border-line">
     <div class="max-w-6xl mx-auto px-4 sm:px-5 py-14 sm:py-20 grid lg:grid-cols-5 gap-10 items-start">
-      <div class="lg:col-span-2 reveal lg:sticky lg:top-10">
+      <div class="lg:col-span-2 lg:sticky lg:top-10">
         <div class="relative mx-auto max-w-[16rem] sm:max-w-xs">
           <div class="absolute -inset-3 bg-gradient-to-b from-cream/10 to-transparent rounded-3xl blur-xl" aria-hidden="true"></div>
           <img src="${asset(c.insideMockup.src)}" alt="${c.insideMockup.alt}" width="${c.insideMockup.width}" height="${c.insideMockup.height}"
@@ -536,17 +536,17 @@ ${CSS}
       <div class="lg:col-span-3">
         ${rule()}
         ${h2(c.inside.h2)}
-        <p class="reveal mt-4 text-lg text-muted">${c.inside.lead}</p>
-        <ol class="mt-8 space-y-3" data-stagger>
-          ${c.inside.chapters.map(([t, b], i) => `<li class="reveal flex gap-4 bg-card border border-line rounded-2xl p-5">
+        <p class="mt-4 text-lg text-muted">${c.inside.lead}</p>
+        <ol class="mt-8 space-y-3">
+          ${c.inside.chapters.map(([t, b], i) => `<li class="flex gap-4 bg-card border border-line rounded-2xl p-5">
             <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
             <div><p class="font-semibold text-cream">${t}</p><p class="mt-1 text-muted">${b}</p></div>
           </li>`).join('\n          ')}
         </ol>
         <div class="mt-10">
-          <p class="reveal text-xs font-semibold tracking-widest uppercase text-muted mb-3">${c.inside.giftsLabel}</p>
-          <ul class="space-y-3" data-stagger>
-            ${c.inside.gifts.map(([t, b]) => `<li class="reveal flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
+          <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3">${c.inside.giftsLabel}</p>
+          <ul class="space-y-3">
+            ${c.inside.gifts.map(([t, b]) => `<li class="flex gap-4 bg-card border border-cream/30 rounded-2xl p-5">
               <span class="font-display text-3xl text-cream leading-none w-9 shrink-0" aria-hidden="true">+</span>
               <div>
                 <div class="flex flex-wrap items-center gap-2">
@@ -568,17 +568,37 @@ ${CSS}
 
   ${resultsSection}
 
+  <!-- ======================================================== 7b. TIMELINE (what to expect, and when) -->
+  <section class="bg-ink border-t border-line">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      ${rule(true)}
+      ${eyebrow(c.timeline.eyebrow, true)}
+      ${h2(c.timeline.h2, ' text-center')}
+      <ol class="timeline mt-10 grid gap-4 md:grid-cols-4" data-stagger>
+        ${c.timeline.steps.map(([k, t, b], i, all) => `<li class="relative pl-8 md:pl-0 md:pt-8">
+          <span class="tl-dot${i === all.length - 1 ? ' tl-dot-end' : ''}" aria-hidden="true"></span>
+          <div class="h-full bg-card border ${i === all.length - 1 ? 'border-cream/30' : 'border-line'} rounded-2xl p-5">
+            <p class="text-[11px] font-semibold tracking-widest uppercase text-muted">${k}</p>
+            <p class="mt-2 font-display text-2xl text-cream leading-tight">${t}</p>
+            <p class="mt-2 text-muted">${b}</p>
+          </div>
+        </li>`).join('\n        ')}
+      </ol>
+      <p class="mt-8 text-sm text-muted text-center">${c.timeline.note}</p>
+    </div>
+  </section>
+
   <!-- ======================================================== 8. FOR / NOT FOR (belief 5) -->
   <section class="bg-panel border-y border-line">
     <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
       ${rule(true)}
       ${h2(c.fit.h2, ' text-center')}
       <div class="mt-10 grid sm:grid-cols-2 gap-5">
-        <div class="reveal bg-card border border-cream/30 rounded-2xl p-6" data-anim="left">
+        <div class="bg-card border border-cream/30 rounded-2xl p-6">
           <p class="font-display text-2xl text-cream mb-4">${c.fit.yesTitle}</p>
           <ul class="space-y-3 text-cream/90">${c.fit.yes.map((t) => `<li class="flex gap-3">${check}<span>${t}</span></li>`).join('')}</ul>
         </div>
-        <div class="reveal bg-card border border-line rounded-2xl p-6" data-anim="right">
+        <div class="bg-card border border-line rounded-2xl p-6">
           <p class="font-display text-2xl text-cream mb-4">${c.fit.noTitle}</p>
           <ul class="space-y-3 text-muted">${c.fit.no.map((t) => `<li class="flex gap-3">${cross}<span>${t}</span></li>`).join('')}</ul>
         </div>
@@ -591,8 +611,8 @@ ${CSS}
     <div class="max-w-3xl mx-auto px-4 sm:px-5 py-14 sm:py-20 text-center">
       ${rule(true)}
       ${h2(c.value.h2)}
-      <p class="reveal mt-4 text-lg text-muted">${c.value.lead}</p>
-      <ul class="value-list reveal mt-8 max-w-md mx-auto space-y-3 text-left">
+      <p class="mt-4 text-lg text-muted">${c.value.lead}</p>
+      <ul class="value-list mt-8 max-w-md mx-auto space-y-3 text-left">
         ${c.value.rows.map((r, i, all) => `<li class="relative flex items-center justify-between gap-4 ${i < all.length - 1 ? 'pb-3' : 'pb-1'}">
           <span class="text-muted">${r.label}</span>${r.money
             ? `<span class="text-muted line-through shrink-0 text-sm sm:text-base">${config.price.symbol}<span class="count" data-count="${r.money}">${r.money}</span>${r.suffix}</span>`
@@ -600,14 +620,14 @@ ${CSS}
           ${i < all.length - 1 ? '<span class="rule rule-divider absolute inset-x-0 bottom-0" aria-hidden="true"></span>' : ''}
         </li>`).join('\n        ')}
       </ul>
-      <p class="reveal mt-8 text-xl text-cream">${c.value.close}</p>
+      <p class="mt-8 text-xl text-cream">${c.value.close}</p>
     </div>
   </section>
 
   <!-- ======================================================== 10. ADD-ON AT CHECKOUT (belief 4) -->
   <section class="bg-panel border-y border-line">
     <div class="max-w-3xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
-      <div class="reveal bg-card border border-cream/25 rounded-3xl p-6 sm:p-10">
+      <div class="bg-card border border-cream/25 rounded-3xl p-6 sm:p-10">
         <p class="inline-block text-[11px] font-semibold tracking-widest uppercase text-muted bg-cream/5 border border-line rounded-full px-2.5 py-1">${c.addon.badge}</p>
         <h2 class="mt-4 font-display text-3xl sm:text-4xl leading-[1.08] text-cream">${c.addon.h2}</h2>
         <div class="mt-5 space-y-4 text-muted text-lg">
@@ -626,19 +646,20 @@ ${CSS}
     <div class="relative max-w-5xl mx-auto px-4 sm:px-5 py-16 sm:py-24">
       ${rule(true)}
       ${h2(c.final.h2, ' text-center')}
-      <ul class="reveal mt-8 max-w-2xl mx-auto grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+      <ul class="mt-8 max-w-2xl mx-auto grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
         ${c.final.outcomes.map((t) => `<li class="flex gap-3 text-cream/90">${check}<span>${t}</span></li>`).join('')}
       </ul>
       ${tiersOn
-        ? `<div class="reveal mt-10">${tiers('pricing')}${urgency()}</div>
+        ? `<div class="mt-10">${tiers('pricing')}${urgency()}</div>
       <div class="mt-5 max-w-xl mx-auto">${guarantee}</div>`
         : `<div class="mt-10 grid md:grid-cols-2 gap-5 items-stretch">
-        <div class="reveal bg-card border border-cream/30 rounded-3xl p-6 sm:p-8 flex flex-col" data-anim="scale">
+        <div class="bg-card border border-cream/30 rounded-3xl p-6 sm:p-8 flex flex-col">
           <p class="text-xs font-semibold tracking-widest uppercase text-muted">${c.final.youGet}</p>
-          <ul class="mt-4 space-y-2.5 text-muted flex-1">
-            ${c.final.stack.map((t) => `<li class="flex gap-3">${check}<span>${t}</span></li>`).join('')}
+          <ul class="mt-4 space-y-3 text-muted flex-1">
+            ${c.final.stack.map((s) => `<li class="flex gap-3">${check}<span class="flex-1"><span class="block text-cream/90">${s.label}</span><span class="block text-sm">${s.sub}</span></span><span class="shrink-0 text-cream font-semibold">${config.price.symbol}${config.valueStack[s.value]}</span></li>`).join('')}
           </ul>
-          <div class="mt-6 pt-6 border-t border-line text-center">
+          <p class="mt-5 pt-4 border-t border-line flex items-center justify-between gap-4 text-muted"><span>${c.final.totalValue}</span><span class="font-semibold">${config.price.symbol}${c.final.stack.reduce((sum, s) => sum + config.valueStack[s.value], 0)}</span></p>
+          <div class="mt-4 pt-6 border-t border-line text-center">
             <p class="text-muted uppercase tracking-widest text-xs">${c.final.today}</p>
             <p class="font-display text-7xl text-cream leading-none mt-1">{price}</p>
             <div class="mt-5">${cta('pricing', BTN_BLOCK)}</div>
@@ -648,8 +669,8 @@ ${CSS}
         </div>
         ${guarantee}
       </div>`}
-      <p class="reveal mt-8 text-lg text-cream text-center">${c.final.risk}</p>
-      <p class="reveal mt-3 text-sm text-muted text-center max-w-md mx-auto">${c.final.bumpNote}</p>
+      <p class="mt-8 text-lg text-cream text-center">${c.final.risk}</p>
+      <p class="mt-3 text-sm text-muted text-center max-w-md mx-auto">${c.final.bumpNote}</p>
     </div>
   </section>
 
@@ -658,13 +679,13 @@ ${CSS}
     <div class="max-w-3xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
       ${rule(true)}
       ${h2(c.faq.h2, ' text-center')}
-      <div class="mt-10 space-y-3" data-stagger>
-        ${c.faq.items.map(([q, a]) => `<details class="reveal group bg-card border border-line rounded-2xl px-5">
+      <div class="mt-10 space-y-3">
+        ${c.faq.items.map(([q, a]) => `<details class="group bg-card border border-line rounded-2xl px-5">
           <summary class="flex items-center justify-between gap-4 py-5 font-semibold text-cream">${q}<span class="faq-icon text-cream text-2xl leading-none" aria-hidden="true">+</span></summary>
           <p class="pb-5 -mt-1 text-muted">${a}</p>
         </details>`).join('\n        ')}
       </div>
-      <div class="reveal mt-12 text-center">
+      <div class="mt-12 text-center">
         <p class="font-display text-3xl text-cream">${c.faq.closing}</p>
         <div class="mt-5">${cta('final', BTN)}</div>
         <p class="mt-2 text-xs text-muted">${c.ctaNote}</p>

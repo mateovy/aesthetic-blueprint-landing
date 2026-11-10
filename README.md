@@ -23,7 +23,7 @@ overwrites them. Edit `src/` and rebuild.
 
 | To change | Edit |
 |---|---|
-| Price, bump price, page counts, proof numbers, tiers, urgency, author photo placement | `src/config.json` |
+| Price, bump price, "Everything you get" values, page counts, proof numbers, tiers, urgency, author photo placement | `src/config.json` |
 | English words | `src/copy/en.mjs` |
 | Spanish words | `src/copy/es.mjs` (same keys as English; the build stops if one is missing) |
 | Results / testimonials | `src/content/evidence/*.json` |
@@ -137,7 +137,7 @@ redirecting, because Hotmart's checkout doesn't open there.
    customer's before/after, Samuel), proof line, headline, outcomes, offer card, 3 short FAQs
 2. The trap (big idea as the headline) · 3. My story · 4. How it works (3 phases + decision tree)
 5. Why it works (approved claims + references accordion) · 6. What's inside (8 chapters, 2 free tools)
-7. Results · 8. For / not for · 9. What not doing it costs · 10. Add-on at checkout
+7. Results · 7b. Timeline ("How soon will you see results?") · 8. For / not for · 9. What not doing it costs · 10. Add-on at checkout
 11. Final offer (outcomes, card, guarantee) · 12. FAQ, footer
 
 The carousel is native horizontal scroll with snap points, so it swipes with no JavaScript;
@@ -151,7 +151,15 @@ inlines them in `<head>`, so first paint needs no stylesheet request. That inlin
 **before** the stylesheet link on purpose: it is a subset of `styles.css`, and if it came after,
 a plain `.flex-col` there would beat an `sm:flex-row` in the stylesheet.
 
-Measured with Lighthouse (mobile, served with gzip like Cloudflare does): performance 93,
+Motion, all off under `prefers-reduced-motion`: sections that start below the fold fade up
+16px once as they come into view (`page.js` adds `.sr`, so with no JS nothing is hidden and the
+hero never animates); the timeline steps and the "Why it works" cards (`data-stagger`) follow
+each other 80ms apart; the buy buttons (`.cta-glow`) give a faint ring pulse every 4s.
+
+"Everything you get" shows each item's value from `config.valueStack` and adds up the total;
+"Today" is `price.amount`. Real values only.
+
+Measured with Lighthouse 12 (mobile, served with gzip like Cloudflare does) on 2026-11-10: performance 96,
 accessibility 100 on both pages. The previous version measured 82 / 91 the same way.
 
 ## Images

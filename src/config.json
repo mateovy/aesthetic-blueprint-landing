@@ -11,6 +11,13 @@
     "amount": 10
   },
 
+  "valueStack": {
+    "_note": "The values shown next to each item in 'Everything you get'. Real values only: the guide's own price and what each sheet is worth on its own. The total is added up by the build; 'Today' is price.amount.",
+    "blueprint": 12,
+    "calculator": 4,
+    "tracker": 4
+  },
+
   "pages": {
     "en": 114,
     "es": 121

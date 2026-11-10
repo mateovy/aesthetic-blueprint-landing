@@ -105,6 +105,7 @@ function shape(o, p = '') {
     if (isNaN(end)) fail('config.urgency.endsAt must be a real date (ISO, e.g. 2026-11-30T23:59:00-05:00)');
     else if (end < Date.now()) fail('config.urgency.endsAt is in the past. Turn urgency off: fake deadlines are not allowed.');
   }
+  for (const [k, v] of Object.entries(config.valueStack)) if (!k.startsWith('_') && !(Number.isFinite(v) && v > 0)) fail(`config.valueStack.${k} must be a positive number`);
   if (!['story', 'results'].includes(config.authorPhotos.placement)) fail('config.authorPhotos.placement must be "story" or "results"');
 }
 
