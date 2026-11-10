@@ -211,6 +211,18 @@ export default {
     photoPending: 'Foto pendiente',
   },
 
+  timeline: {
+    eyebrow: 'El proceso',
+    h2: '¿En cuánto tiempo <em>verás resultados?</em>',
+    steps: [
+      ['Semanas 1–2', 'Empieza por dentro', 'Levantas más peso, pero en el espejo casi no se nota. Aquí es donde la mayoría abandona.'],
+      ['Semanas 3–4', 'Lo empiezas a notar', 'Pierdes un par de centímetros de cintura y la ropa te queda distinta.'],
+      ['Mes 2', 'Se ve en el espejo', 'El abdomen más plano y los hombros más llenos.'],
+      ['Mes 3', 'Los demás lo notan', 'Te empiezan a preguntar si estás entrenando.'],
+    ],
+    note: 'Con constancia. Los resultados varían según tu punto de partida.',
+  },
+
   fit: {
     h2: '¿Esto es <em>para ti?</em>',
     yesTitle: 'Es para ti si…',
@@ -266,12 +278,13 @@ export default {
       'Sigues un plan para tus primeros 30 días',
     ],
     youGet: 'Todo lo que recibes',
+    // `value` es una clave de config.valueStack.
     stack: [
-      'El Manual del Físico de Dios Griego ({pages} páginas)',
-      'Tus primeros 30 días, por escrito',
-      'La Calculadora Metabólica de Calorías (regalo)',
-      'El Registro de Cambios del Físico (regalo)',
+      { label: 'El Manual del Físico de Dios Griego', sub: '{pages} páginas, con tus primeros 30 días por escrito', value: 'blueprint' },
+      { label: 'La Calculadora Metabólica de Calorías', sub: 'Google Sheet', value: 'calculator' },
+      { label: 'El Registro de Cambios del Físico', sub: 'Google Sheet', value: 'tracker' },
     ],
+    totalValue: 'Valor total',
     today: 'Hoy, pago único',
     risk: '{price} es una apuesta pequeña frente a otro año sin cambios.',
     guaranteeTitle: 'Garantía de reembolso de 7 días',

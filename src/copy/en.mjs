@@ -212,6 +212,18 @@ export default {
     photoPending: 'Photo coming soon',
   },
 
+  timeline: {
+    eyebrow: 'Timeline',
+    h2: 'How soon will you <em>see results?</em>',
+    steps: [
+      ['Weeks 1–2', 'It starts inside', 'Your lifts go up; the mirror barely changes. This is where most guys quit.'],
+      ['Weeks 3–4', 'You start to notice', 'Your waist drops a couple of centimeters and shirts fit differently.'],
+      ['Month 2', 'It shows in the mirror', 'A flatter belly and fuller shoulders.'],
+      ['Month 3', 'Others notice', 'People start asking if you\'ve been training.'],
+    ],
+    note: 'With consistency. Results vary with your starting point.',
+  },
+
   fit: {
     h2: 'Is this <em>for you?</em>',
     yesTitle: 'This is for you if…',
@@ -267,12 +279,13 @@ export default {
       'Follow a plan for your first 30 days',
     ],
     youGet: 'Everything you get',
+    // `value` is a key of config.valueStack.
     stack: [
-      'The Aesthetic Physique Blueprint ({pages} pages)',
-      'Your first 30 days, written out',
-      'The Metabolic Calorie Calculator (free tool)',
-      'The Physique Change Tracker (free tool)',
+      { label: 'The Aesthetic Physique Blueprint', sub: '{pages} pages, with your first 30 days written out', value: 'blueprint' },
+      { label: 'The Metabolic Calorie Calculator', sub: 'Google Sheet', value: 'calculator' },
+      { label: 'The Physique Change Tracker', sub: 'Google Sheet', value: 'tracker' },
     ],
+    totalValue: 'Total value',
     today: 'Today, one time',
     risk: '{price} is a small bet next to another year with no change.',
     guaranteeTitle: '7-day money-back guarantee',

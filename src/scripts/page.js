@@ -32,26 +32,34 @@
       update();
     })();
 
-    // Scroll reveals (.reveal and the self-drawing .rule lines), with a 2.5s safety net.
+    // Scroll reveals: each section below the fold fades up 16px the first time it comes into
+    // view; [data-stagger] items follow each other 80ms apart. Anything already on screen at
+    // load is never touched, and the classes come off once the fade is done.
     (function () {
-      var els = document.querySelectorAll('.reveal, .rule');
-      if (!('IntersectionObserver' in window) || !els.length) {
-        els.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      document.querySelectorAll('[data-stagger]').forEach(function (parent) {
-        parent.querySelectorAll(':scope > .reveal').forEach(function (kid, i) { kid.style.transitionDelay = (i * 90) + 'ms'; });
-      });
+      if (reduce || !('IntersectionObserver' in window)) return;
+      var fold = window.innerHeight;
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          io.unobserve(el);
+          el.classList.add('in');
+          setTimeout(function () { el.classList.remove('sr', 'in'); el.style.transitionDelay = ''; }, 1200);
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      els.forEach(function (el) { io.observe(el); });
+      }, { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('main > section, [data-stagger] > *').forEach(function (el) {
+        if (el.getBoundingClientRect().top < fold) return;
+        var p = el.parentNode;
+        if (p.hasAttribute('data-stagger')) el.style.transitionDelay = Array.prototype.indexOf.call(p.children, el) * 80 + 'ms';
+        el.classList.add('sr');
+        io.observe(el);
+      });
     })();
-    setTimeout(function () {
-      document.querySelectorAll('.reveal:not(.in), .rule:not(.in)').forEach(function (el) { el.classList.add('in'); });
-    }, 2500);
+
+    // Full testimonials ship open (readable with no JS); on phones they fold behind "read more".
+    if (window.matchMedia('(max-width: 639px)').matches) {
+      document.querySelectorAll('[data-full-story]').forEach(function (d) { d.open = false; });
+    }
 
     // Hero carousel: arrows, dots and the current slide. The swipe itself is native scroll-snap.
     (function () {
