@@ -66,6 +66,8 @@ Only real people, with their permission. The build enforces the rest.
      blank line (`\n\n`). It shows open on desktop and behind "Read his full story" on phones.
      `quote.lang`: the language they wrote in. `quote.translation.<lang>` holds the
      `highlight` and `text` for the other page, which marks them "Translated from…".
+   - No quote yet? Leave `quote` out: the card shows only the photos and the build warns until
+     you add their words. Never write words for them.
    - `permission`: `true` only once you have it. `false` keeps them off the page entirely.
    - `permissionNote`: where and when they said yes.
    - `featured: true` also adds them as a slide in the hero carousel.
@@ -74,7 +76,8 @@ Only real people, with their permission. The build enforces the rest.
    Both happen **in the image file**, so the published photo never contains the face. To read
    the box, run `node build.mjs --grid originals/<photo>.jpg`: it writes a copy with a numbered
    10% grid next to the original.
-   `rotate` (90/180/270) fixes a sideways phone photo. `frame: [x, y, width]` (in %) picks the
+   Other people caught in the photo (a gym mirror): `"blur": [[x, y, width, height], ...]`, in %,
+   pixelates each box the same way. `rotate` (90/180/270) fixes a sideways phone photo. `frame: [x, y, width]` (in %) picks the
    3:4 crop by hand; leave `null` for centred.
 5. `node build.mjs`. Photos come out as `assets/evidence/<id>-before-1.webp` etc. (720x960).
    If you already have processed photos, point `photos` at them with `src` instead of

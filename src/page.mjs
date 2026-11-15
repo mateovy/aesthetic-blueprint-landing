@@ -282,6 +282,24 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
 
   // Results: only items with permission ever reach this point (build.mjs filters them).
   const resultItems = [...(authorIn === 'results' && author ? [author] : []), ...customers];
+  // Three or more cards: two stacked columns balanced by height (a long testimonial weighs
+  // more than a photos-only card), each keeping the original order, so no row leaves a hole.
+  // The column with the first item comes first, which is the order on phones.
+  const weight = (e) => { const { highlight, text } = quoteParts(e); return 1 + (highlight ? 0.15 : 0) + text.length / 600; };
+  const resultGrid = () => {
+    if (resultItems.length < 3) {
+      return `<div class="mt-10 grid gap-5 items-start ${resultItems.length > 1 ? 'md:grid-cols-2' : 'max-w-md mx-auto'}">
+        ${resultItems.map(evidenceCard).join('')}
+      </div>`;
+    }
+    const cols = [[], []], load = [0, 0];
+    [...resultItems].sort((a, b) => weight(b) - weight(a)).forEach((e) => { const k = load[0] <= load[1] ? 0 : 1; cols[k].push(e); load[k] += weight(e); });
+    cols.forEach((col) => col.sort((a, b) => resultItems.indexOf(a) - resultItems.indexOf(b)));
+    if (!cols[0].includes(resultItems[0])) cols.reverse();
+    return `<div class="mt-10 grid gap-5 items-start md:grid-cols-2">
+        ${cols.map((col) => `<div class="grid gap-5">${col.map(evidenceCard).join('')}</div>`).join('\n        ')}
+      </div>`;
+  };
   const resultsSection = resultItems.length ? `<!-- ======================================================== 7. RESULTS (evidence, permission only) -->
   <section class="bg-ink" id="results">
     <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
@@ -289,9 +307,7 @@ export function render({ c, config, evidence, refs, critical = '/*@critical*/' }
       ${eyebrow(c.results.eyebrow, true)}
       ${h2(c.results.h2, ' text-center')}
       <p class="mt-4 text-lg text-muted text-center max-w-2xl mx-auto">${c.results.lead}</p>
-      <div class="mt-10 grid gap-5 items-start ${resultItems.length > 1 ? 'md:grid-cols-2' : 'max-w-md mx-auto'}">
-        ${resultItems.map(evidenceCard).join('')}
-      </div>
+      ${resultGrid()}
       <p class="mt-6 text-sm text-muted text-center">${c.results.disclaimer}</p>
       <div class="mt-10 text-center">
         ${cta('results', BTN)}
