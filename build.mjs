@@ -127,7 +127,9 @@ const evidenceAll = fs.readdirSync(EVD)
     if (e.type === 'author') authors++;
     if (typeof e.permission !== 'boolean') fail(`${where}: "permission" must be true or false`);
     if (!e.name) fail(`${where}: "name" is required (first name or initials)`);
-    if (!e.quote || !(e.quote.text || e.quote.highlight)) fail(`${where}: the quote needs "highlight" and/or "text" (their exact words)`);
+    // No quote at all is allowed (photos only, until they send their words); an empty one is a mistake.
+    if (!e.quote) warn(`${where}: no quote yet, so the card shows only the photos. Add their exact words when you have them.`);
+    else if (!(e.quote.text || e.quote.highlight)) fail(`${where}: the quote needs "highlight" and/or "text" (their exact words)`);
     if (e.type === 'customer' && e.permission && e.quote && e.quote.highlight && !e.quote.text) warn(`${where}: only the highlight is filled in. Paste their full testimonial into "quote.text" (and its translation).`);
     if (e.quote && e.quote.translation) for (const [l, t] of Object.entries(e.quote.translation)) {
       if (typeof t === 'object' && e.quote.text && !t.text) warn(`${where}: "quote.translation.${l}.text" is empty, so the ${l.toUpperCase()} page shows only the highlight.`);
@@ -227,6 +229,8 @@ function processPhoto(e, side, idx, ph) {
   } else { fw = Math.min(W, H * 3 / 4); fh = fw * 4 / 3; fx = (W - fw) / 2; fy = (H - fh) / 2; }
   fx = Math.max(0, Math.min(fx, W - fw)); fy = Math.max(0, Math.min(fy, H - fh));
   if (face && ph.face.mode === 'blur') pixelate(img, face[0], face[1], face[2], face[3]);
+  // Other people caught in the photo (a gym mirror, a crowd): `blur` is a list of boxes, in %.
+  for (const b of ph.blur || []) pixelate(img, (b[0] / 100) * W, (b[1] / 100) * H, (b[2] / 100) * W, (b[3] / 100) * H);
   img = crop(img, fx, fy, fw, fh);
 
   fs.writeFileSync(path.join(tmp, 'out.bmp'), writeBMP(img));
@@ -234,7 +238,7 @@ function processPhoto(e, side, idx, ph) {
   fs.mkdirSync(r('assets/evidence'), { recursive: true });
   execFileSync('cwebp', ['-quiet', '-q', '82', '-resize', '720', '960', path.join(tmp, 'out.png'), '-o', r(out)]);
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`  photo  ${out}${ph.face ? `  (face: ${ph.face.mode})` : ''}`);
+  console.log(`  photo  ${out}${ph.face ? `  (face: ${ph.face.mode})` : ''}${ph.blur ? `  (${ph.blur.length} bystander${ph.blur.length > 1 ? 's' : ''} blurred)` : ''}`);
   return { src: out, width: 720, height: 960 };
 }
 for (const e of evidence) {

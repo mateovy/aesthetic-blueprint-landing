@@ -1,0 +1,20 @@
+{
+  "id": "andres",
+  "type": "customer",
+  "name": "Andres",
+  "permission": true,
+  "permissionNote": "Before/after photos authorized (confirmed by the author, 2026-11-14). No written testimonial yet.",
+  "featured": false,
+  "time": {
+    "en": "2 years",
+    "es": "2 años"
+  },
+  "photos": {
+    "before": [
+      { "original": "originals/andres-before.jpeg", "rotate": 0, "frame": [0, 20, 100], "face": null, "blur": [[59, 46, 12, 5.5]], "_note": "Phone screenshot: the frame keeps only the photo (20%-80%). The blur hides a man in the background." }
+    ],
+    "after": [
+      { "original": "originals/andres-after.jpeg", "rotate": 0, "frame": [13, 0, 62], "face": null, "blur": [[14, 11, 11, 8]], "_note": "Head to hips, like the before. The frame leaves out the other people's faces; the blur covers the man in profile on the left." }
+    ]
+  }
+}
