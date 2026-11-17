@@ -81,7 +81,18 @@
 
         <div class="mt-5 pt-5 border-t border-line">
           <p class="mb-3 text-center text-sm font-semibold text-cream">¿Lo agregas por $9?</p>
-          <div class="hm-slot"><!-- HOTMART_WIDGET --></div>
+          <div class="hm-slot -mx-4 sm:mx-0"><!-- HOTMART_WIDGET -->
+<!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
+
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+          </div>
           <p class="mt-3 text-center text-xs text-muted">Si lo saltas, vas directo a tu pedido. Tu Manual ya va camino a tu correo.</p>
         </div>
       </div>
