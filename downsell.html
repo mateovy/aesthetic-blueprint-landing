@@ -81,7 +81,18 @@
 
         <div class="mt-5 pt-5 border-t border-line">
           <p class="mb-3 text-center text-sm font-semibold text-cream">Add it for $9?</p>
-          <div class="hm-slot"><!-- HOTMART_WIDGET --></div>
+          <div class="hm-slot -mx-4 sm:mx-0"><!-- HOTMART_WIDGET -->
+<!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
+
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+          </div>
           <p class="mt-3 text-center text-xs text-muted">Skip it and you go straight to your order. Your Blueprint is already on its way.</p>
         </div>
       </div>
