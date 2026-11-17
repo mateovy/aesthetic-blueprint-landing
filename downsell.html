@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<!--
+  Post-purchase downsell: /downsell  (Hotmart sends the buyer here after declining the upsell)
+
+  Hand-written, like upsell.html: build.mjs does not touch it. Same rules: no buy buttons of
+  our own (Hotmart's widget goes in the HOTMART_WIDGET slot), no fake scarcity, no invented
+  numbers or testimonials. Shorter than the upsell on purpose: they already read the pitch.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>One last option · The 90-Day Execution Blueprint for $9</title>
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- PIXELS -->
+
+  <link rel="preload" href="/assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="/assets/execution-blueprint-cover-en-480.webp" fetchpriority="high" />
+
+  <style>
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700-italic.woff2') format('woff2')}
+  </style>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <style>
+    html, body { background:#0A0E1A; overflow-x:hidden; overflow-x:clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing:-0.015em; font-weight:700; }
+    .font-display em, h1 em, h2 em { font-style:italic; }
+    .hero-glow { position:relative; }
+    .hero-glow::before { content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%); }
+    a:focus-visible { outline:3px solid #F5F5F2; outline-offset:3px; border-radius:6px; }
+    /* Hotmart widget slot: see upsell.html. Keep the comment on the same line as the div. */
+    .hm-slot { min-height:120px; display:flex; flex-direction:column; justify-content:center; }
+    .hm-slot:empty { border:1px dashed #1E2740; border-radius:.75rem; }
+    .hm-slot:empty::before { content:"Hotmart buttons load here"; text-align:center; font-size:.75rem; color:#9AA3B2; }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+  <main>
+  <!-- ======================================================== 1. HEADER -->
+  <header class="hero-glow">
+    <div class="relative max-w-xl mx-auto px-4 sm:px-5 pt-8 sm:pt-14">
+      <p class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">Before you go</p>
+      <h1 class="mt-2 font-display leading-[1.08] text-cream text-[2rem] sm:text-5xl">Fair enough. Here's the same plan for <em>$9.</em></h1>
+      <p class="mt-3 text-base sm:text-lg text-muted">You said no, and that's fine. If the price was the reason, this is the full 90-Day Execution Blueprint, all nine chapters, nothing removed, for $9. It's the last offer in this checkout. After this, you go straight to your order.</p>
+    </div>
+  </header>
+
+  <!-- ======================================================== 2. OFFER: price + Hotmart widget -->
+  <section id="offer">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 pt-6 pb-12">
+      <div class="bg-card border border-cream/30 rounded-2xl p-4 sm:p-6">
+        <div class="flex gap-4">
+          <img src="/assets/execution-blueprint-cover-en-480.webp" alt="The 90-Day Execution Blueprint, PDF cover with a 12-week calendar" width="480" height="643" decoding="async" fetchpriority="high"
+               class="w-24 sm:w-28 h-auto shrink-0 self-start rounded-md border border-line shadow-[0_12px_30px_-12px_rgba(0,0,0,.9)]" />
+          <div class="min-w-0 flex-1">
+            <p class="font-display text-xl sm:text-2xl text-cream leading-tight">The 90-Day Execution Blueprint</p>
+            <p class="mt-1 text-xs text-muted">PDF · instant access · the complete plan</p>
+            <p class="mt-3 flex items-baseline gap-2">
+              <span class="text-lg text-muted line-through">$17</span>
+              <span class="font-display text-4xl sm:text-5xl text-cream leading-none">$9</span>
+              <span class="text-xs text-muted">one-time</span>
+            </p>
+            <p class="mt-2 text-xs text-muted">7-day refund, same as the Blueprint</p>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-5 border-t border-line">
+          <p class="mb-3 text-center text-sm font-semibold text-cream">Add it for $9?</p>
+          <div class="hm-slot"><!-- HOTMART_WIDGET --></div>
+          <p class="mt-3 text-center text-xs text-muted">Skip it and you go straight to your order. Your Blueprint is already on its way.</p>
+        </div>
+      </div>
+
+      <!-- ======================================================== 3. SAME PLAN, NOTHING REMOVED -->
+      <div class="mt-10">
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-4">Everything in it, at $9</p>
+        <ul class="grid gap-2.5 text-sm">
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Menus in grams</span> <span class="text-muted">for your calorie level, built on nine foods</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Shopping list</span> <span class="text-muted">for the week</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Batch cooking,</span> <span class="text-muted">so weekday meals are already done</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Your first gym week,</span> <span class="text-muted">with loads and swaps</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">The 12-week calendar</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">The 10-minute Sunday review</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">The plan for hard weeks</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Diet breaks,</span> <span class="text-muted">and how to restart after one</span></span></li>
+          <li class="flex gap-2.5"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="text-cream font-semibold">Day 91:</span> <span class="text-muted">what to do when the 90 days end</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-8 text-center text-xs text-muted">
+      <p>© Aesthetic Engineer · <a href="/privacy" class="hover:text-cream">Privacy</a> · <a href="/terms" class="hover:text-cream">Terms</a></p>
+    </div>
+  </footer>
+</body>
+</html>

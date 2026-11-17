@@ -199,6 +199,25 @@ refund.
 Strictly monochrome, no accent colours. Playfair Display for headlines (italic for the
 emphasized words, written as `<em>` in the copy files), Inter for body text.
 
+## Post-purchase funnel (Hotmart upsell / downsell / thank-you)
+
+Hand-written pages, like `privacy.html`: `build.mjs` does not generate or touch them.
+
+| URL | File |
+|---|---|
+| `/upsell`, `/es/upsell` | `upsell.html`, `es/upsell.html` |
+| `/downsell`, `/es/downsell` | `downsell.html`, `es/downsell.html` |
+| `/thank-you`, `/es/gracias` | `thank-you.html`, `es/gracias.html` |
+
+- Hotmart's accept/decline widget goes where `<!-- HOTMART_WIDGET -->` is (one per page,
+  inside the `hm-slot` div, keep it on the same line). Paste tracking pixels at `<!-- PIXELS -->`.
+- No buy buttons of our own, no fake scarcity, no invented numbers or testimonials.
+- Their Tailwind classes are compiled because the files are listed in `tailwind.config.js`;
+  `node build.mjs` rebuilds `assets/styles.css` with them.
+- Covers: `assets/execution-blueprint-cover-{en,es}.webp` (960 wide) and `-480` versions,
+  from `assets/originals/execution-blueprint-cover-{en,es}.jpeg`.
+- Preview locally: `python3 -m http.server 8000`, then `http://localhost:8000/upsell.html`.
+
 ## Going back
 
 The version before this rework is tagged `pre-mark-v1`. `git checkout pre-mark-v1 -- .`

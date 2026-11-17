@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<!--
+  Upsell posterior a la compra: /es/upsell  (Hotmart envía aquí al comprador después de pagar el Manual)
+
+  Escrita a mano, como upsell.html: build.mjs no la toca. Mismas reglas que la versión en
+  inglés: sin botones de compra propios (el widget de Hotmart va en HOTMART_WIDGET), sin
+  escasez falsa, sin cifras, resultados ni testimonios inventados. Copy adaptado, no traducido.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Tu compra está completa · Un complemento opcional</title>
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- PIXELS -->
+
+  <link rel="preload" href="/assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="/assets/execution-blueprint-cover-es-480.webp" fetchpriority="high" />
+
+  <style>
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700-italic.woff2') format('woff2')}
+  </style>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <style>
+    html, body { background:#0A0E1A; overflow-x:hidden; overflow-x:clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing:-0.015em; font-weight:700; }
+    .font-display em, h1 em, h2 em { font-style:italic; }
+    .rule-accent { display:block; width:3rem; height:2px; background:#F5F5F2; margin-bottom:1.25rem; }
+    .hero-glow { position:relative; }
+    .hero-glow::before { content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%); }
+    a:focus-visible { outline:3px solid #F5F5F2; outline-offset:3px; border-radius:6px; }
+    /* Hueco del widget de Hotmart: ver upsell.html. Deja el comentario en la misma línea que el div. */
+    .hm-slot { min-height:120px; display:flex; flex-direction:column; justify-content:center; }
+    .hm-slot:empty { border:1px dashed #1E2740; border-radius:.75rem; }
+    .hm-slot:empty::before { content:"Aquí cargan los botones de Hotmart"; text-align:center; font-size:.75rem; color:#9AA3B2; }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+
+  <!-- ======================================================== 1. ENCABEZADO: confirmación + siguiente paso -->
+  <header class="hero-glow">
+    <div class="relative max-w-xl mx-auto px-4 sm:px-5 pt-6 sm:pt-12">
+      <p class="flex items-start gap-3 bg-card border border-line rounded-xl px-4 py-3 text-sm">
+        <svg class="w-5 h-5 shrink-0 mt-px text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.7 2.7L14 7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="font-semibold text-cream">Pago completado.</span> <span class="text-muted">El Manual del Físico de Dios Griego ya va camino a tu correo.</span></span>
+      </p>
+
+      <p class="mt-7 text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">Tu siguiente paso · opcional</p>
+      <h1 class="mt-2 font-display leading-[1.08] text-cream text-[2rem] sm:text-5xl">Ya tienes el sistema. Ahora ten los próximos <em>90 días</em> ya organizados.</h1>
+      <p class="mt-3 text-base sm:text-lg text-muted">El Blueprint de Ejecución: 90 Días pone en marcha el plan que acabas de comprar: cada comida, cada sesión y cada decisión del domingo, en un calendario.</p>
+    </div>
+  </header>
+
+  <main>
+  <!-- ======================================================== 2. OFERTA: precio + widget de Hotmart (sin scroll) -->
+  <section id="oferta" class="scroll-mt-4">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 pt-6 pb-12">
+      <div class="bg-card border border-cream/30 rounded-2xl p-4 sm:p-6">
+        <div class="flex gap-4">
+          <img src="/assets/execution-blueprint-cover-es-480.webp" alt="Blueprint de Ejecución: 90 Días, portada del PDF con un calendario de 12 semanas" width="480" height="643" decoding="async" fetchpriority="high"
+               class="w-24 sm:w-28 h-auto shrink-0 self-start rounded-md border border-line shadow-[0_12px_30px_-12px_rgba(0,0,0,.9)]" />
+          <div class="min-w-0 flex-1">
+            <p class="font-display text-xl sm:text-2xl text-cream leading-tight">Blueprint de Ejecución: 90&nbsp;Días</p>
+            <p class="mt-1 text-xs text-muted">PDF · acceso inmediato</p>
+            <p class="mt-3 flex items-baseline gap-2">
+              <span class="font-display text-4xl sm:text-5xl text-cream leading-none">$17</span>
+              <span class="text-xs text-muted">pago único</span>
+            </p>
+            <p class="mt-2 text-xs text-muted">Reembolso de 7 días, igual que el Manual</p>
+          </div>
+        </div>
+
+        <ul class="mt-4 space-y-1.5 text-sm text-cream/90">
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Menús en gramos para tu nivel de calorías</li>
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tu primera semana en el gym, con cargas y sustituciones</li>
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Calendario de 12 semanas y revisión dominical de 10 minutos</li>
+        </ul>
+
+        <div class="mt-5 pt-5 border-t border-line">
+          <p class="mb-3 text-center text-sm font-semibold text-cream">¿Lo agregas a tu pedido?</p>
+          <div class="hm-slot"><!-- HOTMART_WIDGET --></div>
+          <p class="mt-3 text-center text-xs text-muted">Si lo saltas, no cambia nada: tu Manual ya está pagado y va camino a tu correo.</p>
+        </div>
+      </div>
+
+      <a href="#problema" class="mt-5 flex items-center justify-center gap-1.5 text-sm text-muted hover:text-cream">
+        Mira qué incluye
+        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== 3. EL PROBLEMA -->
+  <section id="problema" class="bg-panel border-y border-line">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      <span class="rule-accent" aria-hidden="true"></span>
+      <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream">Saber qué hacer no es lo mismo que saber qué hacer <em>el lunes a las 7.</em></h2>
+      <div class="mt-6 space-y-4 text-lg text-muted leading-relaxed">
+        <p>El Manual te da el sistema: en qué fase empiezas, tus calorías, las reglas para cambiar de fase. Esa es la parte difícil, y ya la tienes.</p>
+        <p>Pero llega el lunes y las preguntas se vuelven pequeñas. Qué va a la sartén y cuánto. Qué peso le pones a la barra. Qué haces si la máquina está ocupada.</p>
+        <p class="text-cream">El Blueprint de Ejecución es ese mismo sistema, ya montado: pesado, comprado y puesto en un calendario. Lo abres y haces lo de hoy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 4. POR QUÉ AYUDA (los cinco ángulos) -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      <span class="rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream text-center">Menos decidir. <em>Más hacer.</em></h2>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">Del sistema <em>a la agenda.</em></p>
+          <p class="mt-2 text-muted">Tu fase y tu nivel de calorías se convierten en 12 semanas de calendario. Cada día ves qué comer y qué entrenar. Nada de improvisar.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">La semana 3, <em>sin sustos.</em></p>
+          <p class="mt-2 text-muted">Hacia la semana 3 la báscula puede frenarse y el espejo puede verse igual. El plan te dice qué es normal en cada etapa, para que una semana normal no parezca un fracaso.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">Nueve alimentos. <em>Cero matemáticas.</em></p>
+          <p class="mt-2 text-muted">Los menús se arman con nueve alimentos de todos los días, ya pesados en gramos para tu nivel de calorías. No cuentas nada. Cocinas lo que dice la página.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">Un domingo. <em>Una decisión.</em></p>
+          <p class="mt-2 text-muted">Diez minutos cada domingo. Revisas tus números, respondes una pregunta y sabes si la próxima semana sigue igual o cambia.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6 sm:col-span-2 lg:col-span-2">
+          <p class="font-display text-2xl text-cream leading-tight">Un plan que aguanta <em>tu peor semana.</em></p>
+          <p class="mt-2 text-muted">Viajes, cierres en el trabajo, una gripe, una semana en la que nada sale bien. También hay plan para esas semanas, y pausas de dieta programadas, para que una mala semana se quede en eso: una semana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 5. QUÉ INCLUYE (9 capítulos) + portada -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20 grid gap-10 md:grid-cols-[1fr_1.15fr] md:items-start">
+      <figure class="max-w-[300px] sm:max-w-[340px] mx-auto md:sticky md:top-8">
+        <img src="/assets/execution-blueprint-cover-es.webp" alt="Portada del Blueprint de Ejecución: 90 Días: cada comida, cada sesión, cada decisión del domingo, ya hecho para ti" width="960" height="1286" loading="lazy" decoding="async"
+             class="w-full h-auto rounded-lg border border-line shadow-[0_30px_60px_-25px_rgba(0,0,0,.95)]" />
+      </figure>
+      <div>
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3">Qué incluye</p>
+        <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream">Nueve capítulos. <em>Noventa días.</em></h2>
+        <ol class="mt-8 space-y-4">
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">1</span><p><span class="font-semibold text-cream">Menús en gramos por nivel de calorías.</span> <span class="text-muted">Eliges tu nivel. Cada comida ya está pesada.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">2</span><p><span class="font-semibold text-cream">La lista de compras.</span> <span class="text-muted">Una lista para la semana. La compras y listo.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">3</span><p><span class="font-semibold text-cream">Cocina por tandas.</span> <span class="text-muted">Cocinas por tandas y las comidas de la semana quedan hechas.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">4</span><p><span class="font-semibold text-cream">Tu primera semana en el gym.</span> <span class="text-muted">Cada ejercicio con sus cargas, y una alternativa para cuando la máquina está ocupada.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">5</span><p><span class="font-semibold text-cream">El calendario de 12 semanas.</span> <span class="text-muted">Todos los días de entrenamiento y todas las revisiones en una sola vista.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">6</span><p><span class="font-semibold text-cream">La revisión dominical de 10 minutos.</span> <span class="text-muted">Unos pocos números, una decisión para la próxima semana.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">7</span><p><span class="font-semibold text-cream">El plan para semanas difíciles.</span> <span class="text-muted">Qué hacer cuando el trabajo, un viaje o una gripe se atraviesan.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">8</span><p><span class="font-semibold text-cream">Pausas de dieta.</span> <span class="text-muted">Cuándo tomar una y cómo retomar el plan después.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">9</span><p><span class="font-semibold text-cream">El día 91.</span> <span class="text-muted">Qué hacer cuando terminen los 90 días, para que nunca te quedes sin siguiente paso.</span></p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 6. CIERRE: volver al widget (un solo widget por página) -->
+  <section class="bg-ink">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-14 sm:py-20 text-center">
+      <h2 class="font-display text-[2rem] sm:text-4xl leading-[1.1] text-cream">El sistema ya lo tienes. <em>Este es el calendario para ejecutarlo.</em></h2>
+      <p class="mt-4 text-lg text-muted">Blueprint de Ejecución: 90 Días, $17 pago único, con la misma garantía de reembolso de 7 días que el Manual: si no es para ti, me escribes y te devuelvo cada centavo. Decidas lo que decidas, tu Manual ya va camino a tu correo.</p>
+      <a href="#oferta" class="mt-7 inline-flex items-center gap-2 border border-cream/40 rounded-xl px-6 py-3.5 font-semibold text-cream hover:bg-cream/5">
+        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 12l5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Volver a las opciones
+      </a>
+    </div>
+  </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-8 text-center text-xs text-muted">
+      <p>© Aesthetic Engineer · <a href="/privacy" class="hover:text-cream">Privacidad</a> · <a href="/terms" class="hover:text-cream">Términos</a></p>
+    </div>
+  </footer>
+</body>
+</html>
