@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<!--
+  Post-purchase upsell: /upsell  (Hotmart sends the buyer here after paying for the Blueprint)
+
+  Hand-written, like privacy.html: build.mjs does not touch it. Its Tailwind classes are
+  compiled into assets/styles.css because the file is listed in tailwind.config.js.
+
+  Rules for this page (do not undo them in an edit):
+  - No buy buttons of our own. Hotmart's accept/decline buttons go in the HOTMART_WIDGET slot.
+  - No fake scarcity: no countdowns, no "only X left", no "you'll never see this again".
+  - No invented numbers, results or testimonials. The product has none yet.
+  - The widget sits right under the header so the price and the buttons show without
+    scrolling far on a phone. The longer argument comes after, with a link back up.
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Your order is complete · One optional add-on</title>
+  <meta name="theme-color" content="#0A0E1A" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- PIXELS -->
+
+  <link rel="preload" href="/assets/fonts/playfair-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="/assets/execution-blueprint-cover-en-480.webp" fetchpriority="high" />
+
+  <style>
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/inter-700.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/inter-800.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700.woff2') format('woff2')}
+    @font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-700-italic.woff2') format('woff2')}
+  </style>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <style>
+    html, body { background:#0A0E1A; overflow-x:hidden; overflow-x:clip; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+    .font-display { letter-spacing:-0.015em; font-weight:700; }
+    .font-display em, h1 em, h2 em { font-style:italic; }
+    .rule-accent { display:block; width:3rem; height:2px; background:#F5F5F2; margin-bottom:1.25rem; }
+    .hero-glow { position:relative; }
+    .hero-glow::before { content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,245,242,.06), transparent 70%); }
+    a:focus-visible { outline:3px solid #F5F5F2; outline-offset:3px; border-radius:6px; }
+
+    /* Hotmart widget slot. Holds its height before the script loads so nothing jumps, and
+       says what goes there while it is still empty (keep the comment on the same line as the
+       div: any whitespace inside would stop :empty from matching). */
+    .hm-slot { min-height:120px; display:flex; flex-direction:column; justify-content:center; }
+    .hm-slot:empty { border:1px dashed #1E2740; border-radius:.75rem; }
+    .hm-slot:empty::before { content:"Hotmart buttons load here"; text-align:center; font-size:.75rem; color:#9AA3B2; }
+  </style>
+</head>
+
+<body class="bg-ink text-cream font-body antialiased selection:bg-cream selection:text-ink">
+
+  <!-- ======================================================== 1. HEADER: confirmation + next step -->
+  <header class="hero-glow">
+    <div class="relative max-w-xl mx-auto px-4 sm:px-5 pt-6 sm:pt-12">
+      <p class="flex items-start gap-3 bg-card border border-line rounded-xl px-4 py-3 text-sm">
+        <svg class="w-5 h-5 shrink-0 mt-px text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.7 2.7L14 7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="font-semibold text-cream">Payment complete.</span> <span class="text-muted">The Aesthetic Physique Blueprint is on its way to your email.</span></span>
+      </p>
+
+      <p class="mt-7 text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-muted">Your next step · optional</p>
+      <h1 class="mt-2 font-display leading-[1.08] text-cream text-[2rem] sm:text-5xl">You have the system. Here are the next <em>90 days,</em> already scheduled.</h1>
+      <p class="mt-3 text-base sm:text-lg text-muted">The 90-Day Execution Blueprint sets up the plan you just bought: every meal, every lift and every Sunday decision, on a calendar.</p>
+    </div>
+  </header>
+
+  <main>
+  <!-- ======================================================== 2. OFFER: price + Hotmart widget (above the fold) -->
+  <section id="offer" class="scroll-mt-4">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 pt-6 pb-12">
+      <div class="bg-card border border-cream/30 rounded-2xl p-4 sm:p-6">
+        <div class="flex gap-4">
+          <img src="/assets/execution-blueprint-cover-en-480.webp" alt="The 90-Day Execution Blueprint, PDF cover with a 12-week calendar" width="480" height="643" decoding="async" fetchpriority="high"
+               class="w-24 sm:w-28 h-auto shrink-0 self-start rounded-md border border-line shadow-[0_12px_30px_-12px_rgba(0,0,0,.9)]" />
+          <div class="min-w-0 flex-1">
+            <p class="font-display text-xl sm:text-2xl text-cream leading-tight">The 90-Day Execution Blueprint</p>
+            <p class="mt-1 text-xs text-muted">PDF · instant access</p>
+            <p class="mt-3 flex items-baseline gap-2">
+              <span class="font-display text-4xl sm:text-5xl text-cream leading-none">$17</span>
+              <span class="text-xs text-muted">one-time</span>
+            </p>
+            <p class="mt-2 text-xs text-muted">7-day refund, same as the Blueprint</p>
+          </div>
+        </div>
+
+        <ul class="mt-4 space-y-1.5 text-sm text-cream/90">
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Menus in grams for your calorie level</li>
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Your first gym week, with loads and swaps</li>
+          <li class="flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-cream" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>A 12-week calendar and a 10-minute Sunday review</li>
+        </ul>
+
+        <div class="mt-5 pt-5 border-t border-line">
+          <p class="mb-3 text-center text-sm font-semibold text-cream">Add it to your order?</p>
+          <div class="hm-slot"><!-- HOTMART_WIDGET --></div>
+          <p class="mt-3 text-center text-xs text-muted">If you skip it, nothing changes: your Blueprint is already paid for and on its way.</p>
+        </div>
+      </div>
+
+      <a href="#gap" class="mt-5 flex items-center justify-center gap-1.5 text-sm text-muted hover:text-cream">
+        See what's inside
+        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== 3. THE PROBLEM -->
+  <section id="gap" class="bg-panel border-y border-line">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      <span class="rule-accent" aria-hidden="true"></span>
+      <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream">Knowing what to do isn't knowing what to do <em>Monday at 7 a.m.</em></h2>
+      <div class="mt-6 space-y-4 text-lg text-muted leading-relaxed">
+        <p>The Blueprint gives you the system: which phase you start in, your calorie targets, the rules for when to switch. That's the hard part, and it's done.</p>
+        <p>Then Monday comes, and the questions get small. What goes in the pan, and how much. Which weight goes on the bar. What to do when the machine is taken.</p>
+        <p class="text-cream">The 90-Day Execution Blueprint is the same system, already set up: weighed, shopped for and put on a calendar. You open it and do today.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 4. WHY IT HELPS (the five angles) -->
+  <section class="bg-ink">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20">
+      <span class="rule-accent mx-auto" aria-hidden="true"></span>
+      <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream text-center">Less deciding. <em>More doing.</em></h2>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">From system <em>to schedule.</em></p>
+          <p class="mt-2 text-muted">Your phase and your calorie level become 12 weeks on a calendar. Each day you see what to eat and what to lift. No planning on the spot.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">Week 3, <em>explained.</em></p>
+          <p class="mt-2 text-muted">Around week 3 the scale can stall and the mirror can look the same. The plan tells you what's normal at each stage, so a normal week doesn't feel like a failed one.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">Nine foods. <em>Zero math.</em></p>
+          <p class="mt-2 text-muted">The menus are built on nine everyday foods, already weighed in grams for your calorie level. You don't count anything. You cook what's on the page.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6">
+          <p class="font-display text-2xl text-cream leading-tight">One Sunday. <em>One decision.</em></p>
+          <p class="mt-2 text-muted">Ten minutes each Sunday. Check your numbers, answer one question, and you know if next week stays the same or changes.</p>
+        </div>
+        <div class="bg-card border border-line rounded-2xl p-5 sm:p-6 sm:col-span-2 lg:col-span-2">
+          <p class="font-display text-2xl text-cream leading-tight">A plan that survives <em>your worst week.</em></p>
+          <p class="mt-2 text-muted">Travel, a deadline, a cold, a week where nothing goes right. There's a plan for those weeks too, plus planned diet breaks, so one bad week stays one bad week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 5. WHAT'S INSIDE (9 chapters) + mockup -->
+  <section class="bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto px-4 sm:px-5 py-14 sm:py-20 grid gap-10 md:grid-cols-[1fr_1.15fr] md:items-start">
+      <figure class="max-w-[300px] sm:max-w-[340px] mx-auto md:sticky md:top-8">
+        <img src="/assets/execution-blueprint-cover-en.webp" alt="The 90-Day Execution Blueprint cover: every meal, every lift, every Sunday decision, already done for you" width="960" height="1286" loading="lazy" decoding="async"
+             class="w-full h-auto rounded-lg border border-line shadow-[0_30px_60px_-25px_rgba(0,0,0,.95)]" />
+      </figure>
+      <div>
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted mb-3">What's inside</p>
+        <h2 class="font-display text-[2.1rem] sm:text-5xl leading-[1.08] text-cream">Nine chapters. <em>Ninety days.</em></h2>
+        <ol class="mt-8 space-y-4">
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">1</span><p><span class="font-semibold text-cream">Menus in grams, by calorie level.</span> <span class="text-muted">Pick your level. Every meal is already weighed.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">2</span><p><span class="font-semibold text-cream">The shopping list.</span> <span class="text-muted">One list for the week. Buy it and you're set.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">3</span><p><span class="font-semibold text-cream">Batch cooking.</span> <span class="text-muted">Cook in batches, so weekday meals are already done.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">4</span><p><span class="font-semibold text-cream">Your first week in the gym.</span> <span class="text-muted">Every exercise with its loads, and a swap for when the machine is taken.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">5</span><p><span class="font-semibold text-cream">The 12-week calendar.</span> <span class="text-muted">Every training day and every check-in on one view.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">6</span><p><span class="font-semibold text-cream">The 10-minute Sunday review.</span> <span class="text-muted">A few numbers, one decision for next week.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">7</span><p><span class="font-semibold text-cream">The plan for hard weeks.</span> <span class="text-muted">What to do when work, travel or a cold gets in the way.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">8</span><p><span class="font-semibold text-cream">Diet breaks.</span> <span class="text-muted">When to take one, and how to pick the plan back up.</span></p></li>
+          <li class="flex gap-4"><span class="font-display text-xl text-muted w-6 shrink-0 tabular-nums">9</span><p><span class="font-semibold text-cream">Day 91.</span> <span class="text-muted">What to do when the 90 days end, so you're never left without a next step.</span></p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 6. CLOSE: back to the widget (one widget per page) -->
+  <section class="bg-ink">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-14 sm:py-20 text-center">
+      <h2 class="font-display text-[2rem] sm:text-4xl leading-[1.1] text-cream">The system you have. <em>The calendar to run it.</em></h2>
+      <p class="mt-4 text-lg text-muted">The 90-Day Execution Blueprint, $17 one-time, with the same 7-day refund as the Blueprint: if it's not for you, email me and get every cent back. Either way, your Blueprint is already on its way to your email.</p>
+      <a href="#offer" class="mt-7 inline-flex items-center gap-2 border border-cream/40 rounded-xl px-6 py-3.5 font-semibold text-cream hover:bg-cream/5">
+        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 12l5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to the options
+      </a>
+    </div>
+  </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="max-w-xl mx-auto px-4 sm:px-5 py-8 text-center text-xs text-muted">
+      <p>© Aesthetic Engineer · <a href="/privacy" class="hover:text-cream">Privacy</a> · <a href="/terms" class="hover:text-cream">Terms</a></p>
+    </div>
+  </footer>
+</body>
+</html>
